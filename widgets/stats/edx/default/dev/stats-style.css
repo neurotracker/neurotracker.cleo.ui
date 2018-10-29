@@ -5,7 +5,6 @@
 .stats__container {
   display: flex;
   flex-direction: column;
-  //width: 307px;
   max-height: 514px;
   font-family: 'Roboto', sans-serif;
   text-transform: uppercase;
@@ -38,16 +37,16 @@
   display: flex;
   flex-flow: row wrap;
   justify-content: flex-end;
-  font-size: 1em;
+  font-size: 1.2em;
   z-index: 2;
 }
 
 .stats__tabs > div {
   position: relative;
   min-width: 120px;
-  height: 30px;
+  height: 37px;
   text-align: center;
-  line-height: 30px;
+  line-height: 35px;
   font-weight: bold;
   color: #d7e2f7;
   background-color: #365CAA;
@@ -79,7 +78,7 @@
   content: "";
   width: 100%;
   height: 8px;
-  bottom: -5px;
+  bottom: -4px;
   left: 0px;
   background-color: #365CAA;
   transition: 0.2s;
@@ -90,7 +89,7 @@
   color: #0C7F40;
   box-shadow: none;
   opacity: 1.0;
-  line-height: 30px;
+  line-height: 39px;
   cursor: default;
   position: relative;
 }
@@ -111,8 +110,8 @@
 
 .stats__content {
   background-color: white;
-  border-radius: 5px 0 5px 5px;
-  border: 8px solid #365CAA;
+  border-radius: 7px 0 7px 7px;
+  border: 4px solid #365CAA;
   position: relative;
   flex-grow: 1;
   box-shadow: 0 5px 15px rgba(0,0,0,0.06), 0 15px 35px rgba(42,51,83,0.12);
@@ -180,7 +179,7 @@
 }
 
 .stats__stat-value {
-  font-size: 1.5em;
+  font-size: 2.25em;
   font-weight: 700;
 }
 
@@ -226,7 +225,6 @@
 
 .stats_details_main_line {
   width: 100%;
-  //margin-bottom: 3px;
   margin: auto 5px 3px 5px;
   border-bottom: 1px dashed #0C7F40;
 }
