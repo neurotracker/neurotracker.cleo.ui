@@ -244,7 +244,7 @@ function openQuiz() {
   currentQuestion = 0;
   jQuery(`.quiz__question-container`).removeClass('quiz__question-container--show');
   showQuestion(currentQuestion);
-  jQuery('#js-profile-widget, #advice-widget, #js-graph-by-targets-widget, #stats-widget').hide();
+  jQuery('#js-profile-widget, #js-advice-widget, #js-graph-by-targets-widget, #js-stats-widget').hide();
 }
 
 // handles closing of quiz page
