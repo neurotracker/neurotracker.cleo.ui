@@ -141,7 +141,6 @@ let goNext = getGoNextButton();
 let goBack = getGoBackButton();
 let quizContainer = getQuizContainer();
 let startContainer = getStartContainer();
-getQuizQuestionIds();
 
 executeStartSessionCalls = function(orgId, userId, sessionId){
   adaptStartSessionLayout();
@@ -159,7 +158,6 @@ executeStartSessionCalls = function(orgId, userId, sessionId){
         message: data.message
       };
       updateStartInfo(start__data);
-      setupEventHandlers();
       jQuery('#js-start-session__loading-container').addClass('start-session__loading-container--fading');
       setTimeout(function()
       {
@@ -172,6 +170,8 @@ executeStartSessionCalls = function(orgId, userId, sessionId){
   });
 }
 
+getQuizQuestionIds();
+setupEventHandlers();
 executeStartSessionCalls(getOrgId(), getUserId(), getSessionId());
 
 jQuery('#communicator-input > input').on('change', function() {
@@ -241,6 +241,8 @@ function openQuiz() {
   startContainer.addClass('start-session__container--hidden');
   quizForm.removeClass('quiz__container--hidden');
   quizContainer.removeClass('quiz__quiz-container--hidden');
+  currentQuestion = 0;
+  jQuery(`.quiz__question-container`).removeClass('quiz__question-container--show');
   showQuestion(currentQuestion);
   jQuery('#js-profile-widget, #advice-widget, #js-graph-by-targets-widget, #stats-widget').hide();
 }
@@ -253,7 +255,7 @@ function closeQuiz() {
   jQuery('.quiz__answer--mood-selected').removeClass('quiz__answer--mood-selected');
   quizMoodAnswers = [];
   jQuery('#js-quiz__sleep-count-input').val(8);
-    jQuery('#js-quiz__sleep-count-display').text(8);
+  jQuery('#js-quiz__sleep-count-display').text(8);
   quizContainer.addClass('quiz__quiz-container--hidden');
   quizForm.addClass('quiz__container--hidden');
   startContainer.removeClass('start-session__container--hidden');
@@ -296,21 +298,19 @@ function nextQuestion(n) {
       "meal": jQuery("input[name=meal]").val(),
       "physical": jQuery("input[name=physical]").val()
     };
-    closeQuiz();
+    
     //display NT iframe fullscreen
     jQuery('#js-nt-iframe').attr('src', neurotrackerSessionUrl);
     setTimeout(() => {
       jQuery('#js-nt-iframe').removeClass('start-session__nt-iframe--hidden'); 
       openFullscreen(jQuery('#js-nt-iframe'));
     }, 500);
-    
-    let iframe = jQuery('#js-nt-iframe')[0].contentWindow;
-    iframe.postMessage("Beginning a new session", neurotrackerSessionUrl);
+    closeQuiz();
     jQuery.ajax({
       type: "POST",
-      url: jQuery('#js-quiz__form').attr('action'),
+      url: "http://38.89.143.20/NEUROEDX_Staging/api/organizations/" + getOrgId() + "/users/" + getUserId() + "/sessions/quizresults",
       beforeSend: function(xhr) {
-        xhr.setRequestHeader('Authorization', 'Basic ' + btoa(':' + sessionId));
+        xhr.setRequestHeader('Authorization', 'Basic ' + btoa(':' + getSessionId()));
       },
       data: JSON.stringify(formData),
       success: function(){
@@ -319,24 +319,10 @@ function nextQuestion(n) {
       },  
       contentType : "application/json"
     });
-    return false;
   } else{
     showQuestion(currentQuestion);
   }
 }
-
-// function receiveMessage(event)
-// {
-//   if (event.origin !== "http://38.89.143.128:3032")
-//     return;
-
-//   if(event.data == "endSession"){
-//     jQuery('#js-nt-iframe').addClass('start-session__nt-iframe--hidden');
-//     closeFullscreen();
-//   }
-// }
-// window.addEventListener("message", receiveMessage, false);
-
 
 function openFullscreen(elem) {
   if (elem[0].requestFullscreen) {
@@ -368,26 +354,36 @@ window.addEventListener('resize', adaptStartSessionLayout);
 function adaptStartSessionLayout() {
   let widgetWidth = jQuery("#js-start-widget").parent().width();
 
-  if(widgetWidth <= 780 ){
+  if(widgetWidth <= 575 ){
     jQuery("#js-start-session__goal-icon").hide();
     jQuery("#js-start-session__goal-message").hide();
   } else {
     jQuery("#js-start-session__goal-icon, #js-start-session__goal-message").show();
   }
   if(widgetWidth <= 500 ) {
-    jQuery('.start-session__title').css('font-size', '1.5em');
-    jQuery('.start-session__target-info, .start-session__second-info').css('font-size', '0.8em');
-  }
-  if( 360 < widgetWidth <= 445 ) {
-    jQuery('.start-session__goal-num').css({'width': '40px', 'height': '40px', 'line-height': '40px'});
+    jQuery('.start-session__session-info span').css('flex-direction', 'column-reverse');
+    jQuery('.start-session__goal-num').css('margin-top', '3px');
   } else {
-    jQuery(".start-session__goal-num").removeAttr("style");
+    jQuery('.start-session__session-info span').removeAttr("style");
   }
-  if(widgetWidth > 500) {
-    jQuery(".start-session__title, .start-session__target-info, .start-session__second-info, .start-session__goal-num").removeAttr("style");
+  if(widgetWidth <= 400 ) {
+    jQuery('.start-session__title').css('font-size', '1.5em');
+  } else {
+    jQuery('.start-session__title').css('font-size', '1.8em');
   }
-  if(widgetWidth <= 670 ){
-    jQuery('.start-session__second-info').css({"margin-left": "5px"});
+  if(widgetWidth <= 340 ) {
+    jQuery('.start-session__start-btn').css('width', '100px');
+  } else {
+    jQuery('.start-session__start-btn').removeAttr("style");
+  }
+  if(widgetWidth <= 310 ) {
+    jQuery('.start-session__target-info, .start-session__second-info').css('font-size', '0.6em');
+  } else {
+    if(widgetWidth <= 400 ) {
+      jQuery('.start-session__target-info, .start-session__second-info').css('font-size', '0.8em');
+    } else {
+      jQuery('.start-session__title').css('font-size', '1.8em');
+    }
   }
 
   //handle full sscreen exit

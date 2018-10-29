@@ -117,12 +117,11 @@ jQuery('#communicator-input > input').on('change', function () {
   let changeVal = jQuery('#communicator-input > input').val();
 
   if(changeVal == 'endSession') {
-    executeStartSessionCalls(getOrgId(), getUserId(), getSessionId());
+    executeStatsCalls(getOrgId(), getUserId(), getSessionId());
   }
-  //executeStatsCalls(getOrgId(), getUserId(), getSessionId());
 });
 
-jQuery('#stats-widget').html(`
+jQuery('#js-stats-widget').html(`
   <div class="stats__container"> 
     <div id="js-stats__tabs" class="stats__tabs">
       <div id="js-stats__week-tab" class="stats__tab--selected stats__tab--week-tab">Week</div>

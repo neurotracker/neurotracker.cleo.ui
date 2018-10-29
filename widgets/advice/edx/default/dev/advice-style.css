@@ -30,22 +30,37 @@
   margin: auto;
 }
 
+.profile__loading-container {
+  position: absolute; 
+  width: 100%; 
+  height: 100%; 
+  background-color: #ffffff; 
+  border-radius: 7px; 
+  top: 0; 
+  left: 0; 
+  z-index: 100; 
+  display: flex; 
+  justify-content: center; 
+  align-items: center; 
+  transition: 0.7s ease-in; 
+}
+
 .advice__content {  
   background-image: url("bulb3.png");
   background-size: auto 100%;  
   background-repeat: no-repeat;
   background-color: white;
   border-radius: 5px;   
-  width: calc(100% - 8px);
+  //width: calc(100% - 8px);
   height: calc(100% - 49px);
   margin: 0 4px 4px 4px;
-  overflow-y: auto;
+  //overflow-y: auto;
   display: flex;
   justify-content: center;
   align-items: center;
   align-content: space-around;
-  position: relative;
-  box-shadow: 0 2px 7px rgba(17,18,18,0.21); 
+  //position: relative;
+  //box-shadow: 0 2px 7px rgba(17,18,18,0.21); 
 }
 
 .advice__content--img img {
@@ -57,9 +72,11 @@
 }
 
 .advice__content--text {  
-  margin: auto;    
-  width: 85%;
-  z-index: 1;
+  margin: 20px;    
+  //width: 85%;
+  //z-index: 1;
+  height: 82%;
+  overflow-y: auto;
 }
 
 .advice__content--text p {  
@@ -67,21 +84,6 @@
   font-size: calc(0.85em + 2.5vw); 
   font-weight: 700; 
   color: #0C7F40; 
-}
-
-.profile__loading-container {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  background-color: #ffffff;
-  border-radius: 7px;
-  top: 0;
-  left: 0;
-  z-index: 100;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  transition: 0.7s ease-in;
 }
 
 .profile__loading-container--fading {

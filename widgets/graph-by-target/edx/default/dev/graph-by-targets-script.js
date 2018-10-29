@@ -50,14 +50,15 @@ jQuery('#communicator-input > input').on('change', function() {
   let changeVal = jQuery('#communicator-input > input').val();
 
   if(changeVal == 'endSession') {
-    executeStartSessionCalls(getOrgId(), getUserId(), getSessionId());
+    needsUpdateData = true;
+    executeGraphCalls(getOrgId(), getUserId(), getSessionId());
   }
-  //executeGraphCalls(getOrgId(), getUserId(), getSessionId());
 });
 
 let unlockNextTarget;
 let currentTargetTab;
 let myChart;
+let needsUpdateData = true;
 let userSessionData = {
     '2Targets': {
         data: '',
@@ -119,7 +120,7 @@ function getLastSessionData(orgId, userId, sessionId) {
 }
 
 function getSessionData(orgId, userId, sessionId, numTargets) {
-    if(userSessionData[`${numTargets}Targets`].data == ''){
+    if(userSessionData[`${numTargets}Targets`].data == '' || needsUpdateData == true){
         if(jQuery('#js-graph__loading-container').css('display') == 'none') {
             jQuery('#js-graph__no-data-label').hide();
             jQuery('#js-graph__loading-container').removeClass('graph__loading-container--fading');
@@ -156,7 +157,7 @@ function getSessionStats(orgId, userId, sessionId, numTargets) {
     if(numTargets == 'overview'){
         filterParam = '';
     }
-    if(userSessionData[`${numTargets}Targets`].stats == ''){
+    if(userSessionData[`${numTargets}Targets`].stats == '' || needsUpdateData == true){
         let myData;
         jQuery.ajax({
             url: "http://38.89.143.20/NEUROEDX_Staging/api/organizations/" + orgId + "/users/" + userId + "/stats" + filterParam,
@@ -285,6 +286,7 @@ function displayDataAndStats(numTargets) {
     // set correct stat values in html elements
     jQuery('#js-graph__best-score-stat-value').text(statValues.bestScore);
     jQuery('#js-graph__highest-speed-stat-value').text(statValues.highestSpeed);
+    needsUpdateData == false;
 }
 
 

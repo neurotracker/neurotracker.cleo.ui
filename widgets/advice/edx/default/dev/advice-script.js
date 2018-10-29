@@ -21,10 +21,11 @@ jQuery('#communicator-input > input').on('change', function () {
   executeAdviceCall(getOrgId(), getSessionId());
 });
 
-jQuery('#advice-widget').html(`
-	<div class="advice__container" id="js-advice-widget">
+jQuery('#js-advice-widget').html(`
+	<div class="advice__container" id="js-advice-widget-container">
 		<div class="advice__tab"><p>Advice of the day</p></div>
 		<div class="advice__content" id="js-advice__content">
+
 			<div id="js-advice__loading-container" class="advice__loading-container">
 			  <svg width="80" height="80" viewBox="0 0 38 38" xmlns="http://www.w3.org/2000/svg" stroke="#365BA9">
 			    <g fill="none" fill-rule="evenodd">
@@ -37,14 +38,15 @@ jQuery('#advice-widget').html(`
 			    </g>
 			  </svg>
 			</div>
-			<div class="advice__content--text"><p id="js-advice-text">If everything seems under control, you are not going fast enough.</p></div>	
+
+			<div class="advice__content--text"><p id="js-advice-text"></p></div>	
 		</div>
 	</div>
 `);
 
 function calculateAdviceContentHeight () {
 
-  var adviceWidgetHeight = jQuery('#js-advice-widget').height();
+  var adviceWidgetHeight = jQuery('#js-advice-widget-container').height();
 
   var tabHeight = jQuery('#js-advice__tab').height();
 
