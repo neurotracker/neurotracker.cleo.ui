@@ -51,12 +51,17 @@
   background-repeat: no-repeat;
   background-color: white;
   border-radius: 5px;   
-  height: calc(100% - 49px);
+  //width: calc(100% - 8px);
+  //height: calc(100% - 49px);
+  height: 181px;
   margin: 0 4px 4px 4px;
+  //overflow-y: auto;
   display: flex;
   justify-content: center;
   align-items: center;
   align-content: space-around;
+  //position: relative;
+  //box-shadow: 0 2px 7px rgba(17,18,18,0.21); 
 }
 
 .advice__content--img img {
@@ -69,6 +74,8 @@
 
 .advice__content--text {  
   margin: 20px;    
+  //width: 85%;
+  //z-index: 1;
   height: 82%;
   overflow-y: auto;
 }

@@ -44,21 +44,21 @@ jQuery('#js-advice-widget').html(`
 	</div>
 `);
 
-function calculateAdviceContentHeight () {
+// function calculateAdviceContentHeight() {
 
-  var adviceWidgetHeight = jQuery('#js-advice-widget-container').height();
+//   var adviceWidgetHeight = jQuery('#js-advice-widget-container').height();
 
-  var tabHeight = jQuery('#js-advice__tab').height();
+//   var tabHeight = jQuery('#js-advice__tab').height();
 
-  var adviceContentMarginTop = parseInt(jQuery('#js-advice__content').css('marginTop'));
-  var adviceContentMarginBottom = parseInt(jQuery('#js-advice__content').css('marginBottom'));
+//   var adviceContentMarginTop = parseInt(jQuery('#js-advice__content').css('marginTop'));
+//   var adviceContentMarginBottom = parseInt(jQuery('#js-advice__content').css('marginBottom'));
    
-  var adviceContentHeight = (adviceWidgetHeight - (tabHeight + adviceContentMarginTop + adviceContentMarginBottom));
+//   var adviceContentHeight = (adviceWidgetHeight - (tabHeight + adviceContentMarginTop + adviceContentMarginBottom));
 
-  jQuery('#js-advice__content').css('height', adviceContentHeight);   
-}
+//   jQuery('#js-advice__content').css('height', adviceContentHeight);   
+// }
 
-calculateAdviceContentHeight();
+// calculateAdviceContentHeight();
 
 setTimeout(function()
 {
