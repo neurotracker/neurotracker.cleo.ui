@@ -1,23 +1,20 @@
-var wpMediaURL = 'http://38.89.143.20:8080/wordpress/wp-content/uploads/2018/10/';
+var cdnUrl = 'https://cdn.jsdelivr.net/gh/neurotracker/neurotracker.cleo.ui-public/widgets/profile-levels/edx/default/0.9.1/';
+var previewProfileImage;
+var currentProfileImage;
 
-
-//Fake data received
-var data = {
-  "name": "Connor Smith",
-  "url": `${wpMediaURL}ball.png`,
-  "borderUrl": `${wpMediaURL}ring03.png`,
-  "level": 1,
-  "title": "big boy",
-  "nextRewardType": "border",
-  "nextRewardLevel": "5",
-  "currentExperience": 36,
-  "goalExperience": 40
+hideLoading = function() {
+  jQuery('#js-profile__loading-container').addClass('profile__loading-container--fading');
+  setTimeout(function () {
+    jQuery('#js-profile__loading-container').hide();
+  }, 800);
 }
-
-//let orgId = jQuery('input#orgId').value();
 
 insertName = function(name) {
   jQuery('#js-profile__name').html(name);
+}
+
+insertPictureUrl = function(imageUrl) {
+  jQuery('#js-profile__avatar-img').attr('src', imageUrl);
 }
 
 insertLevel = function (level, currentExp, goalExp) {
@@ -52,8 +49,13 @@ insertRewards = function(title, borderImage) {
   jQuery("#js-profile__avatar-border").attr('src', borderImage);
 }
 
+insertNextRewards = function(level, type) {
+  jQuery("#js-profile__next-reward").html('NEXT REWARD: LEVEL ' + level + '(NEW ' + type + ')');
+}
+
 executeProfileLevelsCalls = function(orgId, userId, sessionId){
   var loadingCounter = 0;
+  const TOTAL_REQUESTS = 5
 
   jQuery.ajax({
     url: "http://38.89.143.20/NEUROEDX_Staging/api/organizations/" + orgId + "/users/" + userId + "?fields=firstname,lastname",
@@ -64,11 +66,23 @@ executeProfileLevelsCalls = function(orgId, userId, sessionId){
     success: function (data) {
       insertName(data.firstName + " " + data.lastName);
       loadingCounter++;
-      if (loadingCounter == 3) {
-        jQuery('#js-profile__loading-container').addClass('profile__loading-container--fading');
-        setTimeout(function () {
-          jQuery('#js-profile__loading-container').hide();
-        }, 800)
+      if (loadingCounter >= TOTAL_REQUESTS) {
+        hideLoading();
+      }
+    }
+  });
+
+  jQuery.ajax({
+    url: "http://38.89.143.20/NEUROEDX_Staging/api/organizations/" + orgId + "/users/" + userId + "/pictureUrl",
+    beforeSend: function (xhr) {
+      xhr.setRequestHeader('Authorization', 'Basic ' + btoa('satya' + ':' + sessionId));
+    },
+    method: 'GET',
+    success: function (data) {
+      insertName(data.firstName + " " + data.lastName);
+      loadingCounter++;
+      if (loadingCounter >= TOTAL_REQUESTS) {
+        hideLoading();
       }
     }
   });
@@ -82,6 +96,9 @@ executeProfileLevelsCalls = function(orgId, userId, sessionId){
     success: function (data) {
       insertLevel(data.level, data.exp, data.expToNextLevel);
       loadingCounter++;
+      if (loadingCounter >= TOTAL_REQUESTS) {
+        hideLoading();
+      }
       // request to get rewards data using level
       jQuery.ajax({
         url: "http://38.89.143.20/NEUROEDX_Staging/api/organizations/" + orgId + "/rewards/" + data.level,
@@ -92,11 +109,23 @@ executeProfileLevelsCalls = function(orgId, userId, sessionId){
         success: function (data) {
           insertRewards(data.reward_title, data.reward_url);
           loadingCounter++;
-          if (loadingCounter == 3) {
-            jQuery('#js-profile__loading-container').addClass('profile__loading-container--fading');
-            setTimeout(function () {
-              jQuery('#js-profile__loading-container').hide();
-            }, 800)
+          if (loadingCounter >= TOTAL_REQUESTS) {
+            hideLoading();
+          }
+        }
+      });
+      // request to get next rewards data using level
+      jQuery.ajax({
+        url: "http://38.89.143.20/NEUROEDX_Staging/api/organizations/" + orgId + "/nextRewards/" + data.level,
+        beforeSend: function (xhr) {
+          xhr.setRequestHeader('Authorization', 'Basic ' + btoa('satya' + ':' + sessionId));
+        },
+        method: 'GET',
+        success: function (data) {
+          insertNextRewards(data.level, data.type);
+          loadingCounter++;
+          if (loadingCounter >= TOTAL_REQUESTS) {
+            hideLoading();
           }
         }
       });
@@ -104,19 +133,26 @@ executeProfileLevelsCalls = function(orgId, userId, sessionId){
   });
 }
 
+updateProfileImage = function(imageUrl)
+{
+  jQuery.ajax({
+    url: "http://38.89.143.20/NEUROEDX_Staging/api/organizations/" + orgId + "/users/" + userId + "/pictureURL",
+    beforeSend: function (xhr) {
+      xhr.setRequestHeader('Authorization', 'Basic ' + btoa('satya' + ':' + sessionId));
+    },
+    method: 'PUT',
+    data: { picUrl: "cdnUrl" + imageUrl}
+  });
+}
+
 executeProfileLevelsCalls(getOrgId(), getUserId(), getSessionId());
 
 jQuery('#communicator-input > input').on('change', function() {
   let changeVal = jQuery('#communicator-input > input').val();
-
   if(changeVal == 'endSession') {
-    executeStartSessionCalls(getOrgId(), getUserId(), getSessionId());
+    executeProfileLevelsCalls(getOrgId(), getUserId(), getSessionId());
   }
-  //executeProfileLevelsCalls(getOrgId(), getUserId(), getSessionId());
 });
-
-var previewProfileImage;
-var currentProfileImage;
 
 jQuery('#js-profile-widget').html(`
 <div class="profile__container">
@@ -135,7 +171,7 @@ jQuery('#js-profile-widget').html(`
   </div>
   <div id="js-profile__background" class="profile__background"></div>
   <div class="profile__avatar">
-    <img src="${wpMediaURL}skeletor.png" id="js-profile__avatar-img" class="profile__avatar-img">
+    <img src="" id="js-profile__avatar-img" class="profile__avatar-img">
     <!-- <div class="profile__avatar-border"></div> -->
     <img src="" id="js-profile__avatar-border" class="profile__avatar-border">
     <div id="js-profile__change-pic-overlay" class="profile__change-pic-overlay">
@@ -149,8 +185,8 @@ jQuery('#js-profile-widget').html(`
         </svg>
       </div>
       <div class="profile__change-pic-title">Change your image</div>
-      <div id="js-upload-photo" class="profile__change-pic-btn">Upload a photo</div>
-      <input class="image-upload-input" id="js-image-upload" type="file" accept="image/*" />
+      <!-- <div id="js-upload-photo" class="profile__change-pic-btn">Upload a photo</div>
+      <input class="image-upload-input" id="js-image-upload" type="file" accept="image/*" /> -->
       <div class="profile__change-pic-text-box">OR</div>
       <div id="js-profile__avatar-selection-container" class="profile__avatar-selection-container">
         <div id="js-choose-avatar" class="profile__change-pic-btn">
@@ -158,22 +194,22 @@ jQuery('#js-profile-widget').html(`
         </div>
         <div id="js-profile__avatars" class="profile__avatars">
           <ul>
-            <li><img src="${wpMediaURL}1.png" alt="avatar1"></li>
-            <li><img src="${wpMediaURL}2.png" alt="avatar2"></li>
-            <li><img src="${wpMediaURL}3.png" alt="avatar3"></li>
-            <li><img src="${wpMediaURL}4.png" alt="avatar4"></li>
-            <li><img src="${wpMediaURL}5.png" alt="avatar5"></li>
-            <li><img src="${wpMediaURL}6.png" alt="avatar6"></li>
-            <li><img src="${wpMediaURL}7.png" alt="avatar7"></li>
-            <li><img src="${wpMediaURL}8.png" alt="avatar8"></li>
-            <li><img src="${wpMediaURL}9.png" alt="avatar9"></li>
-            <li><img src="${wpMediaURL}10.png" alt="avatar10"></li>
-            <li><img src="${wpMediaURL}11.png" alt="avatar11"></li>
-            <li><img src="${wpMediaURL}12.png" alt="avatar12"></li>
-            <li><img src="${wpMediaURL}13.png" alt="avatar13"></li>
-            <li><img src="${wpMediaURL}14.png" alt="avatar14"></li>
-            <li><img src="${wpMediaURL}15.png" alt="avatar15"></li>
-            <li><img src="${wpMediaURL}16.png" alt="avatar16"></li>
+            <li><img src="${cdnUrl}Avatars/1.png" alt="avatar1"></li>
+            <li><img src="${cdnUrl}Avatars/2.png" alt="avatar2"></li>
+            <li><img src="${cdnUrl}Avatars/3.png" alt="avatar3"></li>
+            <li><img src="${cdnUrl}Avatars/4.png" alt="avatar4"></li>
+            <li><img src="${cdnUrl}Avatars/5.png" alt="avatar5"></li>
+            <li><img src="${cdnUrl}Avatars/6.png" alt="avatar6"></li>
+            <li><img src="${cdnUrl}Avatars/7.png" alt="avatar7"></li>
+            <li><img src="${cdnUrl}Avatars/8.png" alt="avatar8"></li>
+            <li><img src="${cdnUrl}Avatars/9.png" alt="avatar9"></li>
+            <li><img src="${cdnUrl}Avatars/10.png" alt="avatar10"></li>
+            <li><img src="${cdnUrl}Avatars/11.png" alt="avatar11"></li>
+            <li><img src="${cdnUrl}Avatars/12.png" alt="avatar12"></li>
+            <li><img src="${cdnUrl}Avatars/13.png" alt="avatar13"></li>
+            <li><img src="${cdnUrl}Avatars/14.png" alt="avatar14"></li>
+            <li><img src="${cdnUrl}Avatars/15.png" alt="avatar15"></li>
+            <li><img src="${cdnUrl}Avatars/16.png" alt="avatar16"></li>
           </ul>
         </div>
       </div>
@@ -215,6 +251,7 @@ jQuery('#js-profile-widget').html(`
 </div>
 `);
 
+
 // Handle click to change picture
 jQuery('#js-profile__change-pic-overlay').click(function() {
   currentProfileImage = jQuery('#js-profile__avatar-img').attr('src');
@@ -238,6 +275,7 @@ jQuery('#js-profile__save-btn').click(function() {
   jQuery('#js-choose-avatar').removeClass('profile__change-pic-btn--open');
   currentProfileImage = previewProfileImage;
   jQuery('#js-profile__avatar-img').attr('src', currentProfileImage);
+  updateProfileImage(currentProfileImage);
 });
 
 // Handle click to choose avatar from list
@@ -247,7 +285,14 @@ jQuery('#js-choose-avatar').click(function() {
   jQuery('#js-profile__avatars').toggleClass('profile__element--visible');
 });
 
+// Handle click on avatar to preview as avatar image
+jQuery('#js-profile__avatars > ul > li > img').click(function(e) {
+  previewProfileImage = e.target.src;
+  jQuery('#js-profile__avatar-img').attr('src', previewProfileImage);
+});
+
 // For reading file upload url
+/*
 var readURL = function(input) {
   if (input.files && input.files[0]) {
       var reader = new FileReader();
@@ -258,7 +303,8 @@ var readURL = function(input) {
       reader.readAsDataURL(input.files[0]);
   }
 }
-
+*/
+/*
 jQuery("#js-image-upload").on('change', function(){
   readURL(this);
 });
@@ -266,15 +312,4 @@ jQuery("#js-image-upload").on('change', function(){
 jQuery('#js-upload-photo').click(function() {
   jQuery("#js-image-upload").click();
 });
-
-// Handle click on avatar to preview as avatar image
-jQuery('#js-profile__avatars > ul > li > img').click(function(e) {
-  previewProfileImage = e.target.src;
-  jQuery('#js-profile__avatar-img').attr('src', previewProfileImage);
-});
-
-jQuery('#js-profile__avatar-img').attr('src', data.url);
-jQuery('#js-profile__title').html(data.title);
-jQuery('#js-profile__experience-points').html(data.currentExperience);
-jQuery('#js-profile__goal-experience').html('/' + data.goalExperience);
-jQuery('#js-profile__next-reward').html('Next Reward: LVL ' + data.nextRewardLevel + ' (new ' + data.nextRewardType + ')');
+*/
