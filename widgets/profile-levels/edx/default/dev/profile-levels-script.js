@@ -188,8 +188,8 @@ jQuery('#js-profile-widget').html(`
       </div>
       <div class="profile__change-pic-title">Change your image</div>
       <!-- <div id="js-upload-photo" class="profile__change-pic-btn">Upload a photo</div>
-      <input class="image-upload-input" id="js-image-upload" type="file" accept="image/*" /> -->
-      <div class="profile__change-pic-text-box">OR</div>
+      <input class="image-upload-input" id="js-image-upload" type="file" accept="image/*" /> 
+      <div class="profile__change-pic-text-box">OR</div> -->
       <div id="js-profile__avatar-selection-container" class="profile__avatar-selection-container">
         <div id="js-choose-avatar" class="profile__change-pic-btn">
           Choose an avatar
