@@ -1,7 +1,12 @@
 function insertStatsThisWeek(data) {
   jQuery('.js-stats__this-week--best-score').html(data.bestScore);
   jQuery('.js-stats__this-week--sessions-completed').html(data.sessionsCompleted);
-  jQuery('.js-stats__this-week--improvement').html(data.userImprovement);
+  if(data.userImprovement == 'N/A') {
+    jQuery('.js-stats__this-week--improvement').html(data.userImprovement);
+  } else {
+    jQuery('.js-stats__this-week--improvement').html(data.userImprovement + '%');
+  }
+  // jQuery('.js-stats__this-week--improvement').html(data.userImprovement + '%');
   jQuery('.js-stats__this-week--avg-learning-rate').html(data.avgLearningRate);
   jQuery('.js-stats__this-week--highest-speed').html(data.highestSpeed);
 }
@@ -9,7 +14,12 @@ function insertStatsThisWeek(data) {
 function insertStatsLastWeek(data) {
   jQuery('.js-stats__last-week--best-score').html(data.bestScore);
   jQuery('.js-stats__last-week--sessions-completed').html(data.sessionsCompleted);
-  jQuery('.js-stats__last-week--improvement').html(data.userImprovement);
+  if(data.userImprovement == 'N/A') {
+    jQuery('.js-stats__last-week--improvement').html(data.userImprovement);
+  } else {
+    jQuery('.js-stats__last-week--improvement').html(data.userImprovement + '%');
+  }
+  // jQuery('.js-stats__last-week--improvement').html(data.userImprovement + '%');
   jQuery('.js-stats__last-week--avg-learning-rate').html(data.avgLearningRate);
   jQuery('.js-stats__last-week--highest-speed').html(data.highestSpeed);
 }
@@ -17,7 +27,12 @@ function insertStatsLastWeek(data) {
 function insertStatsThisMonth(data) {
   jQuery('.js-stats__this-month--best-score').html(data.bestScore);
   jQuery('.js-stats__this-month--sessions-completed').html(data.sessionsCompleted);
-  jQuery('.js-stats__this-month--improvement').html(data.userImprovement);
+  if(data.userImprovement == 'N/A') {
+    jQuery('.js-stats__this-month--improvement').html(data.userImprovement);
+  } else {
+    jQuery('.js-stats__this-month--improvement').html(data.userImprovement + '%');
+  }
+  // jQuery('.js-stats__this-month--improvement').html(data.userImprovement + '%');
   jQuery('.js-stats__this-month--avg-learning-rate').html(data.avgLearningRate);
   jQuery('.js-stats__this-month--highest-speed').html(data.highestSpeed);
 }
@@ -25,7 +40,12 @@ function insertStatsThisMonth(data) {
 function insertStatsLastMonth(data) {
   jQuery('.js-stats__last-month--best-score').html(data.bestScore);
   jQuery('.js-stats__last-month--sessions-completed').html(data.sessionsCompleted);
-  jQuery('.js-stats__last-month--improvement').html(data.userImprovement);
+  if(data.userImprovement == 'N/A') {
+    jQuery('.js-stats__last-month--improvement').html(data.userImprovement);
+  } else {
+    jQuery('.js-stats__last-month--improvement').html(data.userImprovement + '%');
+  }
+  // jQuery('.js-stats__last-month--improvement').html(data.userImprovement + '%');
   jQuery('.js-stats__last-month--avg-learning-rate').html(data.avgLearningRate);
   jQuery('.js-stats__last-month--highest-speed').html(data.highestSpeed);
 }
@@ -206,7 +226,7 @@ jQuery('#js-stats-widget').html(`
         <li class="stats__stat">
           <div class="stats_normal">
             <div class="stats__stat-value js-stats__this-week--improvement">54%</div>
-            <div class="stats__stat-name">Your improvement</div>
+            <div class="stats__stat-name">Improvement</div>
           </div>
           <div class="stats_hover" id="js-stats__improvement-stat_hover">
             <div class="stats_details_title">improvement</div>
@@ -361,7 +381,7 @@ jQuery('#js-stats-widget').html(`
         <li class="stats__stat">
           <div class="stats_normal">
             <div class="stats__stat-value js-stats__this-month--improvement">49%</div>
-            <div class="stats__stat-name">Your improvement</div>
+            <div class="stats__stat-name">Improvement</div>
           </div>
           <div class="stats_hover" id="js-stats__improvement-stat_hover">
           <div class="stats_details_title">improvement</div>
