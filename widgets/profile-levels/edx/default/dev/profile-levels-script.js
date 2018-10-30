@@ -81,7 +81,7 @@ executeProfileLevelsCalls = function(orgId, userId, sessionId){
     },
     method: 'GET',
     success: function (data) {
-      insertPictureUrl(data.firstName + " " + data.lastName);
+      insertPictureUrl(data);
       loadingCounter++;
       if (loadingCounter >= TOTAL_REQUESTS) {
         hideLoading();
@@ -109,7 +109,7 @@ executeProfileLevelsCalls = function(orgId, userId, sessionId){
         },
         method: 'GET',
         success: function (data) {
-          insertRewards(data.reward_title, data.reward_url);
+          insertRewards(data.reward_title, data.reward_border);
           loadingCounter++;
           if (loadingCounter >= TOTAL_REQUESTS) {
             hideLoading();
@@ -118,7 +118,7 @@ executeProfileLevelsCalls = function(orgId, userId, sessionId){
       });
       // request to get next rewards data using level
       jQuery.ajax({
-        url: "http://38.89.143.20/NEUROEDX_Staging/api/organizations/" + orgId + "/rewards/" + data.level + "nexttype",
+        url: "http://38.89.143.20/NEUROEDX_Staging/api/organizations/" + orgId + "/rewards/" + data.level + "/nexttype",
         beforeSend: function (xhr) {
           xhr.setRequestHeader('Authorization', 'Basic ' + btoa('satya' + ':' + sessionId));
         },

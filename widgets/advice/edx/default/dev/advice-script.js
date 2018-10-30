@@ -1,5 +1,5 @@
-function insertAdvice(data) {
-  jQuery('#js-advice-text').html(data);
+function insertAdvice(advice) {
+  jQuery('#js-advice-text').html(advice);
 }
 
 executeAdviceCall = function (orgId, sessionId) {
@@ -10,7 +10,7 @@ executeAdviceCall = function (orgId, sessionId) {
     },
     method: 'GET',
     success: function(data){
-      insertAdvice(data);
+      insertAdvice(data.advice);
     }
   });
 }
