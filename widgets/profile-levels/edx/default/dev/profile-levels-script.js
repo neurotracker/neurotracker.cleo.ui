@@ -51,7 +51,7 @@ insertRewards = function(title, borderImage) {
 
 insertNextRewards = function(level, type) {
   if(level != ""){
-    jQuery("#js-profile__next-reward").html('NEXT REWARD: LEVEL ' + level + '(NEW ' + type.join(', ') + ')');
+    jQuery("#js-profile__next-reward").html('NEXT REWARD: LEVEL ' + level + ' (NEW ' + type.join(', ') + ')');
   }
 }
 
