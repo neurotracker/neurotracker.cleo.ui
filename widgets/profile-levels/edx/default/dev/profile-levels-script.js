@@ -1,4 +1,4 @@
-var cdnUrl = 'https://cdn.jsdelivr.net/gh/neurotracker/neurotracker.cleo.ui-public/widgets/profile-levels/edx/default/0.9.1/';
+var CDN_URL = 'https://raw.githubusercontent.com/neurotracker/neurotracker.cleo.ui-public/develop/widgets/profile-levels/edx/default/dev/';
 var previewProfileImage;
 var currentProfileImage;
 
@@ -50,7 +50,9 @@ insertRewards = function(title, borderImage) {
 }
 
 insertNextRewards = function(level, type) {
-  jQuery("#js-profile__next-reward").html('NEXT REWARD: LEVEL ' + level + '(NEW ' + type + ')');
+  if(level != ""){
+    jQuery("#js-profile__next-reward").html('NEXT REWARD: LEVEL ' + level + '(NEW ' + type.join(', ') + ')');
+  }
 }
 
 executeProfileLevelsCalls = function(orgId, userId, sessionId){
@@ -79,7 +81,7 @@ executeProfileLevelsCalls = function(orgId, userId, sessionId){
     },
     method: 'GET',
     success: function (data) {
-      insertName(data.firstName + " " + data.lastName);
+      insertPictureUrl(data.firstName + " " + data.lastName);
       loadingCounter++;
       if (loadingCounter >= TOTAL_REQUESTS) {
         hideLoading();
@@ -116,13 +118,13 @@ executeProfileLevelsCalls = function(orgId, userId, sessionId){
       });
       // request to get next rewards data using level
       jQuery.ajax({
-        url: "http://38.89.143.20/NEUROEDX_Staging/api/organizations/" + orgId + "/nextRewards/" + data.level,
+        url: "http://38.89.143.20/NEUROEDX_Staging/api/organizations/" + orgId + "/rewards/" + data.level + "nexttype",
         beforeSend: function (xhr) {
           xhr.setRequestHeader('Authorization', 'Basic ' + btoa('satya' + ':' + sessionId));
         },
         method: 'GET',
         success: function (data) {
-          insertNextRewards(data.level, data.type);
+          insertNextRewards(data.level, data.types);
           loadingCounter++;
           if (loadingCounter >= TOTAL_REQUESTS) {
             hideLoading();
@@ -141,7 +143,7 @@ updateProfileImage = function(imageUrl)
       xhr.setRequestHeader('Authorization', 'Basic ' + btoa('satya' + ':' + sessionId));
     },
     method: 'PUT',
-    data: { picUrl: "cdnUrl" + imageUrl}
+    data: { picUrl: CDN_URL + imageUrl}
   });
 }
 
@@ -194,22 +196,22 @@ jQuery('#js-profile-widget').html(`
         </div>
         <div id="js-profile__avatars" class="profile__avatars">
           <ul>
-            <li><img src="${cdnUrl}Avatars/1.png" alt="avatar1"></li>
-            <li><img src="${cdnUrl}Avatars/2.png" alt="avatar2"></li>
-            <li><img src="${cdnUrl}Avatars/3.png" alt="avatar3"></li>
-            <li><img src="${cdnUrl}Avatars/4.png" alt="avatar4"></li>
-            <li><img src="${cdnUrl}Avatars/5.png" alt="avatar5"></li>
-            <li><img src="${cdnUrl}Avatars/6.png" alt="avatar6"></li>
-            <li><img src="${cdnUrl}Avatars/7.png" alt="avatar7"></li>
-            <li><img src="${cdnUrl}Avatars/8.png" alt="avatar8"></li>
-            <li><img src="${cdnUrl}Avatars/9.png" alt="avatar9"></li>
-            <li><img src="${cdnUrl}Avatars/10.png" alt="avatar10"></li>
-            <li><img src="${cdnUrl}Avatars/11.png" alt="avatar11"></li>
-            <li><img src="${cdnUrl}Avatars/12.png" alt="avatar12"></li>
-            <li><img src="${cdnUrl}Avatars/13.png" alt="avatar13"></li>
-            <li><img src="${cdnUrl}Avatars/14.png" alt="avatar14"></li>
-            <li><img src="${cdnUrl}Avatars/15.png" alt="avatar15"></li>
-            <li><img src="${cdnUrl}Avatars/16.png" alt="avatar16"></li>
+            <li><img src="${CDN_URL}Avatars/1.png" alt="avatar1"></li>
+            <li><img src="${CDN_URL}Avatars/2.png" alt="avatar2"></li>
+            <li><img src="${CDN_URL}Avatars/3.png" alt="avatar3"></li>
+            <li><img src="${CDN_URL}Avatars/4.png" alt="avatar4"></li>
+            <li><img src="${CDN_URL}Avatars/5.png" alt="avatar5"></li>
+            <li><img src="${CDN_URL}Avatars/6.png" alt="avatar6"></li>
+            <li><img src="${CDN_URL}Avatars/7.png" alt="avatar7"></li>
+            <li><img src="${CDN_URL}Avatars/8.png" alt="avatar8"></li>
+            <li><img src="${CDN_URL}Avatars/9.png" alt="avatar9"></li>
+            <li><img src="${CDN_URL}Avatars/10.png" alt="avatar10"></li>
+            <li><img src="${CDN_URL}Avatars/11.png" alt="avatar11"></li>
+            <li><img src="${CDN_URL}Avatars/12.png" alt="avatar12"></li>
+            <li><img src="${CDN_URL}Avatars/13.png" alt="avatar13"></li>
+            <li><img src="${CDN_URL}Avatars/14.png" alt="avatar14"></li>
+            <li><img src="${CDN_URL}Avatars/15.png" alt="avatar15"></li>
+            <li><img src="${CDN_URL}Avatars/16.png" alt="avatar16"></li>
           </ul>
         </div>
       </div>
