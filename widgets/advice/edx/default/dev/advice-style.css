@@ -46,10 +46,9 @@
 
 .advice__loading-container {
   position: absolute; 
-  width: 100%; 
-  height: calc(100%-45px); 
-  top: 45px;
-  margin: 0 4px 4px 4px;
+  width: 97%; 
+  height: calc(97% - 45px); 
+  margin: 45px 4px 4px 4px;
   background-color: #ffffff; 
   border-radius: 7px; 
   top: 0; 
@@ -60,6 +59,10 @@
   align-items: center; 
   transition: 0.7s ease-in; 
 }
+
+.advice__loading-container--fading { 
+  opacity: 0; 
+} 
 
 .advice__content--img img {
   position: absolute;
@@ -80,8 +83,5 @@
   font-size: 1.45em; 
   font-weight: 700; 
   color: #0C7F40; 
-}
-
-.profile__loading-container--fading {
-  opacity: 0;
+  line-height: normal;
 }
