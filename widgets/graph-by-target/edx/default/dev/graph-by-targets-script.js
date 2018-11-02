@@ -58,6 +58,7 @@ jQuery('#communicator-input > input').on('change', function() {
 let unlockNextTarget;
 let currentTargetTab;
 let myChart;
+let tabNames = ['2 Targets', '3 Targets', '4 Targets'];
 let needsUpdateData = true;
 let userSessionData = {
     '2Targets': {
@@ -82,7 +83,8 @@ let userSessionData = {
         data: '',
         stats: '',
     },
-    lastSessionData: ''
+    lastSessionData: '',
+    currentSessionData: ''
 }
 
 // grab html elements
@@ -102,6 +104,23 @@ function handleTabClick() {
     }
 }
 
+function lockTabs() {
+    let tabElements = jQuery(`#js-graph__tabs div`);
+    tabElements.each((index, tab) => {
+        if(tab.id == "js-graph__overview-targets"){
+            return;
+        }else{
+            if((index + 2) > userSessionData.currentSessionData.targets){
+                jQuery(tab).addClass('graph__tabs--locked');
+                jQuery(tab).html('<i class="fas fa-lock"></i>');
+            }else {
+                jQuery(tab).removeClass('graph__tabs--locked');
+                jQuery(tab).html(tabNames[index]);
+            }
+        } 
+    });
+}
+
 function getLastSessionData(orgId, userId, sessionId) {
     jQuery.ajax({
         url: "http://38.89.143.20/NEUROEDX_Staging/api/organizations/" + orgId + "/users/" + userId + "/sessions?fields=last",
@@ -113,10 +132,36 @@ function getLastSessionData(orgId, userId, sessionId) {
           userSessionData.lastSessionData = data;
           // 2. set current tab to type of last session
           currentTargetTab = userSessionData.lastSessionData.targets;
+          if(!currentTargetTab) {
+            currentTargetTab = "2";
+          }
           // 3. select tab to get session data and stats for
-          jQuery(`#js-graph__tabs div#js-graph__${currentTargetTab}-targets`).click();
+          getCurrentSessionData(orgId, userId, sessionId);
         }
     });
+}
+
+function getCurrentSessionData(orgId, userId, sessionId) {
+    jQuery.ajax({
+        url: "http://38.89.143.20/NEUROEDX_Staging/api/organizations/" + orgId + "/users/" + userId,
+        beforeSend: function(xhr) {
+          xhr.setRequestHeader('Authorization', 'Basic ' + btoa(':' + sessionId));
+        },
+        method: 'GET',
+        success: function(data){
+            userSessionData.currentSessionData = {
+            targets: data.nextTargets,
+            seconds: data.nextSeconds,
+          };
+          //lock tabs for higher number of targets than the current session type
+          lockTabs();
+          if(!jQuery(`#js-graph__tabs div#js-graph__${currentTargetTab}-targets`).hasClass("graph__tabs--selected")){
+            jQuery(`#js-graph__tabs div#js-graph__${currentTargetTab}-targets`).click();
+          }else{
+            getSessionData(getOrgId(), getUserId(), getSessionId(), currentTargetTab);
+          }
+        }
+      });
 }
 
 function getSessionData(orgId, userId, sessionId, numTargets) {
@@ -183,15 +228,18 @@ function getSessionStats(orgId, userId, sessionId, numTargets) {
     }
 }
 
-function displayPlotLine(numTargets) {
+function displayPlotLine(numTargets, newChartData) {
     myChart.yAxis[0].removePlotLine('js-highcharts-plot-line-0');
+    if(myChart.series[1]) {
+        myChart.series[1].remove();
+    }
     if(userSessionData[`${numTargets}Targets`].stats.learningRateGoal && 
        numTargets == userSessionData.lastSessionData.targets && 
        !(userSessionData.lastSessionData.trialDuration == 8 && userSessionData.lastSessionData.targets == 4)){
         let learningRateGoal = userSessionData[`${numTargets}Targets`].stats.learningRateGoal;
         learningRateGoal = Math.round(learningRateGoal * 100) / 100;
-        let goalLabelText = `score ${learningRateGoal} or higher to ` ;
-        switch(userSessionData.lastSessionData.trialDuration){
+        let goalLabelText = `<div>score ${learningRateGoal} or higher to ` ;
+        switch(userSessionData.currentSessionData.seconds){
             case 6: 
                 goalLabelText += "unlock 7 seconds";
                 break;
@@ -199,7 +247,7 @@ function displayPlotLine(numTargets) {
                 goalLabelText += "unlock 8 seconds";
                 break;
             case 8: 
-                switch(userSessionData.lastSessionData.targets) {
+                switch(userSessionData.currentSessionData.targets) {
                   case 2: 
                     goalLabelText += "unlock 3 targets";
                     break;
@@ -208,19 +256,45 @@ function displayPlotLine(numTargets) {
                     break;
               }
         }
-        goalLabelText +=  `<span id="js-next-target-indicator" class="next-target-indicator">${learningRateGoal}<span></span>`;
+        goalLabelText +=  `<span id="js-next-target-indicator" class="next-target-indicator"><span></span></div>`;
     
         myChart.yAxis[0].addPlotLine({
             id: 'js-highcharts-plot-line-0',
             className: 'highcharts-plot-line-0',
             value: learningRateGoal,
-            zindex: 5,
+            zIndex: -10,
+            dashStyle: 'ShortDash',
             label: {
                 className: 'js-highcharts-plot-line-label',
                 align: 'right',
                 useHTML: true,
                 text: goalLabelText,
             }
+        });
+
+        let unlockIndicator = [];
+        unlockIndicator.push({
+            x: newChartData[newChartData.length - 1].x,
+            y: newChartData[newChartData.length - 1].y,
+        });
+
+        unlockIndicator.push({
+            x: newChartData.length + 1,
+            y: learningRateGoal,
+            className: 'indicatorPoint',
+        });
+        
+        myChart.addSeries({                        
+            name: 'UnlockIndicator',
+            id: 'unlockIndicator',
+            className: 'unlockIndicatorSeries',
+            showInLegend: false,
+            data: unlockIndicator,
+            zIndex: -1,
+            marker: {
+                symbol: 'circle'
+            },
+            colorIndex: 2,
         });
     }
 }
@@ -253,9 +327,14 @@ function displayDataAndStats(numTargets) {
             });
         }
     });
-    myChart.series[0].setData(newChartData);
-    //update 'unlock next target' indicator
-    displayPlotLine(numTargets);
+
+    // add empty point to end of series data and add series to chart
+    myChart.series[0].setData(newChartData, true);
+
+    // create and add series for learning rate goal from the last data point to carrot
+    displayPlotLine(numTargets, newChartData);
+    let learningRateGoal = userSessionData[`${numTargets}Targets`].stats.learningRateGoal;
+    learningRateGoal = Math.round(learningRateGoal * 100) / 100;
 
     //update stat elements
     let statValues = {};
@@ -297,7 +376,8 @@ myChart = Highcharts.chart('js-graph__graph-container', {
         spacingTop: 10,
         spacingBottom: 10,
         spacingLeft: 20,
-        spacingRight: 40,
+        spacingRight: 50,
+        spacingRight: 10,
         animation: false,
     },
     title: {
@@ -332,14 +412,18 @@ myChart = Highcharts.chart('js-graph__graph-container', {
     plotOptions: {
       series: {
           marker: {
-              enabled: false
+              enabled: true
           },
           lineWidth: 10,
           animation: false,
       },
     },
     tooltip: {
+        borderRadius: 10,
         formatter: function() {
+            if(this.series.name == 'UnlockIndicator'){
+                return false;
+            }
             if(this.point.learningRate){
                 return "Session <b> "+this.point.x+"</b><br/>Date: <b>"+this.point.dateRun+"</b><br/>Learning Rate: <b>"+this.point.y+"</b><br/>Targets: <b>"+this.point.target+"</b><br/>Seconds: <b>"+this.point.trialDuration+"</b>";
             }else{
@@ -410,5 +494,16 @@ function adaptGraphLayout() {
     jQuery(".graph__content-container").css({"border-radius": "0 0 7px 7px"});
   } else {
     jQuery(".graph__tabs, .graph__content-container").removeAttr("style");
+  }
+  if(widgetWidth <= 310) {
+    jQuery(".graph__tabs").css({"font-family": "'Roboto Condensed', sans-serif"});
+    jQuery(".highcharts-plot-line-label div").css({"font-family": "'Roboto Condensed', sans-serif", "font-size": "8px", "width": "50px", "transform": "translate(-73px, -27px)"});
+    jQuery(".next-target-indicator").css({"width": "25px", "height": "25px", "left": "39px", "top": "37"});
+    myChart.chart.spacingBottom = 0;
+    myChart.chart.spacingTop = 0;
+    myChart.chart.spacingRight = 10;
+    myChart.chart.spacingLeft = 0;
+  } else {
+    //jQuery(".graph__tabs, .highcharts-plot-line-label, .next-target-indicator").removeAttr("style");
   }
 }

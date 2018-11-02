@@ -31,14 +31,12 @@
   display: flex;
   flex-direction: row;
   justify-content: flex-start;
-  //width: 80%;  
   z-index: 1;
   font-size: 1.2em;
 }
 
 .graph__tabs > div {
   position: relative;
-  //flex-grow: 1;  
   width: 155px;
   height: 37px;
   text-align: center;
@@ -72,8 +70,8 @@
   position: absolute;
   content: "";
   width: 100%;
-  height: 4px;
-  bottom: -4px;
+  height: 3px;
+  bottom: -3px;
   left: 0px;
   background-color: #365CAA;
   transition: 0.2s;
@@ -98,6 +96,19 @@
 
 .graph__tabs > div:not(.graph__tabs--selected):hover {
   transition: 0.2s;
+}
+
+.graph__tabs .graph__tabs--locked {
+  color: white !important;
+  /* background-color: #8997ac !important; */
+  opacity: 0.5;
+  cursor: default;
+}
+
+.graph__tabs .graph__tabs--locked::before {
+  height: 4px;
+  bottom: -4px;
+  background-color: rgba(54, 92, 170, 0.5) !important;
 }
 
 /* Content styles */
@@ -183,15 +194,26 @@
 
 .highcharts-plot-line {
   fill: none;
-  stroke: rgb(12, 127, 64);
+  stroke: #F39C12;
   stroke-width: 3px;
   opacity: 1;
+  stroke-dasharray: 5, 7;
+  visibility: hidden;
 }
 
-.highcharts-plot-line-label {
-  font-family: 'Roboto', sans-serif;
-  color: rgb(12, 127, 64);
-  transform: translateX(-30px);
+.highcharts-plot-line-label div {
+  position: absolute;
+  width: 90px;
+  left: 5px;
+  padding: 5px;
+  border: 1px solid #F39C12;
+  border-radius: 5px;
+  background-color: white;
+  color: #F39C12;
+  transform: translate(-105px, -30px);
+  font-weight: 700;
+  font-size: 0.8em;
+  white-space: normal !important;
 }
 
 .highcharts-graph {
@@ -204,15 +226,19 @@
 
 .next-target-indicator{
   position: absolute;
-  left: 300px;
+  /* top: 20px;
+  left: 70px; */
+  top: 27px;
+  left: 60px;
   opacity: 1;
   width: 35px;
   height: 35px;
   border-radius: 50%;
-  background-color: rgb(12, 127, 64);
-  color: white;
+  border: 4px dashed #F39C12;
+  background-color: white;
+  color: #F39C12;
   text-align: center;
-  line-height: 35px;
+  line-height: 45px;
   font-weight: 700;
   font-size: 1.24em;
 }
@@ -224,7 +250,7 @@
   background-color: #ffffff;
   top: 0;
   left: 0;
-  z-index: 100;
+  z-index: 1;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -249,9 +275,21 @@
   stop-color: rgb(12, 127, 64);
   stroke-opacity: 1;
 }
+
 .highcharts-color-0 .highcharts-area {
 	fill-opacity: 0.5;
   fill: url(#gradient-0); 
+}
+
+.highcharts-color-2 {
+  fill: #F39C12;
+  stroke: #F39C12;
+  stop-color: #F39C12;
+  stroke-opacity: 1;
+}
+
+.highcharts-color-2 .highcharts-area {
+	fill: transparent; 
 }
 
 .highcharts-area {
@@ -261,4 +299,13 @@
 .highcharts-color-1 {
   fill: #8085e9;
   stroke: #8085e9;
+}
+
+.highcharts-tooltip-box {
+  fill-opacity: 1;
+  fill: white;
+}
+
+.unlockIndicatorSeries {
+  stroke-dasharray: 5, 7;
 }
