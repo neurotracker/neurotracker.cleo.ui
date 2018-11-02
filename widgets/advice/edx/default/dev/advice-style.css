@@ -76,8 +76,6 @@
   margin: 20px;
   height: 141px;
   overflow-y: auto;
-  display: flex;
-  align-items: center;
 }
 
 .advice__content--text p {  
