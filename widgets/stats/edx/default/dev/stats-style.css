@@ -260,7 +260,7 @@
 
   .tooltip .tooltip-top {
     position: relative;
-    min-width: 174px; 
+    min-width: 165px; 
     top: 105px;
     left: 50%;
     transform: translate(-50%, -100%);
@@ -271,7 +271,7 @@
     position: absolute;
     z-index: 99999999;
     box-sizing: border-box;
-    box-shadow: 0 1px 8px rgba(0,0,0,0.5);
+    //box-shadow: 0 1px 8px rgba(0,0,0,0.5);
     display: none;  
   }
 
@@ -304,7 +304,7 @@
     left: 50%;
     transform: translate(-50%,-50%) rotate(45deg);
     background-color: rgba(67, 91, 119, 0.75);
-    box-shadow: 0 1px 8px rgba(67, 91, 119, 0.5);
+    //box-shadow: 0 1px 8px rgba(67, 91, 119, 0.5);
   }
 
   /* end of tolltips inside when hover stats cells */
