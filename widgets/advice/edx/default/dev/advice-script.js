@@ -3,8 +3,9 @@ function insertAdvice(advice) {
 }
 
 executeAdviceCall = function (orgId, sessionId) {
+	var dateNow = new Date();
   jQuery.ajax({
-    url: "http://38.89.143.20/NEUROEDX_Staging/api/organizations/" + orgId + "/advice-of-the-day",
+    url: "http://38.89.143.20/NEUROEDX_Staging/api/organizations/" + orgId + "/advice-of-the-day?date=" + dateNow.getFullYear() + '-' + (dateNow.getMonth()+1) + '-' + dateNow.getDate(),
     beforeSend: function(xhr) {
       xhr.setRequestHeader('Authorization', 'Basic ' + btoa('satya' + ':' + sessionId));
     },
