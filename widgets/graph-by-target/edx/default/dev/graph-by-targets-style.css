@@ -98,6 +98,10 @@
   transition: 0.2s;
 }
 
+.graph__tabs .graph__tabs--locked {
+  pointer-events: none;
+}
+
 .graph__tabs .graph__tabs--locked:hover {
   background-color: #365CAA;
 }
