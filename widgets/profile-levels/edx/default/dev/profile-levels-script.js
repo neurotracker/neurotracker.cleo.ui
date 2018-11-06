@@ -212,6 +212,23 @@ jQuery('#js-profile-widget').html(`
             <li><img src="${CDN_URL}Avatars/14.png" alt="avatar14"></li>
             <li><img src="${CDN_URL}Avatars/15.png" alt="avatar15"></li>
             <li><img src="${CDN_URL}Avatars/16.png" alt="avatar16"></li>
+            <li><img src="${CDN_URL}Avatars/8c.png" alt="avatar8c"></li>
+            <li><img src="${CDN_URL}Avatars/31c.png" alt="avatar31c"></li>
+            <li><img src="${CDN_URL}Avatars/60c.png" alt="avatar60c"></li>
+            <li><img src="${CDN_URL}Avatars/86c.png" alt="avatar86c"></li>
+            <li><img src="${CDN_URL}Avatars/94c.png" alt="avatar94c"></li>
+            <li><img src="${CDN_URL}Avatars/133c.png" alt="avatar133c"></li>
+            <li><img src="${CDN_URL}Avatars/152c.png" alt="avatar152c"></li>
+            <li><img src="${CDN_URL}Avatars/167c.png" alt="avatar167c"></li>
+            <li><img src="${CDN_URL}Avatars/170c.png" alt="avatar170c"></li>
+            <li><img src="${CDN_URL}Avatars/171c.png" alt="avatar171c"></li>
+            <li><img src="${CDN_URL}Avatars/175c.png" alt="avatar175c"></li>
+            <li><img src="${CDN_URL}Avatars/179c.png" alt="avatar179c"></li>
+            <li><img src="${CDN_URL}Avatars/239c.png" alt="avatar239c"></li>
+            <li><img src="${CDN_URL}Avatars/865c.png" alt="avatar865c"></li>
+            <li><img src="${CDN_URL}Avatars/870c.png" alt="avatar870c"></li>
+            <li><img src="${CDN_URL}Avatars/875c.png" alt="avatar875c"></li>
+            <li><img src="${CDN_URL}Avatars/1323c.png" alt="avatar1323c"></li>
           </ul>
         </div>
       </div>
