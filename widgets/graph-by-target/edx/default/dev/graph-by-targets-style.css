@@ -70,8 +70,8 @@
   position: absolute;
   content: "";
   width: 100%;
-  height: 3px;
-  bottom: -3px;
+  height: 2px;
+  bottom: -2px;
   left: 0px;
   background-color: #365CAA;
   transition: 0.2s;
@@ -88,8 +88,8 @@
 }
 
 .graph__tabs .graph__tabs--selected::before {
-  height: 4px;
-  bottom: -4px;
+  height: 2px;
+  bottom: -2px;
   z-index: 1;
   background-color: white;
 }
@@ -98,17 +98,35 @@
   transition: 0.2s;
 }
 
-.graph__tabs .graph__tabs--locked {
-  color: white !important;
-  /* background-color: #8997ac !important; */
-  opacity: 0.5;
-  cursor: default;
+.graph__tabs .graph__tabs--locked:hover {
+  background-color: #365CAA;
 }
 
-.graph__tabs .graph__tabs--locked::before {
-  height: 4px;
-  bottom: -4px;
-  background-color: rgba(54, 92, 170, 0.5) !important;
+.graph__tabs .graph__tabs--locked::before,
+.graph__tabs .graph__tabs--locked:hover::before {
+  height: 2px;
+  bottom: -2px;
+  background-color: rgba(150, 172, 200, 0.9) !important;
+}
+
+.graph__tabs .graph__tabs--locked::after {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  content: "\f023";
+  color: white;
+  background-color: rgba(150, 172, 200, 0.9);
+  -webkit-font-smoothing: antialiased;
+  display: inline-block;
+  font-style: normal;
+  font-variant: normal;
+  text-rendering: auto;
+  line-height: 34px;
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
+  cursor:not-allowed;
 }
 
 /* Content styles */
