@@ -65,20 +65,20 @@ jQuery('#js-start-widget').html(`
     <div class="quiz__question">Which of these words match with your mood?</div>
     <div class="quiz__answers--mood">
       <div class="js-quiz__answer--mood quiz__answer--mood"><div>happy</div></div>
-      <div class="js-quiz__answer--mood quiz__answer--mood"><div>elated</div></div>
+      <div class="js-quiz__answer--mood quiz__answer--mood"><div>sad</div></div>
       <div class="js-quiz__answer--mood quiz__answer--mood"><div>excited</div></div>
+      <div class="js-quiz__answer--mood quiz__answer--mood"><div>upset</div></div>
+      <div class="js-quiz__answer--mood quiz__answer--mood"><div>nervous</div></div>
       <div class="js-quiz__answer--mood quiz__answer--mood"><div>alert</div></div>
-      <div class="js-quiz__answer--mood quiz__answer--mood"><div>contented</div></div>
-      <div class="js-quiz__answer--mood quiz__answer--mood"><div>serene</div></div>
       <div class="js-quiz__answer--mood quiz__answer--mood"><div>relaxed</div></div>
       <div class="js-quiz__answer--mood quiz__answer--mood"><div>calm</div></div>
-      <div class="js-quiz__answer--mood quiz__answer--mood"><div>sad</div></div>
+      <div class="js-quiz__answer--mood quiz__answer--mood"><div>stressed</div></div>
       <div class="js-quiz__answer--mood quiz__answer--mood"><div>depressed</div></div>
+      <div class="js-quiz__answer--mood quiz__answer--mood"><div>serene</div></div>
+      <div class="js-quiz__answer--mood quiz__answer--mood"><div>contented</div></div>
       <div class="js-quiz__answer--mood quiz__answer--mood"><div>lethargic</div></div>
       <div class="js-quiz__answer--mood quiz__answer--mood"><div>fatigued</div></div>
-      <div class="js-quiz__answer--mood quiz__answer--mood"><div>upset</div></div>
-      <div class="js-quiz__answer--mood quiz__answer--mood"><div>stressed</div></div>
-      <div class="js-quiz__answer--mood quiz__answer--mood"><div>nervous</div></div>
+      <div class="js-quiz__answer--mood quiz__answer--mood"><div>elated</div></div>
       <div class="js-quiz__answer--mood quiz__answer--mood"><div>tense</div></div>
     </div>
   </div>
@@ -259,7 +259,7 @@ function closeQuiz() {
   quizContainer.addClass('quiz__quiz-container--hidden');
   quizForm.addClass('quiz__container--hidden');
   startContainer.removeClass('start-session__container--hidden');
-  jQuery('#js-profile-widget, #advice-widget, #js-graph-by-targets-widget, #stats-widget').show();
+  jQuery('#js-profile-widget, #js-advice-widget, #js-graph-by-targets-widget, #js-stats-widget').show();
 }
 
 // handles incrementing and decrementing 'number of hours of sleep' quiz question and input
@@ -334,6 +334,7 @@ function openFullscreen(elem) {
   } else if (elem[0].msRequestFullscreen) { /* IE/Edge */
     elem[0].msRequestFullscreen();
   }
+  //screen.lockOrientation('landscape');
 }
 
 function closeFullscreen() {
@@ -347,6 +348,20 @@ function closeFullscreen() {
     document.msExitFullscreen();
   }
 }
+
+function handleExitFullscreen (e) {
+  if(e.key === "Escape") {
+    jQuery('#js-nt-iframe').addClass('start-session__nt-iframe--hidden');
+    closeFullscreen();
+  }
+}
+
+jQuery(window).keyup(function(e) {
+  if(e.key === "Escape") {
+    jQuery('#js-nt-iframe').addClass('start-session__nt-iframe--hidden');
+    closeFullscreen();
+  }
+});
 
 // MEDIA QUERIES
 window.addEventListener('resize', adaptStartSessionLayout);
