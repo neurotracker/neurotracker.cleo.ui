@@ -137,13 +137,18 @@ executeProfileLevelsCalls = function(orgId, userId, sessionId){
 
 updateProfileImage = function(imageUrl)
 {
+  imageUrl = imageUrl.split(CDN_URL+'Avatars/')[1];
+  let data = {
+    picURL: imageUrl
+  };
   jQuery.ajax({
-    url: "http://38.89.143.20/NEUROEDX_Staging/api/organizations/" + orgId + "/users/" + userId + "/pictureURL",
+    url: "http://38.89.143.20/NEUROEDX_Staging/api/organizations/" + getOrgId() + "/users/" + getUserId() + "/pictureURL",
     beforeSend: function (xhr) {
-      xhr.setRequestHeader('Authorization', 'Basic ' + btoa('satya' + ':' + sessionId));
+      xhr.setRequestHeader('Authorization', 'Basic ' + btoa('satya' + ':' + getSessionId()));
     },
     method: 'PUT',
-    data: { picUrl: CDN_URL + imageUrl}
+    data: JSON.stringify(data),
+    contentType : "application/json"
   });
 }
 
