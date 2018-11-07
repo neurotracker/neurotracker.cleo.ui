@@ -291,7 +291,10 @@
 }
 
 .profile__save-btn:hover > svg > path {
-  /* font-size: 2.1em; */
+  fill: rgb(22, 128, 40);
+}
+
+.profile__save-btn--selected > svg > path {
   fill: rgb(22, 128, 40);
 }
 

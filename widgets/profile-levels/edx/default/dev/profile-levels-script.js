@@ -283,6 +283,7 @@ jQuery('#js-profile__close-btn').click(function() {
   jQuery('#js-profile__avatars').removeClass('profile__element--visible');
   jQuery('#js-profile__avatar-selection-container').removeClass('profile__avatar-selection-container--open');
   jQuery('#js-choose-avatar').removeClass('profile__change-pic-btn--open');
+  jQuery('.profile__save-btn').removeClass('profile__save-btn--selected');
   jQuery('#js-profile__avatar-img').attr('src', currentProfileImage);
 });
 
@@ -292,6 +293,7 @@ jQuery('#js-profile__save-btn').click(function() {
   jQuery('#js-profile__avatars').removeClass('profile__element--visible');
   jQuery('#js-profile__avatar-selection-container').removeClass('profile__avatar-selection-container--open');
   jQuery('#js-choose-avatar').removeClass('profile__change-pic-btn--open');
+  jQuery('.profile__save-btn').removeClass('profile__save-btn--selected');
   currentProfileImage = previewProfileImage;
   jQuery('#js-profile__avatar-img').attr('src', currentProfileImage);
   updateProfileImage(currentProfileImage);
@@ -308,6 +310,7 @@ jQuery('#js-choose-avatar').click(function() {
 jQuery('#js-profile__avatars > ul > li > img').click(function(e) {
   previewProfileImage = e.target.src;
   jQuery('#js-profile__avatar-img').attr('src', previewProfileImage);
+  jQuery('.profile__save-btn').addClass('profile__save-btn--selected');
 });
 
 // For reading file upload url
