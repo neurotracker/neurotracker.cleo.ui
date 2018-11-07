@@ -113,7 +113,6 @@ function lockTabs() {
         }else{
             if((index + 2) > userSessionData.currentSessionData.targets){
                 jQuery(tab).addClass('graph__tabs--locked');
-                jQuery(tab).html('<i class="fas fa-lock"></i>');
             }else {
                 jQuery(tab).removeClass('graph__tabs--locked');
                 jQuery(tab).html(tabNames[index]);
