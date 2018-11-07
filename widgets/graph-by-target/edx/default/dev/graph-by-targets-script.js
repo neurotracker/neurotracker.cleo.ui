@@ -258,7 +258,7 @@ function displayPlotLine(numTargets, newChartData) {
               }
         }
         //goalLabelText +=  `<span id="js-next-target-indicator" class="next-target-indicator"><span></span></div>`;
-        let goalLabelText =  `<span id="js-next-target-indicator" class="next-target-indicator"><span></span>`;
+        let goalLabelText =  `<span id="js-next-target-indicator" class="next-target-indicator"></span>`;
     
         myChart.yAxis[0].addPlotLine({
             id: 'js-highcharts-plot-line-0',
@@ -423,6 +423,7 @@ myChart = Highcharts.chart('js-graph__graph-container', {
     tooltip: {
         hideDelay: 250,
         stickyTracking: false,
+
         borderRadius: 10,
         formatter: function() {
             if(this.series.name == 'UnlockIndicator'){
@@ -501,8 +502,8 @@ function adaptGraphLayout() {
   }
   if(widgetWidth <= 310) {
     jQuery(".graph__tabs").css({"font-family": "'Roboto Condensed', sans-serif"});
-    jQuery(".highcharts-plot-line-label div").css({"font-family": "'Roboto Condensed', sans-serif", "font-size": "8px", "width": "50px", "transform": "translate(-73px, -27px)"});
-    jQuery(".next-target-indicator").css({"width": "25px", "height": "25px", "left": "39px", "top": "37"});
+    //jQuery(".highcharts-plot-line-label div").css({"font-family": "'Roboto Condensed', sans-serif", "font-size": "8px", "width": "50px", "transform": "translate(-73px, -27px)"});
+    jQuery(".next-target-indicator").css({"width": "25px", "height": "25px", "left": "25px"});
     myChart.chart.spacingBottom = 0;
     myChart.chart.spacingTop = 0;
     myChart.chart.spacingRight = 10;
