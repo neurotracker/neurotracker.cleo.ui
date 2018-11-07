@@ -202,7 +202,7 @@
 .quiz__question-prompt {
   margin: 17px auto 27px auto;
   font-size: 1.5em;
-  color: rgb(255, 255, 255, 0.8);
+  color: rgba(255, 255, 255, 0.8);
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 1px;
@@ -275,7 +275,6 @@
   color: rgb(54, 92, 170);
   font-weight: 700;
   letter-spacing: 1px;
-  //max-width: 400px;
 }
 
 .quiz__subquestion-answers {
@@ -615,10 +614,38 @@
   } 
  
 } 
- 
+
+.nt-iframe {
+  position:fixed;
+  top:0px; left:0px;
+  bottom:0px;
+  right:0px;
+  width:100%;
+  height:100%;
+  border:none;
+  margin:0;
+  padding:0;
+  overflow:hidden;
+  z-index:999999;
+}
+
 .start-session__nt-iframe--hidden { 
   display: none; 
 } 
+
+@media screen and (orientation: portrait) {
+  .nt-iframe {
+    transform: rotate(-90deg);
+    transform-origin: left top;
+    width: 100vh;
+    height: 100vw;
+    overflow-x: hidden;
+    overflow-y: hidden;
+    position: absolute;
+    top: 100%;
+    left: 0;
+  }
+}
  
 @media screen and (max-width: 475px) { 
  

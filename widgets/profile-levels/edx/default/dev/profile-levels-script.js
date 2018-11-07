@@ -137,13 +137,18 @@ executeProfileLevelsCalls = function(orgId, userId, sessionId){
 
 updateProfileImage = function(imageUrl)
 {
+  imageUrl = imageUrl.split(CDN_URL+'Avatars/')[1];
+  let data = {
+    picURL: imageUrl
+  };
   jQuery.ajax({
-    url: "http://38.89.143.20/NEUROEDX_Staging/api/organizations/" + orgId + "/users/" + userId + "/pictureURL",
+    url: "http://38.89.143.20/NEUROEDX_Staging/api/organizations/" + getOrgId() + "/users/" + getUserId() + "/pictureURL",
     beforeSend: function (xhr) {
-      xhr.setRequestHeader('Authorization', 'Basic ' + btoa('satya' + ':' + sessionId));
+      xhr.setRequestHeader('Authorization', 'Basic ' + btoa('satya' + ':' + getSessionId()));
     },
     method: 'PUT',
-    data: { picUrl: CDN_URL + imageUrl}
+    data: JSON.stringify(data),
+    contentType : "application/json"
   });
 }
 
@@ -283,6 +288,7 @@ jQuery('#js-profile__close-btn').click(function() {
   jQuery('#js-profile__avatars').removeClass('profile__element--visible');
   jQuery('#js-profile__avatar-selection-container').removeClass('profile__avatar-selection-container--open');
   jQuery('#js-choose-avatar').removeClass('profile__change-pic-btn--open');
+  jQuery('.profile__save-btn').removeClass('profile__save-btn--selected');
   jQuery('#js-profile__avatar-img').attr('src', currentProfileImage);
 });
 
@@ -292,6 +298,7 @@ jQuery('#js-profile__save-btn').click(function() {
   jQuery('#js-profile__avatars').removeClass('profile__element--visible');
   jQuery('#js-profile__avatar-selection-container').removeClass('profile__avatar-selection-container--open');
   jQuery('#js-choose-avatar').removeClass('profile__change-pic-btn--open');
+  jQuery('.profile__save-btn').removeClass('profile__save-btn--selected');
   currentProfileImage = previewProfileImage;
   jQuery('#js-profile__avatar-img').attr('src', currentProfileImage);
   updateProfileImage(currentProfileImage);
@@ -308,6 +315,7 @@ jQuery('#js-choose-avatar').click(function() {
 jQuery('#js-profile__avatars > ul > li > img').click(function(e) {
   previewProfileImage = e.target.src;
   jQuery('#js-profile__avatar-img').attr('src', previewProfileImage);
+  jQuery('.profile__save-btn').addClass('profile__save-btn--selected');
 });
 
 // For reading file upload url

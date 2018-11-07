@@ -56,6 +56,7 @@ jQuery('#communicator-input > input').on('change', function() {
 });
 
 let unlockNextTarget;
+let unlockLabelText;
 let currentTargetTab;
 let myChart;
 let tabNames = ['2 Targets', '3 Targets', '4 Targets'];
@@ -238,25 +239,27 @@ function displayPlotLine(numTargets, newChartData) {
        !(userSessionData.lastSessionData.trialDuration == 8 && userSessionData.lastSessionData.targets == 4)){
         let learningRateGoal = userSessionData[`${numTargets}Targets`].stats.learningRateGoal;
         learningRateGoal = Math.round(learningRateGoal * 100) / 100;
-        let goalLabelText = `<div>score ${learningRateGoal} or higher to ` ;
+        //let goalLabelText = `<div>score ${learningRateGoal} or higher in your next session to ` ;
+        unlockLabelText = `Score ${learningRateGoal} or higher in your next session to ` ;
         switch(userSessionData.currentSessionData.seconds){
             case 6: 
-                goalLabelText += "unlock 7 seconds";
+                unlockLabelText += `move up to 7 second trials for ${userSessionData.currentSessionData.targets} targets`;
                 break;
             case 7: 
-                goalLabelText += "unlock 8 seconds";
+                unlockLabelText += `move up to 8 second trials for ${userSessionData.currentSessionData.targets} targets`;
                 break;
             case 8: 
                 switch(userSessionData.currentSessionData.targets) {
                   case 2: 
-                    goalLabelText += "unlock 3 targets";
+                    unlockLabelText += `move up to 3 targets`;
                     break;
                   case 3: 
-                    goalLabelText += "unlock 4 targets";
+                    unlockLabelText += `move up to 4 targets`;
                     break;
               }
         }
-        goalLabelText +=  `<span id="js-next-target-indicator" class="next-target-indicator"><span></span></div>`;
+        //goalLabelText +=  `<span id="js-next-target-indicator" class="next-target-indicator"><span></span></div>`;
+        let goalLabelText =  `<span id="js-next-target-indicator" class="next-target-indicator"><span></span>`;
     
         myChart.yAxis[0].addPlotLine({
             id: 'js-highcharts-plot-line-0',
@@ -419,10 +422,12 @@ myChart = Highcharts.chart('js-graph__graph-container', {
       },
     },
     tooltip: {
+        hideDelay: 250,
+        stickyTracking: false,
         borderRadius: 10,
         formatter: function() {
             if(this.series.name == 'UnlockIndicator'){
-                return false;
+                return unlockLabelText;
             }
             if(this.point.learningRate){
                 return "Session <b> "+this.point.x+"</b><br/>Date: <b>"+this.point.dateRun+"</b><br/>Learning Rate: <b>"+this.point.y+"</b><br/>Targets: <b>"+this.point.target+"</b><br/>Seconds: <b>"+this.point.trialDuration+"</b>";
