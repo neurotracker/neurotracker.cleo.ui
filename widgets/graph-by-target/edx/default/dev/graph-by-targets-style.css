@@ -70,8 +70,8 @@
   position: absolute;
   content: "";
   width: 100%;
-  height: 2px;
-  bottom: -2px;
+  height: 4px;
+  bottom: -4px;
   left: 0px;
   background-color: #365CAA;
   transition: 0.2s;
@@ -88,8 +88,8 @@
 }
 
 .graph__tabs .graph__tabs--selected::before {
-  height: 2px;
-  bottom: -2px;
+  height: 4px;
+  bottom: -4px;
   z-index: 1;
   background-color: white;
 }
@@ -108,8 +108,8 @@
 
 .graph__tabs .graph__tabs--locked::before,
 .graph__tabs .graph__tabs--locked:hover::before {
-  height: 2px;
-  bottom: -2px;
+  height: 4px;
+  bottom: -4px;
   background-color: rgba(150, 172, 200, 0.9) !important;
 }
 
