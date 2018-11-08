@@ -75,7 +75,10 @@
 .advice__content--text {  
   margin: 20px;
   height: 141px;
-  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  overflow: auto;
 }
 
 .advice__content--text p {  
@@ -84,4 +87,5 @@
   font-weight: 700; 
   color: #0C7F40; 
   line-height: normal;
+  overflow: auto;
 }
