@@ -248,14 +248,14 @@
 
 .next-target-indicator{
   position: absolute;
-  top: 0px;
-  left: -38px;
-  opacity: 1;
-  width: 35px;
-  height: 35px;
+  top: 4px;
+  left: -30px;
+  opacity: 0.6;
+  width: 20px;
+  height: 20px;
   border-radius: 50%;
-  border: 4px dashed #F39C12;
-  background-color: white;
+  border: 2px dashed #F39C12;
+  background-color: transparent;
   color: #F39C12;
   text-align: center;
   font-weight: 700;
@@ -356,5 +356,14 @@
 }
 
 .unlockIndicatorSeries {
+  opacity: 0.6;
   stroke-dasharray: 5, 7;
+  stroke-width: 2px;
+  -webkit-animation: dash 90s linear infinite;
+}
+
+@-webkit-keyframes dash {
+  to {
+    stroke-dashoffset: -1000;
+  }
 }

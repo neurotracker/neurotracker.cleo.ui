@@ -503,12 +503,12 @@ function adaptGraphLayout() {
   if(widgetWidth <= 310) {
     jQuery(".graph__tabs").css({"font-family": "'Roboto Condensed', sans-serif"});
     //jQuery(".highcharts-plot-line-label div").css({"font-family": "'Roboto Condensed', sans-serif", "font-size": "8px", "width": "50px", "transform": "translate(-73px, -27px)"});
-    jQuery(".next-target-indicator").css({"width": "25px", "height": "25px", "left": "25px"});
+    jQuery(".next-target-indicator").css({"width": "20px", "height": "20px", "left": "-23px", "top": "5px"});
     myChart.chart.spacingBottom = 0;
     myChart.chart.spacingTop = 0;
     myChart.chart.spacingRight = 10;
     myChart.chart.spacingLeft = 0;
   } else {
-    //jQuery(".graph__tabs, .highcharts-plot-line-label, .next-target-indicator").removeAttr("style");
+    jQuery(".next-target-indicator").css({"width": "20px", "height": "20px", "left": "-30px", "top": "4px"});
   }
 }
