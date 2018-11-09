@@ -266,7 +266,7 @@
     transform: translate(-50%, -100%);
     padding: 10px;
     color: #FFFFFF;
-    background-color: rgba(67, 91, 119, 0.85);    
+    background-color: rgba(67, 91, 119, 0.9);    
     border-radius: 8px;
     position: absolute;
     z-index: 99999999;
@@ -303,7 +303,7 @@
     height: 10px;
     left: 50%;
     transform: translate(-50%,-50%) rotate(45deg);
-    background-color: rgba(67, 91, 119, 0.85);
+    background-color: rgba(67, 91, 119, 0.9);
     //box-shadow: 0 1px 8px rgba(67, 91, 119, 0.5);
   }
 
