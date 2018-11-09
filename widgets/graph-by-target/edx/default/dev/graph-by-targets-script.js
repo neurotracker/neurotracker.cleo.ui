@@ -356,6 +356,7 @@ function displayDataAndStats(numTargets) {
                 symbol: 'circle'
             },
             colorIndex: 1,
+            showInLegend: false,
         });
     }else{
         jQuery('#js-graph__best-score-stat').removeClass('graph__stat-value--hidden');
@@ -376,11 +377,10 @@ function displayDataAndStats(numTargets) {
 myChart = Highcharts.chart('js-graph__graph-container', {
     chart: {
         type: 'area',
-        spacingTop: 10,
+        spacingTop: 5,
         spacingBottom: 10,
-        spacingLeft: 20,
-        spacingRight: 50,
-        spacingRight: 10,
+        spacingLeft: 5,
+        spacingRight: 5,
         animation: false,
     },
     title: {
@@ -441,6 +441,7 @@ myChart = Highcharts.chart('js-graph__graph-container', {
         {
             id: 'targetData',
             name: 'Target Data',
+            showInLegend: false,
         },
     ],
     defs: {
@@ -507,7 +508,7 @@ function adaptGraphLayout() {
     jQuery(".next-target-indicator").css({"width": "20px", "height": "20px", "left": "-23px", "top": "5px"});
     myChart.chart.spacingBottom = 0;
     myChart.chart.spacingTop = 0;
-    myChart.chart.spacingRight = 10;
+    myChart.chart.spacingRight = 5;
     myChart.chart.spacingLeft = 0;
   } else {
     jQuery(".next-target-indicator").css({"width": "20px", "height": "20px", "left": "-30px", "top": "4px"});
