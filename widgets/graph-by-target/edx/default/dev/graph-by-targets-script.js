@@ -235,7 +235,8 @@ function displayPlotLine(numTargets, newChartData) {
     }
     if(userSessionData[`${numTargets}Targets`].stats.learningRateGoal && 
        numTargets == userSessionData.lastSessionData.targets && 
-       !(userSessionData.lastSessionData.trialDuration == 8 && userSessionData.lastSessionData.targets == 4)){
+       !(userSessionData.lastSessionData.trialDuration == 8 && userSessionData.lastSessionData.targets == 4) &&
+       userSessionData.currentSessionData.targets == numTargets){
         let learningRateGoal = userSessionData[`${numTargets}Targets`].stats.learningRateGoal;
         learningRateGoal = Math.round(learningRateGoal * 100) / 100;
         //let goalLabelText = `<div>score ${learningRateGoal} or higher in your next session to ` ;

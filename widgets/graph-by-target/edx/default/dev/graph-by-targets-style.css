@@ -250,12 +250,12 @@
   position: absolute;
   top: 5px;
   left: -30px;
-  opacity: 0.6;
   width: 21px;
   height: 21px;
   border-radius: 50%;
-  border: 2px dashed #F39C12;
-  color: #F39C12;
+  border: 2px dashed #f8c471;
+  color: #f8c471;
+  background-color: transparent;
   text-align: center;
   font-weight: 700;
   font-size: 1.24em;
@@ -317,9 +317,9 @@
 }
 
 .highcharts-color-2 {
-  fill: #F39C12;
-  stroke: #F39C12;
-  stop-color: #F39C12;
+  fill: #f8c471;
+  stroke: #f8c471;
+  stop-color: #f8c471;
   stroke-opacity: 1;
 }
 
@@ -346,7 +346,7 @@
 }
 
 .unlockIndicatorSeries {
-  opacity: 0.6;
+  /* opacity: 0.6; */
   stroke-dasharray: 5, 7;
   stroke-width: 2px;
   -webkit-animation: dash 90s linear infinite;
