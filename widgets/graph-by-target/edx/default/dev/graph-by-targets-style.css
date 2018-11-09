@@ -248,31 +248,21 @@
 
 .next-target-indicator{
   position: absolute;
-  top: 4px;
+  top: 5px;
   left: -30px;
   opacity: 0.6;
-  width: 20px;
-  height: 20px;
+  width: 21px;
+  height: 21px;
   border-radius: 50%;
   border: 2px dashed #F39C12;
-  background-color: transparent;
   color: #F39C12;
   text-align: center;
   font-weight: 700;
   font-size: 1.24em;
-  -webkit-animation-name: spin;
-  -webkit-animation-duration: 10000ms;
-  -webkit-animation-iteration-count: infinite;
-  -webkit-animation-timing-function: linear;
-  -moz-animation-name: spin;
-  -moz-animation-duration: 10000ms;
-  -moz-animation-iteration-count: infinite;
-  -moz-animation-timing-function: linear;
-  -ms-animation-name: spin;
-  -ms-animation-duration: 10000ms;
-  -ms-animation-iteration-count: infinite;
-  -ms-animation-timing-function: linear;
-  -o-transition: rotate(3600deg);
+  animation-name: spin;
+  animation-duration: 6s;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
 }
 
 @-moz-keyframes spin {
