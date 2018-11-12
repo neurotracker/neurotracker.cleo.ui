@@ -223,7 +223,7 @@
   border-radius: 5px;
   height: 100%;
   width: 100%;
-  flex-grow: 1;
+  min-height: 0px;
   overflow: none;
   box-shadow: 0 2px 7px rgba(17,18,18,0.21);
 }
