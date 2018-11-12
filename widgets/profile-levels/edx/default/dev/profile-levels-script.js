@@ -1,6 +1,7 @@
 var CDN_URL = 'https://raw.githubusercontent.com/neurotracker/neurotracker.cleo.ui-public/develop/widgets/profile-levels/edx/default/dev/';
 var previewProfileImage;
 var currentProfileImage;
+var experiencePercentage;
 
 hideLoading = function() {
   jQuery('#js-profile__loading-container').addClass('profile__loading-container--fading');
@@ -8,7 +9,7 @@ hideLoading = function() {
     jQuery('#js-profile__loading-container').hide();
   }, 800);
   setTimeout(function () {
-    jQuery('#js-profile__experience-meter').css('width', currentExp / goalExp * 100 + '%');
+    jQuery('#js-profile__experience-meter').css('width', experiencePercentage);
   }, 600);
 }
 
@@ -21,6 +22,7 @@ insertPictureUrl = function(imageUrl) {
 }
 
 insertLevel = function (level, currentExp, goalExp) {
+  experiencePercentage = currentExp / goalExp * 100 + '%';
   jQuery('#js-profile__current-level').html(level);
   jQuery('#js-profile__experience-points').html(currentExp);
   jQuery('#js-profile__goal-experience').html('/' + goalExp + ' EXP');
