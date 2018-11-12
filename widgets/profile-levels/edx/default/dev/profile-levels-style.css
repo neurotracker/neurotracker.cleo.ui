@@ -313,9 +313,10 @@
 
 .profile__avatar-selection-container--open {
   max-height: 250px;
-  /* overflow: scroll; */
   overflow-x: hidden;
-}::-webkit-scrollbar {
+}
+
+.profile__avatar-selection-container--open::-webkit-scrollbar {
   width: 0px;
   background: transparent;
 }
