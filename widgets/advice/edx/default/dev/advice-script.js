@@ -24,7 +24,7 @@ jQuery('#communicator-input > input').on('change', function () {
 
 jQuery('#js-advice-widget').html(`
 	<div class="advice__container" id="js-advice-widget-container">
-		<div class="advice__tab"><p>Advice of the day</p></div>
+		<div class="advice__tab"><p>Tip of the day</p></div>
 		<div class="advice__content" id="js-advice__content">
 
 			<div id="js-advice__loading-container" class="advice__loading-container">
