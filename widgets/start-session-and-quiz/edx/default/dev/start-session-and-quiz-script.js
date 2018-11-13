@@ -244,6 +244,7 @@ function openQuiz() {
   currentQuestion = 0;
   jQuery(`.quiz__question-container`).removeClass('quiz__question-container--show');
   showQuestion(currentQuestion);
+  window.scrollTo(0, 0);
   jQuery('#js-profile-widget, #js-advice-widget, #js-graph-by-targets-widget, #js-stats-widget').hide();
 }
 
@@ -252,6 +253,7 @@ function closeQuiz() {
   jQuery(`#${questionIds[currentQuestion]}`).removeClass('quiz__question-container--show');
   currentQuestion = 0;
   quizForm.trigger('reset');
+  window.scrollTo(0, 0);
   jQuery('.quiz__answer--mood-selected').removeClass('quiz__answer--mood-selected');
   quizMoodAnswers = [];
   jQuery('#js-quiz__sleep-count-input').val(8);
