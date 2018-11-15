@@ -1,0 +1,91 @@
+/* Advice widget style sheet */
+
+* {box-sizing: border-box;}
+
+/* Container styles */
+
+.advice__container {
+  width: 100%;
+  min-height: 230px;
+  height: 100%;
+  background-color: #365CAA;
+  font-family: 'Roboto', sans-serif;
+  border-radius: 7px;  
+  box-shadow: 0 5px 15px rgba(0,0,0,0.06), 0 15px 35px rgba(42,51,83,0.12);
+  position: relative;
+}
+
+/* Tab styles */
+.advice__tab {  
+  width: 100%;
+  height: 45px;  
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2em; 
+  font-weight: 700;  
+  text-transform: uppercase; 
+  color: white;  
+  text-align: center;
+  margin: auto;
+}
+
+.advice__content {  
+  background-image: url("https://raw.githubusercontent.com/neurotracker/neurotracker.cleo.ui-public/develop/widgets/advice/edx/default/dev/bulb3.png");
+  background-size: auto 100%;  
+  background-repeat: no-repeat;
+  background-color: white;
+  border-radius: 5px;   
+  height: 181px;
+  margin: 0 4px 4px 4px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  align-content: space-around;
+}
+
+.advice__loading-container {
+  position: absolute; 
+  width: 97%; 
+  height: calc(97% - 45px); 
+  margin: 45px 4px 4px 4px;
+  background-color: #ffffff; 
+  border-radius: 7px; 
+  top: 0; 
+  left: 0; 
+  z-index: 100; 
+  display: flex; 
+  justify-content: center; 
+  align-items: center; 
+  transition: 0.7s ease-in; 
+}
+
+.advice__loading-container--fading { 
+  opacity: 0; 
+} 
+
+.advice__content--img img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: auto;
+  height: 100%;  
+}
+
+.advice__content--text {  
+  margin: 20px;
+  height: 141px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  overflow: auto;
+}
+
+.advice__content--text p {  
+  margin: 5px auto;
+  font-size: 1.45em; 
+  font-weight: 700; 
+  color: #0C7F40; 
+  line-height: normal;
+  overflow: auto;
+}
