@@ -64,6 +64,8 @@ Globalize.loadMessages(
       "avg-learning-rate": "average learning rate",
       "this-week": "this week",
       "last-week": "last week",
+      "this-month": "this month",
+      "last-month": "last month",
     },
     ja: 
     {
@@ -110,32 +112,34 @@ Globalize.loadMessages(
       "tip-of-the-day": "\u{4ECA}\u{65E5}\u{306E}\u{5148}\u{7AEF}",
 
       //graph widget
-      "2-targets": "2 targets",
-      "3-targets": "3 targets",
-      "4-targets": "4 targets",
-      "overview": "overview",
-      "best-score": "best score",
-      "highest-speed": "highest speed",
-      "best-learning-rate": "best learning rate",
-      "score": "score",
-      "session": "session",
-      "no-data": "No Data",
+      "2-targets": "2\u{3064}\u{306E}\u{30BF}\u{30FC}\u{30B2}\u{30C3}\u{30C8}",
+      "3-targets": "3\u{3064}\u{306E}\u{30BF}\u{30FC}\u{30B2}\u{30C3}\u{30C8}",
+      "4-targets": "4\u{3064}\u{306E}\u{30BF}\u{30FC}\u{30B2}\u{30C3}\u{30C8}",
+      "overview": "\u{6982}\u{8981}",
+      "best-score": "\u{6700}\u{9AD8}\u{306E}\u{30B9}\u{30B3}\u{30A2}",
+      "highest-speed": "\u{6700}\u{9AD8}\u{901F}\u{5EA6}",
+      "best-learning-rate": "\u{6700}\u{9AD8}\u{306E}\u{5B66}\u{7FD2}\u{7387}",
+      "score": "\u{30B9}\u{30B3}\u{30A2}",
+      "session": "\u{30BB}\u{30C3}\u{30B7}\u{30E7}\u{30F3}",
+      "no-data": "\u{30C7}\u{30FC}\u{30BF}\u{306A}\u{3057}",
 
       //stats widget
-      "week": "week",
-      "month": "month",
-      "completed-sessions": "completed sessions",
-      "improvement": "improvement",
-      "avg-learning-rate": "average learning rate",
-      "this-week": "this week",
-      "last-week": "last week",
+      "week": "\u{9031}\u{9593}",
+      "month": "\u{6708}",
+      "completed-sessions": "\u{5B8C}\u{4E86}\u{3057}\u{305F}\u{30BB}\u{30C3}\u{30B7}\u{30E7}\u{30F3}",
+      "improvement": "\u{6539}\u{5584}",
+      "avg-learning-rate": "\u{5E73}\u{5747}\u{5B66}\u{7FD2}\u{7387}",
+      "this-week": "\u{4ECA}\u{9031}",
+      "last-week": "\u{5148}\u{9031}",
+      "this-month": "\u{4ECA}\u{6708}",
+      "last-month": "\u{5148}\u{6708}",
     },
     fr: 
     {
       //start widget
-      "welcome-back": "Nous saluons le retour!",
-      "your-goal": "Ton<br>but",
-      "targets": "des cibles",
+      "welcome-back": "bienvenue \u{E0} retour",
+      "your-goal": "Ton<br>objectif",
+      "targets": "cibles",
       "seconds": "secondes",
       "ready": "pr\u{EA}t?",
       "start": "d\u{E9}but",
@@ -166,34 +170,36 @@ Globalize.loadMessages(
       "submit": "soumettre", //TODO
 
       //profile widget
-      "change-pic": "change <br> picture",
-      "change-your-image": "change your image",
-      "choose-an-avatar": "choose an avatar",
-      "or": "or",
+      "change-pic": "changer <br> l'image",
+      "change-your-image": "changer ton image",
+      "choose-an-avatar": "choisir un avatar",
+      "or": "ou",
 
       //advice widget
-      "tip-of-the-day": "tip of the day",
+      "tip-of-the-day": "Conseil du jour",
 
       //graph widget
-      "2-targets": "2 targets",
-      "3-targets": "3 targets",
-      "4-targets": "4 targets",
-      "overview": "overview",
-      "best-score": "best score",
-      "highest-speed": "highest speed",
-      "best-learning-rate": "best learning rate",
+      "2-targets": "2 cibles",
+      "3-targets": "3 cibles",
+      "4-targets": "4 cibles",
+      "overview": "vue d'ensemble",
+      "best-score": "meilleur score",
+      "highest-speed": "vitesse maximale",
+      "best-learning-rate": "meilleur taux d'apprentissage",
       "score": "score",
       "session": "session",
-      "no-data": "No Data",
+      "no-data": "Pas de donn\u{E9}es",
 
       //stats widget
-      "week": "week",
-      "month": "month",
-      "completed-sessions": "completed sessions",
-      "improvement": "improvement",
-      "avg-learning-rate": "average learning rate",
-      "this-week": "this week",
-      "last-week": "last week",
+      "week": "semaine",
+      "month": "mois",
+      "completed-sessions": "sessions termin\u{E9}es",
+      "improvement": "am\u{E9}lioration",
+      "avg-learning-rate": "taux d'apprentissage moyen",
+      "this-week": "cette semaine",
+      "last-week": "semaine derni\u{E8}re",
+      "this-month": "ce mois-ci",
+      "last-month": "mois dernier",
     }
 });
 
@@ -206,7 +212,9 @@ Globalize.loadMessages(
 //   return result;
 // };
 
-var globalize = new Globalize("fr");
+
+
+let globalize = new Globalize("fr");
 jQuery('.i18n-welcome-back').text(globalize.messageFormatter('welcome-back'));
 jQuery('.i18n-your-goal').html(globalize.messageFormatter('your-goal'));
 jQuery('.i18n-targets').text(globalize.messageFormatter('targets'));
@@ -264,3 +272,9 @@ jQuery('.i18n-last-week').text(globalize.messageFormatter('last-week'));
 // jQuery('.i18n-').text(globalize.messageFormatter(''));
 // jQuery('.i18n-').text(globalize.messageFormatter(''));
 // jQuery('.i18n-').text(globalize.messageFormatter(''));
+
+
+setTimeout(() => {
+  console.log('here');
+  globalize = new Globalize('ja');
+}, 5000);
