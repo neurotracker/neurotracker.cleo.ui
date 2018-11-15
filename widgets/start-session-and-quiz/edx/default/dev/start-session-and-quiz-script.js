@@ -306,7 +306,7 @@ function nextQuestion(n) {
     setTimeout(() => {
       jQuery('#js-nt-iframe').removeClass('start-session__nt-iframe--hidden'); 
       openFullscreen(jQuery('#js-nt-iframe'));
-    }, 500);
+    }, 1000);
     closeQuiz();
     jQuery.ajax({
       type: "POST",
@@ -351,15 +351,8 @@ function closeFullscreen() {
   }
 }
 
-function handleExitFullscreen (e) {
-  if(e.key === "Escape") {
-    jQuery('#js-nt-iframe').addClass('start-session__nt-iframe--hidden');
-    closeFullscreen();
-  }
-}
-
 jQuery(window).keyup(function(e) {
-  if(e.key === "Escape") {
+  if(e.key == "Escape") {
     jQuery('#js-nt-iframe').addClass('start-session__nt-iframe--hidden');
     closeFullscreen();
   }
