@@ -2,10 +2,10 @@
 jQuery("#js-graph-by-targets-widget").html(`
 <div class="graph__container">
         <div id="js-graph__tabs" class="graph__tabs">
-          <div id="js-graph__2-targets">2 Targets</div>
-          <div id="js-graph__3-targets">3 Targets</div>
-          <div id="js-graph__4-targets">4 Targets</div>
-          <div id="js-graph__overview-targets">Overview</div>
+          <div id="js-graph__2-targets i18n-2-targets"></div>
+          <div id="js-graph__3-targets i18n-3-targets"></div>
+          <div id="js-graph__4-targets i18n-4-targets"></div>
+          <div id="js-graph__overview-targets i18n-overview"></div>
         </div>
         <div class="graph__content-container">
           <div id="js-graph__loading-container" class="graph__loading-container">
@@ -23,18 +23,18 @@ jQuery("#js-graph-by-targets-widget").html(`
           <ul id="js-graph__stat-list" class="graph__stat-list">
             <li id="js-graph__best-learning-rate-stat" class="graph__stat graph__stat-value--hidden">
               <div id="js-graph__best-learning-rate-stat-value" class="graph__stat-value">-</div>
-              <div class="graph__stat-name">Best Learning Rate</div>
+              <div class="graph__stat-name i18n-best-learning-rate"></div>
             </li>
             <li id="js-graph__best-score-stat" class="graph__stat">
               <div id="js-graph__best-score-stat-value" class="graph__stat-value">-</div>
-              <div class="graph__stat-name">Best Score</div>
+              <div class="graph__stat-name i18n-best-score"></div>
             </li>
             <li id="js-graph__highest-speed-stat" class="graph__stat">
               <div id="js-graph__highest-speed-stat-value" class="graph__stat-value">-</div>
-              <div class="graph__stat-name">Highest Speed</div>
+              <div class="graph__stat-name i18n-highest-speed"></div>
             </li>
           </ul>
-          <div id="js-graph__no-data-label" class="graph__no-data-label" style="display: none;">No Data</div>
+          <div id="js-graph__no-data-label" class="graph__no-data-label i18n-no-data" style="display: none;"></div>
           <div id="js-graph__graph-container" class="graph__graph-container">
           </div>
         </div>

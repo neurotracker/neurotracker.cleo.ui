@@ -144,8 +144,8 @@ jQuery('#communicator-input > input').on('change', function () {
 jQuery('#js-stats-widget').html(`
   <div class="stats__container"> 
     <div id="js-stats__tabs" class="stats__tabs">
-      <div id="js-stats__week-tab" class="stats__tab--selected stats__tab--week-tab">Week</div>
-      <div id="js-stats__month-tab" class="stats__tab--month-tab">Month</div>
+      <div id="js-stats__week-tab" class="stats__tab--selected stats__tab--week-tab i18n-week"></div>
+      <div id="js-stats__month-tab" class="stats__tab--month-tab i18n-month"></div>
     </div>
     <div class="stats__content" id="js-stats__content">
 
@@ -169,21 +169,21 @@ jQuery('#js-stats-widget').html(`
 
         <li class="stats__stat">
           <div class="stats_normal">
-            <div class="stats__stat-value js-stats__this-week--best-score">2.68</div>
-            <div class="stats__stat-name">Best Score</div>
+            <div class="stats__stat-value js-stats__this-week--best-score"></div>
+            <div class="stats__stat-name i18n-best-score"></div>
           </div>
           <div class="stats_hover" id="js-stats__best-score-stat_hover">
-            <div class="stats_details_title">Best Score</div>
+            <div class="stats_details_title i18n-best-score"></div>
             <div class="stats_details_main">
-              <div class="stats_details_main_feature">This week</div>
+              <div class="stats_details_main_feature i18n-this-week"></div>
               <div class="stats_details_main_line"></div>
-              <div class="stats_details_main_data js-stats__this-week--best-score">2.68</div>
+              <div class="stats_details_main_data js-stats__this-week--best-score"></div>
             </div>
             <!-- <div class="stats_details_sub">[Wednesday, Dec 23]</div> -->
             <div class="stats_details_main">
-              <div class="stats_details_main_feature">Last week</div>
+              <div class="stats_details_main_feature i18n-last-week"></div>
               <div class="stats_details_main_line"></div>
-              <div class="stats_details_main_data js-stats__last-week--best-score">2.02</div>
+              <div class="stats_details_main_data js-stats__last-week--best-score"></div>
             </div>
             <!-- <div class="stats_details_sub">[Wednesday, Oct 30]</div> -->
             <div class="stats_details_moreinfo tooltip">
@@ -197,21 +197,21 @@ jQuery('#js-stats-widget').html(`
 
         <li class="stats__stat">
           <div class="stats_normal">
-            <div class="stats__stat-value js-stats__this-week--sessions-completed">17</div>
-            <div class="stats__stat-name">Completed sessions</div>
+            <div class="stats__stat-value js-stats__this-week--sessions-completed"></div>
+            <div class="stats__stat-name i18n-completed-sessions"></div>
           </div>
           <div class="stats_hover" id="js-stats__sessions-completed-stat_hover">
-            <div class="stats_details_title">Completed sessions</div>
+            <div class="stats_details_title i18n-completed-sessions"></div>
             <div class="stats_details_main">
-              <div class="stats_details_main_feature">This week</div>
+              <div class="stats_details_main_feature i18n-this-week"></div>
               <div class="stats_details_main_line"></div>
-              <div class="stats_details_main_data js-stats__this-week--sessions-completed">17</div>
+              <div class="stats_details_main_data js-stats__this-week--sessions-completed"></div>
             </div>
             <!-- <div class="stats_details_sub">[56% OF LAST WEEK]</div> -->
             <div class="stats_details_main">
-              <div class="stats_details_main_feature">Last week</div>
+              <div class="stats_details_main_feature i18n-last-week"></div>
               <div class="stats_details_main_line"></div>
-              <div class="stats_details_main_data js-stats__last-week--sessions-completed">26</div>
+              <div class="stats_details_main_data js-stats__last-week--sessions-completed"></div>
             </div>
             <!-- <div class="stats_details_sub">[-35% OF LAST WEEK]</div> -->
             <div class="stats_details_moreinfo tooltip">
@@ -225,20 +225,20 @@ jQuery('#js-stats-widget').html(`
 
         <li class="stats__stat">
           <div class="stats_normal">
-            <div class="stats__stat-value js-stats__this-week--improvement">54%</div>
-            <div class="stats__stat-name">Improvement</div>
+            <div class="stats__stat-value js-stats__this-week--improvement"></div>
+            <div class="stats__stat-name i18n-improvement"></div>
           </div>
           <div class="stats_hover" id="js-stats__improvement-stat_hover">
-            <div class="stats_details_title">improvement</div>
+            <div class="stats_details_title i18n-improvement"></div>
             <div class="stats_details_main">
-              <div class="stats_details_main_feature">This week</div>
+              <div class="stats_details_main_feature i18n-this-week"></div>
               <div class="stats_details_main_line"></div>
-              <div class="stats_details_main_data js-stats__this-week--improvement">54%</div>
+              <div class="stats_details_main_data js-stats__this-week--improvement"></div>
             </div>
             <div class="stats_details_main">
-              <div class="stats_details_main_feature">Last week</div>
+              <div class="stats_details_main_feature i18n-last-week"></div>
               <div class="stats_details_main_line"></div>
-              <div class="stats_details_main_data js-stats__last-week--improvement">65%</div>
+              <div class="stats_details_main_data js-stats__last-week--improvement"></div>
             </div>
             <div class="stats_details_moreinfo tooltip">
               <div class="tooltip-top">
@@ -251,20 +251,20 @@ jQuery('#js-stats-widget').html(`
 
         <li class="stats__stat">
           <div class="stats_normal">
-            <div class="stats__stat-value js-stats__this-week--avg-learning-rate">3.90</div>
-            <div class="stats__stat-name">Avg learning rate</div>
+            <div class="stats__stat-value js-stats__this-week--avg-learning-rate"></div>
+            <div class="stats__stat-name i18n-avg-learning-rate"></div>
           </div>
           <div class="stats_hover" id="js-stats__avg-learning-stat_hover">
-            <div class="stats_details_title">Avg learning rate</div>
+            <div class="stats_details_title i18n-avg-learning-rate"></div>
             <div class="stats_details_main">
-              <div class="stats_details_main_feature">This week</div>
+              <div class="stats_details_main_feature i18n-this-week"></div>
               <div class="stats_details_main_line"></div>
-              <div class="stats_details_main_data js-stats__this-week--avg-learning-rate">3.90</div>
+              <div class="stats_details_main_data js-stats__this-week--avg-learning-rate"></div>
             </div>
             <div class="stats_details_main">
-              <div class="stats_details_main_feature">Last week</div>
+              <div class="stats_details_main_feature i18n-last-week"></div>
               <div class="stats_details_main_line"></div>
-              <div class="stats_details_main_data js-stats__last-week--avg-learning-rate">3.38</div>
+              <div class="stats_details_main_data js-stats__last-week--avg-learning-rate"></div>
             </div>
             <!-- <div class="stats_details_main">39% IMPROVEMENT</div> -->
             <div class="stats_details_moreinfo tooltip">
@@ -278,21 +278,21 @@ jQuery('#js-stats-widget').html(`
 
         <li class="stats__stat">
           <div class="stats_normal">
-            <div class="stats__stat-value js-stats__this-week--highest-speed">4.7</div>
-            <div class="stats__stat-name">Highest speed</div>
+            <div class="stats__stat-value js-stats__this-week--highest-speed"></div>
+            <div class="stats__stat-name i18n-highest-speed"></div>
           </div>
           <div class="stats_hover" id="js-stats__highest-speed-stat_hover">
-            <div class="stats_details_title">Highest speed</div>
+            <div class="stats_details_title i18n-highest-speed"></div>
             <div class="stats_details_main">
-              <div class="stats_details_main_feature">This week</div>
+              <div class="stats_details_main_feature i18n-this-week"></div>
               <div class="stats_details_main_line"></div>
-              <div class="stats_details_main_data js-stats__this-week--highest-speed">4.7</div>
+              <div class="stats_details_main_data js-stats__this-week--highest-speed"></div>
             </div>
             <!-- <div class="stats_details_sub">[Wednesday, Dec 23]</div> -->
             <div class="stats_details_main">
-              <div class="stats_details_main_feature">Last week</div>
+              <div class="stats_details_main_feature i18n-last-week"></div>
               <div class="stats_details_main_line"></div>
-              <div class="stats_details_main_data js-stats__last-week--highest-speed">3.1</div>
+              <div class="stats_details_main_data js-stats__last-week--highest-speed"></div>
             </div>
             <!-- <div class="stats_details_sub">[Wednesday, Oct 30]</div> -->
             <div class="stats_details_moreinfo tooltip">
@@ -305,7 +305,7 @@ jQuery('#js-stats-widget').html(`
         </li>
         <!-- <li class="stats__stat seemore_stat" id="js-stats__more-stats-week">
           <div class="stats__stat-value">+</div>
-          <div class="stats__stat-name">See all stats</div>
+          <div class="stats__stat-name i18n-see-all-stats"></div>
         </li> -->
       </ul>
 
@@ -315,7 +315,7 @@ jQuery('#js-stats-widget').html(`
         <div class="stats__see-more-content-container">
           <ul class="stats__more-stat-list stats__more-stat-list-week" id="js-stats__more-stat-list"></ul>
         </div>
-        <div class="stats__see-more-content--see-less-button" id="js-stats__see-more-content-week--see-less-button">See less</div>
+        <div class="stats__see-more-content--see-less-button" id="js-stats__see-more-content-week--see-less-button i18n-see-less"></div>
       </div>
 
     <!-- month stats default view -->
@@ -324,21 +324,21 @@ jQuery('#js-stats-widget').html(`
 
         <li class="stats__stat">
           <div class="stats_normal">
-            <div class="stats__stat-value js-stats__this-month--best-score">3.02</div>
-            <div class="stats__stat-name">Best Score</div>
+            <div class="stats__stat-value js-stats__this-month--best-score"></div>
+            <div class="stats__stat-name i18n-best-score"></div>
           </div>
           <div class="stats_hover" id="js-stats__best-score-stat_hover">
-          <div class="stats_details_title">Best Score</div>
+          <div class="stats_details_title i18n-best-score"></div>
           <div class="stats_details_main">
-            <div class="stats_details_main_feature">This month</div>
+            <div class="stats_details_main_feature i18n-this-month"></div>
             <div class="stats_details_main_line"></div>
-            <div class="stats_details_main_data js-stats__this-month--best-score">3.02</div>
+            <div class="stats_details_main_data js-stats__this-month--best-score"></div>
           </div>
           <!-- <div class="stats_details_sub">[Wednesday, Dec 23]</div> -->
           <div class="stats_details_main">
-            <div class="stats_details_main_feature">Last month</div>
+            <div class="stats_details_main_feature i18n-last-month"></div>
             <div class="stats_details_main_line"></div>
-            <div class="stats_details_main_data js-stats__last-month--best-score">2.61</div>
+            <div class="stats_details_main_data js-stats__last-month--best-score"></div>
           </div>
           <!-- <div class="stats_details_sub">[Wednesday, Oct 30]</div> -->
             <div class="stats_details_moreinfo tooltip">
@@ -352,21 +352,21 @@ jQuery('#js-stats-widget').html(`
 
         <li class="stats__stat">
           <div class="stats_normal">
-            <div class="stats__stat-value js-stats__this-month--sessions-completed">103</div>
-            <div class="stats__stat-name">Completed sessions</div>
+            <div class="stats__stat-value js-stats__this-month--sessions-completed"></div>
+            <div class="stats__stat-name i18n-completed-sessions"></div>
           </div>
           <div class="stats_hover" id="js-stats__sessions-completed-stat_hover">
-            <div class="stats_details_title">Completed sessions</div>
+            <div class="stats_details_title i18n-completed-sessions"></div>
             <div class="stats_details_main">
-              <div class="stats_details_main_feature">This month</div>
+              <div class="stats_details_main_feature i18n-this-month"></div>
               <div class="stats_details_main_line"></div>
-              <div class="stats_details_main_data js-stats__this-month--sessions-completed">103</div>
+              <div class="stats_details_main_data js-stats__this-month--sessions-completed"></div>
             </div>
             <!-- <div class="stats_details_sub">[48% OF LAST month]</div> -->
             <div class="stats_details_main">
-              <div class="stats_details_main_feature">Last month</div>
+              <div class="stats_details_main_feature i18n-last-month"></div>
               <div class="stats_details_main_line"></div>
-              <div class="stats_details_main_data js-stats__last-month--sessions-completed">56</div>
+              <div class="stats_details_main_data js-stats__last-month--sessions-completed"></div>
             </div>
             <!-- <div class="stats_details_sub">[-35% OF LAST month]</div> -->
             <div class="stats_details_moreinfo tooltip">
@@ -380,20 +380,20 @@ jQuery('#js-stats-widget').html(`
 
         <li class="stats__stat">
           <div class="stats_normal">
-            <div class="stats__stat-value js-stats__this-month--improvement">49%</div>
-            <div class="stats__stat-name">Improvement</div>
+            <div class="stats__stat-value js-stats__this-month--improvement"></div>
+            <div class="stats__stat-name i18n-improvement"></div>
           </div>
           <div class="stats_hover" id="js-stats__improvement-stat_hover">
-          <div class="stats_details_title">improvement</div>
+          <div class="stats_details_title i18n-improvement"></div>
           <div class="stats_details_main">
-            <div class="stats_details_main_feature">This month</div>
+            <div class="stats_details_main_feature i18n-this-month"></div>
             <div class="stats_details_main_line"></div>
-            <div class="stats_details_main_data js-stats__this-month--improvement">49%</div>
+            <div class="stats_details_main_data js-stats__this-month--improvement"></div>
           </div>
           <div class="stats_details_main">
-            <div class="stats_details_main_feature">Last month</div>
+            <div class="stats_details_main_feature i18n-last-month"></div>
             <div class="stats_details_main_line"></div>
-            <div class="stats_details_main_data js-stats__last-month--improvement">25%</div>
+            <div class="stats_details_main_data js-stats__last-month--improvement"></div>
           </div>
             <div class="stats_details_moreinfo tooltip">
               <div class="tooltip-top">
@@ -406,20 +406,20 @@ jQuery('#js-stats-widget').html(`
 
         <li class="stats__stat">
           <div class="stats_normal">
-            <div class="stats__stat-value js-stats__this-month--avg-learning-rate">2.9</div>
-            <div class="stats__stat-name">Avg learning rate</div>
+            <div class="stats__stat-value js-stats__this-month--avg-learning-rate"></div>
+            <div class="stats__stat-name i18n-avg-learning-rate"></div>
           </div>
           <div class="stats_hover" id="js-stats__avg-learning-stat_hover">
-            <div class="stats_details_title">Avg learning rate</div>
+            <div class="stats_details_title i18n-avg-learning-rate"></div>
             <div class="stats_details_main">
-              <div class="stats_details_main_feature">This month</div>
+              <div class="stats_details_main_feature i18n-this-month"></div>
               <div class="stats_details_main_line"></div>
-              <div class="stats_details_main_data js-stats__this-month--avg-learning-rate">2.9</div>
+              <div class="stats_details_main_data js-stats__this-month--avg-learning-rate"></div>
             </div>
             <div class="stats_details_main">
-              <div class="stats_details_main_feature">Last month</div>
+              <div class="stats_details_main_feature i18n-last-month"></div>
               <div class="stats_details_main_line"></div>
-              <div class="stats_details_main_data js-stats__last-month--avg-learning-rate">2.49</div>
+              <div class="stats_details_main_data js-stats__last-month--avg-learning-rate"></div>
             </div>
             <!-- <div class="stats_details_main">51% IMPROVEMENT</div> -->
             <div class="stats_details_moreinfo tooltip">
@@ -433,21 +433,21 @@ jQuery('#js-stats-widget').html(`
 
         <li class="stats__stat">
           <div class="stats_normal">
-            <div class="stats__stat-value js-stats__this-month--highest-speed">3.4</div>
-            <div class="stats__stat-name">Highest speed</div>
+            <div class="stats__stat-value js-stats__this-month--highest-speed"></div>
+            <div class="stats__stat-name i18n-highest-speed"></div>
           </div>
           <div class="stats_hover" id="js-stats__highest-speed-stat_hover">
-            <div class="stats_details_title">Highest speed</div>
+            <div class="stats_details_title i18n-highest-speed"></div>
             <div class="stats_details_main">
-              <div class="stats_details_main_feature">This month</div>
+              <div class="stats_details_main_feature i18n-this-month"></div>
               <div class="stats_details_main_line"></div>
-              <div class="stats_details_main_data js-stats__this-month--highest-speed">3.4</div>
+              <div class="stats_details_main_data js-stats__this-month--highest-speed"></div>
             </div>
             <!-- <div class="stats_details_sub">[Wednesday, Dec 23]</div> -->
             <div class="stats_details_main">
-              <div class="stats_details_main_feature">Last month</div>
+              <div class="stats_details_main_feature i18n-last-month"></div>
               <div class="stats_details_main_line"></div>
-              <div class="stats_details_main_data js-stats__last-month--highest-speed">2.6</div>
+              <div class="stats_details_main_data js-stats__last-month--highest-speed"></div>
             </div>
             <!-- <div class="stats_details_sub">[Wednesday, Oct 30]</div> -->
             <div class="stats_details_moreinfo tooltip">
@@ -461,7 +461,7 @@ jQuery('#js-stats-widget').html(`
 
         <!-- <li class="stats__stat seemore_stat" id="js-stats__more-stats-month">
           <div class="stats__stat-value">+</div>
-          <div class="stats__stat-name">See all stats</div>
+          <div class="stats__stat-name i18n-see-all-stats"></div>
         </li> -->
 
       </ul>

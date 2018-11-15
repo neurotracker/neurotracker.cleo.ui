@@ -184,7 +184,7 @@ jQuery('#js-profile-widget').html(`
     <!-- <div class="profile__avatar-border"></div> -->
     <img src="" id="js-profile__avatar-border" class="profile__avatar-border">
     <div id="js-profile__change-pic-overlay" class="profile__change-pic-overlay">
-      <div>Change<br />Picture</div>
+      <div class="i18n-change-pic"></div>
     </div>
     <div id="js-profile__change-pic-component" class="profile__change-pic-component">
       <div id="js-profile__close-btn" class="profile__close-btn">
@@ -193,14 +193,12 @@ jQuery('#js-profile-widget').html(`
             fill="#aaaaaa" />
         </svg>
       </div>
-      <div class="profile__change-pic-title">Change your image</div>
-      <!-- <div id="js-upload-photo" class="profile__change-pic-btn">Upload a photo</div>
+      <div class="profile__change-pic-title i18n-change-your-image"></div>
+      <!-- <div id="js-upload-photo" class="profile__change-pic-btn i18n-upload-a-photo"></div>
       <input class="image-upload-input" id="js-image-upload" type="file" accept="image/*" /> 
-      <div class="profile__change-pic-text-box">OR</div> -->
+      <div class="profile__change-pic-text-box i18n-or"></div> -->
       <div id="js-profile__avatar-selection-container" class="profile__avatar-selection-container">
-        <div id="js-choose-avatar" class="profile__change-pic-btn">
-          Choose an avatar
-        </div>
+        <div id="js-choose-avatar" class="profile__change-pic-btn i18n-choose-an-avatar"></div>
         <div id="js-profile__avatars" class="profile__avatars">
           <ul>
             <li><img src="${CDN_URL}Avatars/1.png" alt="avatar1"></li>

@@ -89,6 +89,10 @@
   flex-grow: 2;
 }
 
+.start-session__session-info-block {
+  display: flex;
+}
+
 .start-session__target-info, .start-session__second-info {
   display: flex;
   align-items: center;

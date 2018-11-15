@@ -48,6 +48,10 @@ function receiveMessage(event)
 }
 window.addEventListener("message", receiveMessage, false);
 
-setOrgId(btoa(neurotracker.orgId)); 
-setUserId(btoa(neurotracker.userId));
-setSessionId(neurotracker.sessionId);
+// setOrgId(btoa(neurotracker.orgId)); 
+// setUserId(btoa(neurotracker.userId));
+// setSessionId(neurotracker.sessionId);
+
+setOrgId("TmV1cm9FZFg="); 
+setUserId("ODQ2MDQ0MThkMjNlZDY3MzkwNDJiMDA4M2JiZjUxMGQtMQ==");
+setSessionId("426092_c9470285-a62f-4321-8665-06e1fcb9799c");
