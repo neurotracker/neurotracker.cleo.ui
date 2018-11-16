@@ -41,17 +41,17 @@ jQuery("#js-graph-by-targets-widget").html(`
       </div>`
 );
 
-executeGraphCalls = function(orgId, userId, sessionId){
-    getLastSessionData(orgId, userId, sessionId);
+executeGraphCalls = function(orgId, userId, sessionId, serverUrl){
+    getLastSessionData(orgId, userId, sessionId, serverUrl);
 }
 
-executeGraphCalls(getOrgId(), getUserId(), getSessionId());
+executeGraphCalls(getOrgId(), getUserId(), getSessionId(), getServerUrl());
 jQuery('#communicator-input > input').on('change', function() {
   let changeVal = jQuery('#communicator-input > input').val();
 
   if(changeVal == 'endSession') {
     needsUpdateData = true;
-    executeGraphCalls(getOrgId(), getUserId(), getSessionId());
+    executeGraphCalls(getOrgId(), getUserId(), getSessionId(), getServerUrl());
   }
 });
 
@@ -121,9 +121,9 @@ function lockTabs() {
     });
 }
 
-function getLastSessionData(orgId, userId, sessionId) {
+function getLastSessionData(orgId, userId, sessionId, serverUrl) {
     jQuery.ajax({
-        url: "http://38.89.143.20/NEUROEDX_Staging/api/organizations/" + orgId + "/users/" + userId + "/sessions?fields=last",
+        url: serverUrl + "/api/organizations/" + orgId + "/users/" + userId + "/sessions?fields=last",
         beforeSend: function(xhr) {
           xhr.setRequestHeader('Authorization', 'Basic ' + btoa('satya' + ':' + sessionId));
         },
@@ -143,7 +143,7 @@ function getLastSessionData(orgId, userId, sessionId) {
 
 function getCurrentSessionData(orgId, userId, sessionId) {
     jQuery.ajax({
-        url: "http://38.89.143.20/NEUROEDX_Staging/api/organizations/" + orgId + "/users/" + userId,
+        url: serverUrl + "/api/organizations/" + orgId + "/users/" + userId,
         beforeSend: function(xhr) {
           xhr.setRequestHeader('Authorization', 'Basic ' + btoa(':' + sessionId));
         },
@@ -177,7 +177,7 @@ function getSessionData(orgId, userId, sessionId, numTargets) {
         }
         let myData;
         jQuery.ajax({
-            url: "http://38.89.143.20/NEUROEDX_Staging/api/organizations/" + orgId + "/users/" + userId + "/sessions" + filterParam,
+            url: serverUrl + "/api/organizations/" + orgId + "/users/" + userId + "/sessions" + filterParam,
             beforeSend: function(xhr) {
             xhr.setRequestHeader('Authorization', 'Basic ' + btoa('satya' + ':' + sessionId));
             },
@@ -205,7 +205,7 @@ function getSessionStats(orgId, userId, sessionId, numTargets) {
     if(userSessionData[`${numTargets}Targets`].stats == '' || needsUpdateData == true){
         let myData;
         jQuery.ajax({
-            url: "http://38.89.143.20/NEUROEDX_Staging/api/organizations/" + orgId + "/users/" + userId + "/stats" + filterParam,
+            url: serverUrl + "/api/organizations/" + orgId + "/users/" + userId + "/stats" + filterParam,
             beforeSend: function(xhr) {
             xhr.setRequestHeader('Authorization', 'Basic ' + btoa('satya' + ':' + sessionId));
             },
