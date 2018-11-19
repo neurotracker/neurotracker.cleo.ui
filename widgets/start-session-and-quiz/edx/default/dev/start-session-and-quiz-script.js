@@ -142,10 +142,10 @@ let goBack = getGoBackButton();
 let quizContainer = getQuizContainer();
 let startContainer = getStartContainer();
 
-executeStartSessionCalls = function(orgId, userId, sessionId){
+executeStartSessionCalls = function(orgId, userId, sessionId, serverUrl){
   adaptStartSessionLayout();
   jQuery.ajax({
-    url: "http://38.89.143.20/NEUROEDX_Staging/api/organizations/" + orgId + "/users/" + userId,
+    url: serverUrl + "/api/organizations/" + orgId + "/users/" + userId,
     beforeSend: function(xhr) {
       xhr.setRequestHeader('Authorization', 'Basic ' + btoa(':' + sessionId));
     },
@@ -172,7 +172,7 @@ executeStartSessionCalls = function(orgId, userId, sessionId){
 
 getQuizQuestionIds();
 setupEventHandlers();
-executeStartSessionCalls(getOrgId(), getUserId(), getSessionId());
+executeStartSessionCalls(getOrgId(), getUserId(), getSessionId(), getServerUrl());
 
 jQuery('#communicator-input > input').on('change', function() {
   let changeVal = jQuery('#communicator-input > input').val();
@@ -180,13 +180,13 @@ jQuery('#communicator-input > input').on('change', function() {
   if(changeVal == 'endSession') {
     jQuery('#js-nt-iframe').addClass('start-session__nt-iframe--hidden');
     closeFullscreen();
-    executeStartSessionCalls(getOrgId(), getUserId(), getSessionId());
+    executeStartSessionCalls(getOrgId(), getUserId(), getSessionId(), getServerUrl());
   }
 
   if(changeVal == 'newSessionCompleted') {
     jQuery('#js-nt-iframe').addClass('start-session__nt-iframe--hidden');
     closeFullscreen();
-    executeStartSessionCalls(getOrgId(), getUserId(), getSessionId());
+    executeStartSessionCalls(getOrgId(), getUserId(), getSessionId(), getServerUrl());
   }
   if(changeVal == 'sessionEndedUncomplete') {
     jQuery('#js-nt-iframe').addClass('start-session__nt-iframe--hidden');
@@ -310,7 +310,7 @@ function nextQuestion(n) {
     closeQuiz();
     jQuery.ajax({
       type: "POST",
-      url: "http://38.89.143.20/NEUROEDX_Staging/api/organizations/" + getOrgId() + "/users/" + getUserId() + "/sessions/quizresults",
+      url: serverUrl + "/api/organizations/" + getOrgId() + "/users/" + getUserId() + "/sessions/quizresults",
       beforeSend: function(xhr) {
         xhr.setRequestHeader('Authorization', 'Basic ' + btoa(':' + getSessionId()));
       },

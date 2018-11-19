@@ -50,11 +50,11 @@ function insertStatsLastMonth(data) {
   jQuery('.js-stats__last-month--highest-speed').html(data.highestSpeed);
 }
 
-executeStatsCalls = function (orgId, userId, sessionId) {
+executeStatsCalls = function (orgId, userId, sessionId, serverUrl) {
   var loadingCounter = 0;
 
   jQuery.ajax({
-    url: "http://38.89.143.20/NEUROEDX_Staging/api/organizations/" + orgId + "/users/" + userId + "/stats?timeframe=thisweek",
+    url: serverUrl + "/api/organizations/" + orgId + "/users/" + userId + "/stats?timeframe=thisweek",
     beforeSend: function(xhr) {
       xhr.setRequestHeader('Authorization', 'Basic ' + btoa('satya' + ':' + sessionId));
     },
@@ -73,7 +73,7 @@ executeStatsCalls = function (orgId, userId, sessionId) {
     }
   });
   jQuery.ajax({
-    url: "http://38.89.143.20/NEUROEDX_Staging/api/organizations/" + orgId + "/users/" + userId + "/stats?timeframe=lastweek",
+    url: serverUrl + "/api/organizations/" + orgId + "/users/" + userId + "/stats?timeframe=lastweek",
     beforeSend: function(xhr) {
       xhr.setRequestHeader('Authorization', 'Basic ' + btoa('satya' + ':' + sessionId));
     },
@@ -92,7 +92,7 @@ executeStatsCalls = function (orgId, userId, sessionId) {
     }
   });
   jQuery.ajax({
-    url: "http://38.89.143.20/NEUROEDX_Staging/api/organizations/" + orgId + "/users/" + userId + "/stats?timeframe=thismonth",
+    url: serverUrl + "/api/organizations/" + orgId + "/users/" + userId + "/stats?timeframe=thismonth",
     beforeSend: function(xhr) {
       xhr.setRequestHeader('Authorization', 'Basic ' + btoa('satya' + ':' + sessionId));
     },
@@ -111,7 +111,7 @@ executeStatsCalls = function (orgId, userId, sessionId) {
     }
   });
   jQuery.ajax({
-    url: "http://38.89.143.20/NEUROEDX_Staging/api/organizations/" + orgId + "/users/" + userId + "/stats?timeframe=lastmonth",
+    url: serverUrl + "/api/organizations/" + orgId + "/users/" + userId + "/stats?timeframe=lastmonth",
     beforeSend: function(xhr) {
       xhr.setRequestHeader('Authorization', 'Basic ' + btoa('satya' + ':' + sessionId));
     },
@@ -131,13 +131,13 @@ executeStatsCalls = function (orgId, userId, sessionId) {
   });
 }
 
-executeStatsCalls(getOrgId(), getUserId(), getSessionId());
+executeStatsCalls(getOrgId(), getUserId(), getSessionId(), getServerUrl());
 
 jQuery('#communicator-input > input').on('change', function () {
   let changeVal = jQuery('#communicator-input > input').val();
 
   if(changeVal == 'endSession') {
-    executeStatsCalls(getOrgId(), getUserId(), getSessionId());
+    executeStatsCalls(getOrgId(), getUserId(), getSessionId(), getServerUrl());
   }
 });
 

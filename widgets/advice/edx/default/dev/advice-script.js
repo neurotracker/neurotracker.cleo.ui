@@ -2,10 +2,10 @@ function insertAdvice(advice) {
   jQuery('#js-advice-text').html(advice);
 }
 
-executeAdviceCall = function (orgId, sessionId) {
+executeAdviceCall = function (orgId, sessionId, serverUrl) {
 	var dateNow = new Date();
   jQuery.ajax({
-    url: "http://38.89.143.20/NEUROEDX_Staging/api/organizations/" + orgId + "/advice-of-the-day?date=" + dateNow.getFullYear() + '-' + (dateNow.getMonth()+1) + '-' + dateNow.getDate(),
+    url: serverUrl + "/api/organizations/" + orgId + "/advice-of-the-day?date=" + dateNow.getFullYear() + '-' + (dateNow.getMonth()+1) + '-' + dateNow.getDate(),
     beforeSend: function(xhr) {
       xhr.setRequestHeader('Authorization', 'Basic ' + btoa('satya' + ':' + sessionId));
     },
@@ -16,7 +16,7 @@ executeAdviceCall = function (orgId, sessionId) {
   });
 }
 
-executeAdviceCall(getOrgId(), getSessionId());
+executeAdviceCall(getOrgId(), getSessionId(), getServerUrl());
 
 jQuery('#communicator-input > input').on('change', function () {
   executeAdviceCall(getOrgId(), getSessionId());

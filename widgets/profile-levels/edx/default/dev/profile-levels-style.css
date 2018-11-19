@@ -238,7 +238,7 @@
 }
 
 .profile__change-pic-btn {
-  width: 190px;
+  width: 208px;
   height: 30px;
   background-color: #2c73a7;
   border-radius: 7px;
@@ -304,7 +304,7 @@
 }
 
 .profile__avatar-selection-container {
-  width: 190px;
+  width: 208px;
   max-height: 30px;
   background-color: #d1dfe9;
   border-radius: 7px;

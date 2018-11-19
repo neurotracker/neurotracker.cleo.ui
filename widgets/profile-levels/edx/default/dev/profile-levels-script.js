@@ -57,12 +57,12 @@ insertNextRewards = function(level, type) {
   }
 }
 
-executeProfileLevelsCalls = function(orgId, userId, sessionId){
+executeProfileLevelsCalls = function(orgId, userId, sessionId, serverUrl){
   var loadingCounter = 0;
   const TOTAL_REQUESTS = 5
 
   jQuery.ajax({
-    url: "http://38.89.143.20/NEUROEDX_Staging/api/organizations/" + orgId + "/users/" + userId + "?fields=firstname,lastname",
+    url: serverUrl + "/api/organizations/" + orgId + "/users/" + userId + "?fields=firstname,lastname",
     beforeSend: function (xhr) {
       xhr.setRequestHeader('Authorization', 'Basic ' + btoa('satya' + ':' + sessionId));
     },
@@ -77,7 +77,7 @@ executeProfileLevelsCalls = function(orgId, userId, sessionId){
   });
 
   jQuery.ajax({
-    url: "http://38.89.143.20/NEUROEDX_Staging/api/organizations/" + orgId + "/users/" + userId + "/pictureUrl",
+    url: serverUrl + "/api/organizations/" + orgId + "/users/" + userId + "/pictureUrl",
     beforeSend: function (xhr) {
       xhr.setRequestHeader('Authorization', 'Basic ' + btoa('satya' + ':' + sessionId));
     },
@@ -92,7 +92,7 @@ executeProfileLevelsCalls = function(orgId, userId, sessionId){
   });
 
   jQuery.ajax({
-    url: "http://38.89.143.20/NEUROEDX_Staging/api/organizations/" + orgId + "/users/" + userId + '/level',
+    url: serverUrl + "/api/organizations/" + orgId + "/users/" + userId + '/level',
     beforeSend: function (xhr) {
       xhr.setRequestHeader('Authorization', 'Basic ' + btoa('satya' + ':' + sessionId));
     },
@@ -105,7 +105,7 @@ executeProfileLevelsCalls = function(orgId, userId, sessionId){
       }
       // request to get rewards data using level
       jQuery.ajax({
-        url: "http://38.89.143.20/NEUROEDX_Staging/api/organizations/" + orgId + "/rewards/" + data.level,
+        url: serverUrl + "/api/organizations/" + orgId + "/rewards/" + data.level,
         beforeSend: function (xhr) {
           xhr.setRequestHeader('Authorization', 'Basic ' + btoa('satya' + ':' + sessionId));
         },
@@ -120,7 +120,7 @@ executeProfileLevelsCalls = function(orgId, userId, sessionId){
       });
       // request to get next rewards data using level
       jQuery.ajax({
-        url: "http://38.89.143.20/NEUROEDX_Staging/api/organizations/" + orgId + "/rewards/" + data.level + "/nexttype",
+        url: serverUrl + "/api/organizations/" + orgId + "/rewards/" + data.level + "/nexttype",
         beforeSend: function (xhr) {
           xhr.setRequestHeader('Authorization', 'Basic ' + btoa('satya' + ':' + sessionId));
         },
@@ -144,7 +144,7 @@ updateProfileImage = function(imageUrl)
     picURL: imageUrl
   };
   jQuery.ajax({
-    url: "http://38.89.143.20/NEUROEDX_Staging/api/organizations/" + getOrgId() + "/users/" + getUserId() + "/pictureURL",
+    url: serverUrl + "/api/organizations/" + getOrgId() + "/users/" + getUserId() + "/pictureURL",
     beforeSend: function (xhr) {
       xhr.setRequestHeader('Authorization', 'Basic ' + btoa('satya' + ':' + getSessionId()));
     },
@@ -154,12 +154,12 @@ updateProfileImage = function(imageUrl)
   });
 }
 
-executeProfileLevelsCalls(getOrgId(), getUserId(), getSessionId());
+executeProfileLevelsCalls(getOrgId(), getUserId(), getSessionId(), getServerUrl());
 
 jQuery('#communicator-input > input').on('change', function() {
   let changeVal = jQuery('#communicator-input > input').val();
   if(changeVal == 'endSession') {
-    executeProfileLevelsCalls(getOrgId(), getUserId(), getSessionId());
+    executeProfileLevelsCalls(getOrgId(), getUserId(), getSessionId(), getServerUrl());
   }
 });
 
