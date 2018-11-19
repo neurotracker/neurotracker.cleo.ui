@@ -551,9 +551,11 @@ function translateStatsTabs() {
   jQuery('.i18n-month').text(globalize.messageFormatter('month'));
 }
 function translateStatsWidget() {
+  jQuery('.i18n-best-score').text(globalize.messageFormatter('best-score'));
   jQuery('.i18n-completed-sessions').text(globalize.messageFormatter('completed-sessions'));
   jQuery('.i18n-improvement').text(globalize.messageFormatter('improvement'));
   jQuery('.i18n-avg-learning-rate').text(globalize.messageFormatter('avg-learning-rate'));
+  jQuery('.i18n-highest-speed').text(globalize.messageFormatter('highest-speed'));
   jQuery('.i18n-this-week').text(globalize.messageFormatter('this-week'));
   jQuery('.i18n-last-week').text(globalize.messageFormatter('last-week'));
   jQuery('.i18n-this-month').text(globalize.messageFormatter('this-month'));
