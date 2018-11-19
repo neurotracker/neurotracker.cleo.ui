@@ -101,7 +101,7 @@ function handleTabClick() {
         let clickedTabNum = /([0-9]|overview)/.exec(jQuery(this).attr('id'))[0];
         currentTargetTab = clickedTabNum;
         // 4. get session data for current tab
-        getSessionData(getOrgId(), getUserId(), getSessionId(), currentTargetTab);
+        getSessionData(getOrgId(), getUserId(), getSessionId(), currentTargetTab, getServerUrl());
     }
 }
 
@@ -136,12 +136,12 @@ function getLastSessionData(orgId, userId, sessionId, serverUrl) {
             currentTargetTab = "2";
           }
           // 3. select tab to get session data and stats for
-          getCurrentSessionData(orgId, userId, sessionId);
+          getCurrentSessionData(orgId, userId, sessionId, serverUrl);
         }
     });
 }
 
-function getCurrentSessionData(orgId, userId, sessionId) {
+function getCurrentSessionData(orgId, userId, sessionId, serverUrl) {
     jQuery.ajax({
         url: serverUrl + "/api/organizations/" + orgId + "/users/" + userId,
         beforeSend: function(xhr) {
@@ -158,13 +158,13 @@ function getCurrentSessionData(orgId, userId, sessionId) {
           if(!jQuery(`#js-graph__tabs div#js-graph__${currentTargetTab}-targets`).hasClass("graph__tabs--selected")){
             jQuery(`#js-graph__tabs div#js-graph__${currentTargetTab}-targets`).click();
           }else{
-            getSessionData(getOrgId(), getUserId(), getSessionId(), currentTargetTab);
+            getSessionData(getOrgId(), getUserId(), getSessionId(), currentTargetTab, serverUrl);
           }
         }
       });
 }
 
-function getSessionData(orgId, userId, sessionId, numTargets) {
+function getSessionData(orgId, userId, sessionId, numTargets, serverUrl) {
     if(userSessionData[`${numTargets}Targets`].data == '' || needsUpdateData == true){
         if(jQuery('#js-graph__loading-container').css('display') == 'none') {
             jQuery('#js-graph__no-data-label').hide();
@@ -189,15 +189,15 @@ function getSessionData(orgId, userId, sessionId, numTargets) {
             else if(numTargets==4){ userSessionData[`${numTargets}Targets`].data = myData;}
             else { userSessionData[`${numTargets}Targets`].data = myData;}
             // 5. get stats for current tab
-            getSessionStats(orgId, userId, sessionId, numTargets);
+            getSessionStats(orgId, userId, sessionId, numTargets, serverUrl);
             }
         });
     } else {
-        getSessionStats(orgId, userId, sessionId, numTargets);
+        getSessionStats(orgId, userId, sessionId, numTargets, serverUrl);
     }
 }
 
-function getSessionStats(orgId, userId, sessionId, numTargets) {
+function getSessionStats(orgId, userId, sessionId, numTargets, serverUrl) {
     let filterParam = "?targets=" + numTargets;
     if(numTargets == 'overview'){
         filterParam = '';
