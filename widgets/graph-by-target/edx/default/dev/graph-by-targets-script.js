@@ -493,9 +493,6 @@ function adaptGraphLayout() {
   if( 440 < widgetWidth && widgetWidth < 540 ) {
     jQuery(".graph__tabs").css({"font-size": "1.0em"});
   }
-  if( 540 <= widgetWidth ) {
-    //jQuery(".graph__tabs").css({"font-size": "1.2em"});
-  }
   if( widgetWidth < 635 ) {
     jQuery(".graph__tabs").css({"min-width": "100%"});
     jQuery(".graph__content-container").css({"border-radius": "0 0 7px 7px"});
@@ -504,13 +501,9 @@ function adaptGraphLayout() {
   }
   if(widgetWidth <= 310) {
     jQuery(".graph__tabs").css({"font-family": "'Roboto Condensed', sans-serif"});
-    //jQuery(".highcharts-plot-line-label div").css({"font-family": "'Roboto Condensed', sans-serif", "font-size": "8px", "width": "50px", "transform": "translate(-73px, -27px)"});
     jQuery(".next-target-indicator").css({"width": "20px", "height": "20px", "left": "-23px", "top": "5px"});
-    myChart.chart.spacingBottom = 0;
-    myChart.chart.spacingTop = 0;
-    myChart.chart.spacingRight = 5;
-    myChart.chart.spacingLeft = 0;
-  } else {
-    jQuery(".next-target-indicator").css({"width": "20px", "height": "20px", "left": "-30px", "top": "4px"});
+  }
+  if(widgetWidth > 540){
+    jQuery(".graph__tabs").removeAttr("style");
   }
 }
