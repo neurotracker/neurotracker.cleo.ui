@@ -2,10 +2,10 @@
 jQuery("#js-graph-by-targets-widget").html(`
 <div class="graph__container">
         <div id="js-graph__tabs" class="graph__tabs">
-          <div id="js-graph__2-targets i18n-2-targets"></div>
-          <div id="js-graph__3-targets i18n-3-targets"></div>
-          <div id="js-graph__4-targets i18n-4-targets"></div>
-          <div id="js-graph__overview-targets i18n-overview"></div>
+          <div id="js-graph__2-targets" class="i18n-2-targets"></div>
+          <div id="js-graph__3-targets" class="i18n-3-targets"></div>
+          <div id="js-graph__4-targets" class="i18n-4-targets"></div>
+          <div id="js-graph__overview-targets" class="i18n-overview"></div>
         </div>
         <div class="graph__content-container">
           <div id="js-graph__loading-container" class="graph__loading-container">
@@ -45,6 +45,7 @@ executeGraphCalls = function(orgId, userId, sessionId){
     getLastSessionData(orgId, userId, sessionId);
 }
 
+translateGraphTabs();
 executeGraphCalls(getOrgId(), getUserId(), getSessionId());
 jQuery('#communicator-input > input').on('change', function() {
   let changeVal = jQuery('#communicator-input > input').val();
@@ -115,7 +116,6 @@ function lockTabs() {
                 jQuery(tab).addClass('graph__tabs--locked');
             }else {
                 jQuery(tab).removeClass('graph__tabs--locked');
-                jQuery(tab).html(tabNames[index]);
             }
         } 
     });
@@ -216,7 +216,7 @@ function getSessionStats(orgId, userId, sessionId, numTargets) {
             // 6. display data and stats for current tab
             displayDataAndStats(numTargets);
             // 7. Remove loading bar element to reveal graph
-            jQuery('#js-graph__loading-container').addClass('graph__loading-container--fading');
+            translateGraphWidget();
             setTimeout(function()
             {
                 jQuery('#js-graph__loading-container').hide();
@@ -226,6 +226,23 @@ function getSessionStats(orgId, userId, sessionId, numTargets) {
     } else {
         displayDataAndStats(numTargets);
     }
+}
+
+
+function translateGraphTabs() {
+    jQuery('.i18n-2-targets').text(globalize.messageFormatter('2-targets'));
+    jQuery('.i18n-3-targets').text(globalize.messageFormatter('3-targets'));
+    jQuery('.i18n-4-targets').text(globalize.messageFormatter('4-targets'));
+    jQuery('.i18n-overview').text(globalize.messageFormatter('overview'));
+}
+function translateGraphWidget() {
+    jQuery('.i18n-best-score').text(globalize.messageFormatter('best-score'));
+    jQuery('.i18n-highest-speed').text(globalize.messageFormatter('highest-speed'));
+    jQuery('.i18n-best-learning-rate').text(globalize.messageFormatter('best-learning-rate'));
+    jQuery('.i18n-score').text(globalize.messageFormatter('score'));
+    jQuery('.i18n-session').text(globalize.messageFormatter('session'));
+    jQuery('.i18n-no-data').text(globalize.messageFormatter('no-data'));
+    jQuery('#js-graph__loading-container').addClass('graph__loading-container--fading');
 }
 
 function displayPlotLine(numTargets, newChartData) {
@@ -388,7 +405,7 @@ myChart = Highcharts.chart('js-graph__graph-container', {
     },
     xAxis: {
         title: {
-            text: 'Session'
+            text: globalize.messageFormatter('session')(),
         },
         tickLength: 0,
         labels: {
@@ -402,7 +419,7 @@ myChart = Highcharts.chart('js-graph__graph-container', {
     },
     yAxis: {
         title: {
-            text: 'Score'
+            text: globalize.messageFormatter('score')(),
         },
         allowDecimals: false,
         labels: {
@@ -431,9 +448,9 @@ myChart = Highcharts.chart('js-graph__graph-container', {
                 return unlockLabelText;
             }
             if(this.point.learningRate){
-                return "Session <b> "+this.point.x+"</b><br/>Date: <b>"+this.point.dateRun+"</b><br/>Learning Rate: <b>"+this.point.y+"</b><br/>Targets: <b>"+this.point.target+"</b><br/>Seconds: <b>"+this.point.trialDuration+"</b>";
+                return globalize.messageFormatter('session')()+": <b> "+this.point.x+"</b><br/>"+globalize.messageFormatter('date')()+": <b>"+this.point.dateRun+"</b><br/>"+globalize.messageFormatter('learning-rate')()+": <b>"+this.point.y+"</b><br/>"+globalize.messageFormatter('targets')()+": <b>"+this.point.target+"</b><br/>"+globalize.messageFormatter('seconds')()+": <b>"+this.point.trialDuration+"</b>";
             }else{
-                return "Session <b> "+this.point.x+"</b><br/>Date: <b>"+this.point.dateRun+"</b><br/>Score: <b>"+this.point.y+"</b><br/>Targets: <b>"+this.point.target+"</b><br/>Seconds: <b>"+this.point.trialDuration+"</b>";
+                return globalize.messageFormatter('session')()+": <b> "+this.point.x+"</b><br/>"+globalize.messageFormatter('date')()+": <b>"+this.point.dateRun+"</b><br/>"+globalize.messageFormatter('score')()+": <b>"+this.point.y+"</b><br/>"+globalize.messageFormatter('targets')()+": <b>"+this.point.target+"</b><br/>"+globalize.messageFormatter('seconds')()+": <b>"+this.point.trialDuration+"</b>";
             }
         }
     },

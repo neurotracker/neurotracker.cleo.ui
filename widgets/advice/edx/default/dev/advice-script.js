@@ -1,27 +1,3 @@
-function insertAdvice(advice) {
-  jQuery('#js-advice-text').html(advice);
-}
-
-executeAdviceCall = function (orgId, sessionId) {
-	var dateNow = new Date();
-  jQuery.ajax({
-    url: "http://38.89.143.20/NEUROEDX_Staging/api/organizations/" + orgId + "/advice-of-the-day?date=" + dateNow.getFullYear() + '-' + (dateNow.getMonth()+1) + '-' + dateNow.getDate(),
-    beforeSend: function(xhr) {
-      xhr.setRequestHeader('Authorization', 'Basic ' + btoa('satya' + ':' + sessionId));
-    },
-    method: 'GET',
-    success: function(data){
-      insertAdvice(data.advice);
-    }
-  });
-}
-
-executeAdviceCall(getOrgId(), getSessionId());
-
-jQuery('#communicator-input > input').on('change', function () {
-  executeAdviceCall(getOrgId(), getSessionId());
-});
-
 jQuery('#js-advice-widget').html(`
 	<div class="advice__container" id="js-advice-widget-container">
 		<div class="advice__tab"><p class="i18n-tip-of-the-day"></p></div>
@@ -44,6 +20,34 @@ jQuery('#js-advice-widget').html(`
 		</div>
 	</div>
 `);
+
+function insertAdvice(advice) {
+  jQuery('#js-advice-text').html(advice);
+}
+
+executeAdviceCall = function (orgId, sessionId) {
+	var dateNow = new Date();
+  jQuery.ajax({
+    url: "http://38.89.143.20/NEUROEDX_Staging/api/organizations/" + orgId + "/advice-of-the-day?date=" + dateNow.getFullYear() + '-' + (dateNow.getMonth()+1) + '-' + dateNow.getDate(),
+    beforeSend: function(xhr) {
+      xhr.setRequestHeader('Authorization', 'Basic ' + btoa('satya' + ':' + sessionId));
+    },
+    method: 'GET',
+    success: function(data){
+      insertAdvice(data.advice);
+    }
+  });
+}
+
+translateAdviceWidget();
+executeAdviceCall(getOrgId(), getSessionId());
+jQuery('#communicator-input > input').on('change', function () {
+	executeAdviceCall(getOrgId(), getSessionId());
+});
+
+function translateAdviceWidget() {
+	jQuery('.i18n-tip-of-the-day').text(globalize.messageFormatter('tip-of-the-day'));
+}
 
 // function calculateAdviceContentHeight() {
 

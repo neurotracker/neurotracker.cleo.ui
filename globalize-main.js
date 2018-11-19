@@ -40,6 +40,9 @@ Globalize.loadMessages(
       "change-your-image": "change your image",
       "choose-an-avatar": "choose an avatar",
       "or": "or",
+      "next-reward": "NEXT REWARD",
+      "level": "LEVEL",
+      "new": "NEW",
 
       //advice widget
       "tip-of-the-day": "tip of the day",
@@ -52,8 +55,10 @@ Globalize.loadMessages(
       "best-score": "best score",
       "highest-speed": "highest speed",
       "best-learning-rate": "best learning rate",
-      "score": "score",
-      "session": "session",
+      "score": "Score",
+      "session": "Session",
+      "date": "Date",
+      "learning-rate": "Learning Rate",
       "no-data": "No Data",
 
       //stats widget
@@ -66,6 +71,12 @@ Globalize.loadMessages(
       "last-week": "last week",
       "this-month": "this month",
       "last-month": "last month",
+      "best-score-info": "This is your best NeuroEdX speed threshold score obtained at the end of each session (calculated after 20 trials). Keep it up!",
+      "completed-sessions-info": "This is how many NeuroEdX sessions you've successfully completed.",
+      "improvement-week-info": "This metric shows how much you've improved over this week and the last week.",
+      "improvement-month-info": "This metric shows how much you've improved over this month and the last month.",
+      "avg-learning-rate-info": "NeuroEdX adjusts in speed and number of targets as you progress, this metric gives you an average value of how you're adapting and learning to the task as it progresses in difficulty.",
+      "highest-speed-info": "This is the highest speed you reached within a NeuroEdX session. Great job!",
     },
     ja: 
     {
@@ -103,10 +114,14 @@ Globalize.loadMessages(
       "submit": "\u{63D0}\u{51FA}\u{3059}\u{308B}", //TODO
 
       //profile widget
-      "change-pic": "\u{5909}\u{5316}\u{3059}\u{308B} <br> 画像",
+      "change-pic": "\u{5909}\u{66f4} <br> \u{753b}\u{50cf}",
       "change-your-image": "\u{3042}\u{306A}\u{305F}\u{306E}\u{30A4}\u{30E1}\u{30FC}\u{30B8}\u{3092}\u{5909}\u{3048}\u{308B}",
       "choose-an-avatar": "\u{30A2}\u{30D0}\u{30BF}\u{30FC}\u{3092}\u{9078}\u{3076}",
       "or": "\u{307E}\u{305F}\u{306F}",
+      "next-reward": "\u{6b21}\u{306e}\u{5831}\u{916c}",
+      "level": "\u{30ec}\u{30d9}\u{30eb}",
+      "new": "\u{65b0}\u{3057}\u{3044}",
+
 
       //advice widget
       "tip-of-the-day": "\u{4ECA}\u{65E5}\u{306E}\u{5148}\u{7AEF}",
@@ -121,6 +136,8 @@ Globalize.loadMessages(
       "best-learning-rate": "\u{6700}\u{9AD8}\u{306E}\u{5B66}\u{7FD2}\u{7387}",
       "score": "\u{30B9}\u{30B3}\u{30A2}",
       "session": "\u{30BB}\u{30C3}\u{30B7}\u{30E7}\u{30F3}",
+      "date": "\u{65e5}",
+      "learning-rate": "\u{5b66}\u{7fd2}\u{7387}",
       "no-data": "\u{30C7}\u{30FC}\u{30BF}\u{306A}\u{3057}",
 
       //stats widget
@@ -133,6 +150,12 @@ Globalize.loadMessages(
       "last-week": "\u{5148}\u{9031}",
       "this-month": "\u{4ECA}\u{6708}",
       "last-month": "\u{5148}\u{6708}",
+      "best-score-info": "\u{3053}\u{308C}\u{306F}\u{3001}\u{5404}\u{30BB}\u{30C3}\u{30B7}\u{30E7}\u{30F3}\u{306E}\u{7D42}\u{4E86}\u{6642}\u{306B}\u{5F97}\u{3089}\u{308C}\u{305F}\u{6700}\u{9AD8}\u{306E}NeuroEdX\u{901F}\u{5EA6}\u{95BE}\u{5024}\u{30B9}\u{30B3}\u{30A2}\u{3067}\u{3059}\u{FF08}20\u{8A66}\u{884C}\u{5F8C}\u{306B}\u{8A08}\u{7B97}\u{3055}\u{308C}\u{307E}\u{3059}\u{FF09}\u{3002} \u{304C}\u{3093}\u{3070}\u{308A}\u{7D9A}\u{3051}\u{308B}\u{FF01}",
+      "completed-sessions-info": "\u{3053}\u{308C}\u{306F}\u{3042}\u{306A}\u{305F}\u{304C}\u{6B63}\u{5E38}\u{306B}\u{5B8C}\u{4E86}\u{3057}\u{305F}NeuroEdX\u{30BB}\u{30C3}\u{30B7}\u{30E7}\u{30F3}\u{306E}\u{6570}\u{3067}\u{3059}\u{3002}",
+      "improvement-week-info": "\u{3053}\u{306E}\u{30E1}\u{30C8}\u{30EA}\u{30C3}\u{30AF}\u{306F}\u{3001}\u{4ECA}\u{9031}\u{3068}\u{5148}\u{9031}\u{306E}\u{9593}\u{306B}\u{3069}\u{308C}\u{3060}\u{3051}\u{6539}\u{5584}\u{3057}\u{305F}\u{304B}\u{3092}\u{793A}\u{3057}\u{3066}\u{3044}\u{307E}\u{3059}\u{3002}",
+      "improvement-month-info": "\u{3053}\u{306E}\u{30E1}\u{30C8}\u{30EA}\u{30C3}\u{30AF}\u{306F}\u{3001}\u{4ECA}\u{6708}\u{3068}\u{6700}\u{5F8C}\u{306E}\u{6708}\u{306B}\u{3069}\u{306E}\u{7A0B}\u{5EA6}\u{5411}\u{4E0A}\u{3057}\u{305F}\u{304B}\u{3092}\u{793A}\u{3057}\u{3066}\u{3044}\u{307E}\u{3059}\u{3002}",
+      "avg-learning-rate-info": "NeuroEdX\u{306F}\u{9032}\u{884C}\u{4E2D}\u{306E}\u{901F}\u{5EA6}\u{3068}\u{30BF}\u{30FC}\u{30B2}\u{30C3}\u{30C8}\u{306E}\u{6570}\u{3092}\u{8ABF}\u{6574}\u{3057}\u{307E}\u{3059}\u{3002}\u{3053}\u{306E}\u{30E1}\u{30C8}\u{30EA}\u{30C3}\u{30AF}\u{3067}\u{306F}\u{3001}\u{96E3}\u{6613}\u{5EA6}\u{304C}\u{9032}\u{3080}\u{306B}\u{3064}\u{308C}\u{3066}\u{3001}\u{30BF}\u{30B9}\u{30AF}\u{306B}\u{3069}\u{306E}\u{3088}\u{3046}\u{306B}\u{9069}\u{5FDC}\u{3057}\u{3001}\u{5B66}\u{7FD2}\u{3057}\u{3066}\u{3044}\u{308B}\u{304B}\u{306E}\u{5E73}\u{5747}\u{5024}\u{304C}\u{5F97}\u{3089}\u{308C}\u{307E}\u{3059}\u{3002}",
+      "highest-speed-info": "\u{3053}\u{308C}\u{306F}\u{3001}NeuroEdX\u{30BB}\u{30C3}\u{30B7}\u{30E7}\u{30F3}\u{3067}\u{5230}\u{9054}\u{3057}\u{305F}\u{6700}\u{9AD8}\u{901F}\u{5EA6}\u{3067}\u{3059}\u{3002} \u{3088}\u{304F}\u{3084}\u{3063}\u{305F}\u{FF01}",
     },
     fr: 
     {
@@ -174,6 +197,9 @@ Globalize.loadMessages(
       "change-your-image": "changer ton image",
       "choose-an-avatar": "choisir un avatar",
       "or": "ou",
+      "next-reward": "\u{0050}\u{0052}\u{004f}\u{0043}\u{0048}\u{0041}\u{0049}\u{004e} \u{0052}\u{00c9}\u{0043}\u{004f}\u{004d}\u{0050}\u{0045}\u{004e}\u{0053}\u{0045}",
+      "level": "NIVEAU",
+      "new": "NOUVEAU",
 
       //advice widget
       "tip-of-the-day": "Conseil du jour",
@@ -186,8 +212,10 @@ Globalize.loadMessages(
       "best-score": "meilleur score",
       "highest-speed": "vitesse maximale",
       "best-learning-rate": "meilleur taux d'apprentissage",
-      "score": "score",
-      "session": "session",
+      "score": "Score",
+      "session": "Session",
+      "date": "\u{006a}\u{006f}\u{0075}\u{0072}\u{006e}\u{00e9}\u{0065}",
+      "learning-rate": "taux d'apprentissage",
       "no-data": "Pas de donn\u{E9}es",
 
       //stats widget
@@ -200,81 +228,13 @@ Globalize.loadMessages(
       "last-week": "semaine derni\u{E8}re",
       "this-month": "ce mois-ci",
       "last-month": "mois dernier",
+      "best-score-info": "Il s'agit de votre meilleur score de seuil de vitesse NeuroEdX obtenu \u{E0} la fin de chaque session (calcul\u{E9} apr\u{E8}s 20 essais). Continuez!",
+      "completed-sessions-info": "Voici le nombre de sessions NeuroEdX que vous avez termin\u{E9}es avec succ\u{E8}s.",
+      "improvement-week-info": "Cette m\u{E9}trique montre \u{E0} quel point vous avez progress\u{E9} cette semaine et la semaine derni\u{E8}re.",
+      "improvement-month-info": "Cette m\u{E9}trique indique votre progr\u{E8}s par rapport \u{E0} ce mois et au mois dernier.",
+      "avg-learning-rate-info": "NeuroEdX ajuste la vitesse et le nombre de cibles \u{E0} mesure que vous progressez. Cette m\u{E9}trique vous donne une valeur moyenne de la fa\u{E7}on dont vous vous adaptez et apprenez \u{E0} la t\u{E2}che \u{E0} mesure qu'elle progresse en difficult\u{E9}.",
+      "highest-speed-info": "Il s\u{2019}agit de la vitesse la plus \u{E9}lev\u{E9}e atteinte dans une session NeuroEdX. Bon travail!",
     }
 });
 
-// String.prototype.toUnicode = function(){
-//   var result = "";
-//   for(var i = 0; i < this.length; i++){
-//       // Assumption: all characters are < 0xffff
-//       result += "\\u" + ("000" + this[i].charCodeAt(0).toString(16)).substr(-4);
-//   }
-//   return result;
-// };
-
-
-
-let globalize = new Globalize("fr");
-jQuery('.i18n-welcome-back').text(globalize.messageFormatter('welcome-back'));
-jQuery('.i18n-your-goal').html(globalize.messageFormatter('your-goal'));
-jQuery('.i18n-targets').text(globalize.messageFormatter('targets'));
-jQuery('.i18n-seconds').text(globalize.messageFormatter('seconds'));
-jQuery('.i18n-ready').text(globalize.messageFormatter('ready'));
-jQuery('.i18n-start').text(globalize.messageFormatter('start'));
-jQuery('.i18n-just-a-few-questions').text(globalize.messageFormatter('just-a-few-questions'));
-jQuery('.i18n-how-are-you-feeling').text(globalize.messageFormatter('how-are-you-feeling'));
-jQuery('.i18n-which-of-these-match-your-mood').text(globalize.messageFormatter('which-of-these-match-your-mood'));
-jQuery('.i18n-happy').text(globalize.messageFormatter('happy'));
-jQuery('.i18n-sad').text(globalize.messageFormatter('sad'));
-jQuery('.i18n-excited').text(globalize.messageFormatter('excited'));
-jQuery('.i18n-upset').text(globalize.messageFormatter('upset'));
-jQuery('.i18n-nervous').text(globalize.messageFormatter('nervous'));
-jQuery('.i18n-alert').text(globalize.messageFormatter('alert'));
-jQuery('.i18n-relaxed').text(globalize.messageFormatter('relaxed'));
-jQuery('.i18n-calm').text(globalize.messageFormatter('calm'));
-jQuery('.i18n-stressed').text(globalize.messageFormatter('stressed'));
-jQuery('.i18n-depressed').text(globalize.messageFormatter('depressed'));
-jQuery('.i18n-serene').text(globalize.messageFormatter('serene'));
-jQuery('.i18n-contented').text(globalize.messageFormatter('contented'));
-jQuery('.i18n-lethargic').text(globalize.messageFormatter('lethargic'));
-jQuery('.i18n-fatigued').text(globalize.messageFormatter('fatigued'));
-jQuery('.i18n-elated').text(globalize.messageFormatter('elated'));
-jQuery('.i18n-tense').text(globalize.messageFormatter('tense'));
-jQuery('.i18n-how-many-hours-of-sleep').text(globalize.messageFormatter('how-many-hours-of-sleep'));
-jQuery('.i18n-have-you-eaten-in-the-last-2-hours').text(globalize.messageFormatter('have-you-eaten-in-the-last-2-hours'));
-jQuery('.i18n-have-you-exercised-in-the-last-2-hours').text(globalize.messageFormatter('have-you-exercised-in-the-last-2-hours'));
-jQuery('.i18n-next').text(globalize.messageFormatter('next'));
-jQuery('.i18n-back').text(globalize.messageFormatter('back'));
-jQuery('.i18n-change-pic').html(globalize.messageFormatter('change-pic'));
-jQuery('.i18n-change-your-image').text(globalize.messageFormatter('change-your-image'));
-jQuery('.i18n-choose-an-avatar').text(globalize.messageFormatter('choose-an-avatar'));
-jQuery('.i18n-or').text(globalize.messageFormatter('or'));
-jQuery('.i18n-tip-of-the-day').text(globalize.messageFormatter('tip-of-the-day'));
-jQuery('.i18n-2-targets').text(globalize.messageFormatter('2-targets'));
-jQuery('.i18n-3-targets').text(globalize.messageFormatter('3-targets'));
-jQuery('.i18n-4-targets').text(globalize.messageFormatter('4-targets'));
-jQuery('.i18n-overview').text(globalize.messageFormatter('overview'));
-jQuery('.i18n-best-score').text(globalize.messageFormatter('best-score'));
-jQuery('.i18n-highest-speed').text(globalize.messageFormatter('highest-speed'));
-jQuery('.i18n-best-learning-rate').text(globalize.messageFormatter('best-learning-rate'));
-jQuery('.i18n-score').text(globalize.messageFormatter('score'));
-jQuery('.i18n-session').text(globalize.messageFormatter('session'));
-jQuery('.i18n-no-data').text(globalize.messageFormatter('no-data'));
-jQuery('.i18n-week').text(globalize.messageFormatter('week'));
-jQuery('.i18n-month').text(globalize.messageFormatter('month'));
-jQuery('.i18n-completed-sessions').text(globalize.messageFormatter('completed-sessions'));
-jQuery('.i18n-improvement').text(globalize.messageFormatter('improvement'));
-jQuery('.i18n-avg-learning-rate').text(globalize.messageFormatter('avg-learning-rate'));
-jQuery('.i18n-this-week').text(globalize.messageFormatter('this-week'));
-jQuery('.i18n-last-week').text(globalize.messageFormatter('last-week'));
-// jQuery('.i18n-').text(globalize.messageFormatter(''));
-// jQuery('.i18n-').text(globalize.messageFormatter(''));
-// jQuery('.i18n-').text(globalize.messageFormatter(''));
-// jQuery('.i18n-').text(globalize.messageFormatter(''));
-// jQuery('.i18n-').text(globalize.messageFormatter(''));
-
-
-setTimeout(() => {
-  console.log('here');
-  globalize = new Globalize('ja');
-}, 5000);
+let globalize = new Globalize("en");

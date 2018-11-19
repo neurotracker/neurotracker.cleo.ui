@@ -1,146 +1,3 @@
-function insertStatsThisWeek(data) {
-  jQuery('.js-stats__this-week--best-score').html(data.bestScore);
-  jQuery('.js-stats__this-week--sessions-completed').html(data.sessionsCompleted);
-  if(data.userImprovement == 'N/A') {
-    jQuery('.js-stats__this-week--improvement').html(data.userImprovement);
-  } else {
-    jQuery('.js-stats__this-week--improvement').html(data.userImprovement + '%');
-  }
-  // jQuery('.js-stats__this-week--improvement').html(data.userImprovement + '%');
-  jQuery('.js-stats__this-week--avg-learning-rate').html(data.avgLearningRate);
-  jQuery('.js-stats__this-week--highest-speed').html(data.highestSpeed);
-}
-
-function insertStatsLastWeek(data) {
-  jQuery('.js-stats__last-week--best-score').html(data.bestScore);
-  jQuery('.js-stats__last-week--sessions-completed').html(data.sessionsCompleted);
-  if(data.userImprovement == 'N/A') {
-    jQuery('.js-stats__last-week--improvement').html(data.userImprovement);
-  } else {
-    jQuery('.js-stats__last-week--improvement').html(data.userImprovement + '%');
-  }
-  // jQuery('.js-stats__last-week--improvement').html(data.userImprovement + '%');
-  jQuery('.js-stats__last-week--avg-learning-rate').html(data.avgLearningRate);
-  jQuery('.js-stats__last-week--highest-speed').html(data.highestSpeed);
-}
-
-function insertStatsThisMonth(data) {
-  jQuery('.js-stats__this-month--best-score').html(data.bestScore);
-  jQuery('.js-stats__this-month--sessions-completed').html(data.sessionsCompleted);
-  if(data.userImprovement == 'N/A') {
-    jQuery('.js-stats__this-month--improvement').html(data.userImprovement);
-  } else {
-    jQuery('.js-stats__this-month--improvement').html(data.userImprovement + '%');
-  }
-  // jQuery('.js-stats__this-month--improvement').html(data.userImprovement + '%');
-  jQuery('.js-stats__this-month--avg-learning-rate').html(data.avgLearningRate);
-  jQuery('.js-stats__this-month--highest-speed').html(data.highestSpeed);
-}
-
-function insertStatsLastMonth(data) {
-  jQuery('.js-stats__last-month--best-score').html(data.bestScore);
-  jQuery('.js-stats__last-month--sessions-completed').html(data.sessionsCompleted);
-  if(data.userImprovement == 'N/A') {
-    jQuery('.js-stats__last-month--improvement').html(data.userImprovement);
-  } else {
-    jQuery('.js-stats__last-month--improvement').html(data.userImprovement + '%');
-  }
-  // jQuery('.js-stats__last-month--improvement').html(data.userImprovement + '%');
-  jQuery('.js-stats__last-month--avg-learning-rate').html(data.avgLearningRate);
-  jQuery('.js-stats__last-month--highest-speed').html(data.highestSpeed);
-}
-
-executeStatsCalls = function (orgId, userId, sessionId) {
-  var loadingCounter = 0;
-
-  jQuery.ajax({
-    url: "http://38.89.143.20/NEUROEDX_Staging/api/organizations/" + orgId + "/users/" + userId + "/stats?timeframe=thisweek",
-    beforeSend: function(xhr) {
-      xhr.setRequestHeader('Authorization', 'Basic ' + btoa('satya' + ':' + sessionId));
-    },
-    method: 'GET',
-    success: function(data){
-      insertStatsThisWeek(data);
-      loadingCounter++;
-      if(loadingCounter == 4)
-      {
-        jQuery('#js-stats__loading-container').addClass('stats__loading-container--fading');
-        setTimeout(function()
-        {
-          jQuery('#js-stats__loading-container').hide();
-        }, 800)
-      }
-    }
-  });
-  jQuery.ajax({
-    url: "http://38.89.143.20/NEUROEDX_Staging/api/organizations/" + orgId + "/users/" + userId + "/stats?timeframe=lastweek",
-    beforeSend: function(xhr) {
-      xhr.setRequestHeader('Authorization', 'Basic ' + btoa('satya' + ':' + sessionId));
-    },
-    method: 'GET',
-    success: function(data){
-      insertStatsLastWeek(data);
-      loadingCounter++;
-      if(loadingCounter == 4)
-      {
-        jQuery('#js-stats__loading-container').addClass('stats__loading-container--fading');
-        setTimeout(function()
-        {
-          jQuery('#js-stats__loading-container').hide();
-        }, 800)
-      }
-    }
-  });
-  jQuery.ajax({
-    url: "http://38.89.143.20/NEUROEDX_Staging/api/organizations/" + orgId + "/users/" + userId + "/stats?timeframe=thismonth",
-    beforeSend: function(xhr) {
-      xhr.setRequestHeader('Authorization', 'Basic ' + btoa('satya' + ':' + sessionId));
-    },
-    method: 'GET',
-    success: function(data){
-      insertStatsThisMonth(data);
-      loadingCounter++;
-      if(loadingCounter == 4)
-      {
-        jQuery('#js-stats__loading-container').addClass('stats__loading-container--fading');
-        setTimeout(function()
-        {
-          jQuery('#js-stats__loading-container').hide();
-        }, 800)
-      }
-    }
-  });
-  jQuery.ajax({
-    url: "http://38.89.143.20/NEUROEDX_Staging/api/organizations/" + orgId + "/users/" + userId + "/stats?timeframe=lastmonth",
-    beforeSend: function(xhr) {
-      xhr.setRequestHeader('Authorization', 'Basic ' + btoa('satya' + ':' + sessionId));
-    },
-    method: 'GET',
-    success: function(data){
-      insertStatsLastMonth(data);
-      loadingCounter++;
-      if(loadingCounter == 4)
-      {
-        jQuery('#js-stats__loading-container').addClass('stats__loading-container--fading');
-        setTimeout(function()
-        {
-          jQuery('#js-stats__loading-container').hide();
-        }, 800)
-      }
-    }
-  });
-}
-
-executeStatsCalls(getOrgId(), getUserId(), getSessionId());
-
-jQuery('#communicator-input > input').on('change', function () {
-  let changeVal = jQuery('#communicator-input > input').val();
-
-  if(changeVal == 'endSession') {
-    executeStatsCalls(getOrgId(), getUserId(), getSessionId());
-  }
-});
-
 jQuery('#js-stats-widget').html(`
   <div class="stats__container"> 
     <div id="js-stats__tabs" class="stats__tabs">
@@ -188,7 +45,7 @@ jQuery('#js-stats-widget').html(`
             <!-- <div class="stats_details_sub">[Wednesday, Oct 30]</div> -->
             <div class="stats_details_moreinfo tooltip">
               <div class="tooltip-top">
-                <p>This is your best NeuroEdX speed threshold score obtained at the end of each session (calculated after 20 trials). Keep it up!</p>
+                <p class="i18n-best-score-info"></p>
                 <i></i>
               </div>
             </div>
@@ -216,7 +73,7 @@ jQuery('#js-stats-widget').html(`
             <!-- <div class="stats_details_sub">[-35% OF LAST WEEK]</div> -->
             <div class="stats_details_moreinfo tooltip">
               <div class="tooltip-top">
-                <p>This is how many NeuroEdX sessions you've successfully completed.</p>
+                <p class="i18n-completed-sessions-info"></p>
                 <i></i>
               </div>
             </div>
@@ -242,7 +99,7 @@ jQuery('#js-stats-widget').html(`
             </div>
             <div class="stats_details_moreinfo tooltip">
               <div class="tooltip-top">
-                <p>This metric shows how much you've improved over this week and the last week.</p>
+                <p class="i18n-improvement-week-info"></p>
                 <i></i>
               </div>
             </div>
@@ -269,7 +126,7 @@ jQuery('#js-stats-widget').html(`
             <!-- <div class="stats_details_main">39% IMPROVEMENT</div> -->
             <div class="stats_details_moreinfo tooltip">
               <div class="tooltip-top">
-                <p>NeuroEdX adjusts in speed and number of targets as you progress, this metric gives you an average value of how you're adapting and learning to the task as it progresses in difficulty.</p>
+                <p class="i18n-avg-learning-rate-info"></p>
                 <i></i>
               </div>
             </div>
@@ -297,7 +154,7 @@ jQuery('#js-stats-widget').html(`
             <!-- <div class="stats_details_sub">[Wednesday, Oct 30]</div> -->
             <div class="stats_details_moreinfo tooltip">
               <div class="tooltip-top">
-                <p>This is the highest speed you reached within a NeuroEdX session. Great job!</p>
+                <p class="i18n-highest-speed-info"></p>
                 <i></i>
               </div>
             </div>
@@ -343,7 +200,7 @@ jQuery('#js-stats-widget').html(`
           <!-- <div class="stats_details_sub">[Wednesday, Oct 30]</div> -->
             <div class="stats_details_moreinfo tooltip">
               <div class="tooltip-top">
-                <p>This is your best NeuroEdX speed threshold score obtained at the end of each session (calculated after 20 trials). Keep it up!</p>
+                <p class="i18n-best-score-info"></p>
                 <i></i>
               </div>
             </div>
@@ -371,7 +228,7 @@ jQuery('#js-stats-widget').html(`
             <!-- <div class="stats_details_sub">[-35% OF LAST month]</div> -->
             <div class="stats_details_moreinfo tooltip">
               <div class="tooltip-top">
-                <p>This is how many NeuroEdX sessions you've successfully completed.</p>
+                <p class="i18n-completed-sessions-info"></p>
                 <i></i>
               </div>
             </div>
@@ -397,7 +254,7 @@ jQuery('#js-stats-widget').html(`
           </div>
             <div class="stats_details_moreinfo tooltip">
               <div class="tooltip-top">
-                <p>This metric shows how much you've improved over this month and the last month.</p>
+                <p class="i18n-improvement-month-info"></p>
                 <i></i>
               </div>
             </div>
@@ -424,7 +281,7 @@ jQuery('#js-stats-widget').html(`
             <!-- <div class="stats_details_main">51% IMPROVEMENT</div> -->
             <div class="stats_details_moreinfo tooltip">
               <div class="tooltip-top">
-                <p>NeuroEdX adjusts in speed and number of targets as you progress, this metric gives you an average value of how you're adapting and learning to the task as it progresses in difficulty.</p>
+                <p class="i18n-avg-learning-rate-info"></p>
                 <i></i>
               </div>
             </div>
@@ -452,7 +309,7 @@ jQuery('#js-stats-widget').html(`
             <!-- <div class="stats_details_sub">[Wednesday, Oct 30]</div> -->
             <div class="stats_details_moreinfo tooltip">
               <div class="tooltip-top">
-                <p>This is the highest speed you reached within a NeuroEdX session. Great job!</p>
+                <p class="i18n-highest-speed-info"></p>
                 <i></i>
               </div>
             </div>
@@ -637,6 +494,173 @@ jQuery('#js-stats-widget').html(`
   </div>
 `);
 
+function insertStatsThisWeek(data) {
+  jQuery('.js-stats__this-week--best-score').html(data.bestScore);
+  jQuery('.js-stats__this-week--sessions-completed').html(data.sessionsCompleted);
+  if(data.userImprovement == 'N/A') {
+    jQuery('.js-stats__this-week--improvement').html(data.userImprovement);
+  } else {
+    jQuery('.js-stats__this-week--improvement').html(data.userImprovement + '%');
+  }
+  // jQuery('.js-stats__this-week--improvement').html(data.userImprovement + '%');
+  jQuery('.js-stats__this-week--avg-learning-rate').html(data.avgLearningRate);
+  jQuery('.js-stats__this-week--highest-speed').html(data.highestSpeed);
+}
+
+function insertStatsLastWeek(data) {
+  jQuery('.js-stats__last-week--best-score').html(data.bestScore);
+  jQuery('.js-stats__last-week--sessions-completed').html(data.sessionsCompleted);
+  if(data.userImprovement == 'N/A') {
+    jQuery('.js-stats__last-week--improvement').html(data.userImprovement);
+  } else {
+    jQuery('.js-stats__last-week--improvement').html(data.userImprovement + '%');
+  }
+  // jQuery('.js-stats__last-week--improvement').html(data.userImprovement + '%');
+  jQuery('.js-stats__last-week--avg-learning-rate').html(data.avgLearningRate);
+  jQuery('.js-stats__last-week--highest-speed').html(data.highestSpeed);
+}
+
+function insertStatsThisMonth(data) {
+  jQuery('.js-stats__this-month--best-score').html(data.bestScore);
+  jQuery('.js-stats__this-month--sessions-completed').html(data.sessionsCompleted);
+  if(data.userImprovement == 'N/A') {
+    jQuery('.js-stats__this-month--improvement').html(data.userImprovement);
+  } else {
+    jQuery('.js-stats__this-month--improvement').html(data.userImprovement + '%');
+  }
+  // jQuery('.js-stats__this-month--improvement').html(data.userImprovement + '%');
+  jQuery('.js-stats__this-month--avg-learning-rate').html(data.avgLearningRate);
+  jQuery('.js-stats__this-month--highest-speed').html(data.highestSpeed);
+}
+
+function insertStatsLastMonth(data) {
+  jQuery('.js-stats__last-month--best-score').html(data.bestScore);
+  jQuery('.js-stats__last-month--sessions-completed').html(data.sessionsCompleted);
+  if(data.userImprovement == 'N/A') {
+    jQuery('.js-stats__last-month--improvement').html(data.userImprovement);
+  } else {
+    jQuery('.js-stats__last-month--improvement').html(data.userImprovement + '%');
+  }
+  // jQuery('.js-stats__last-month--improvement').html(data.userImprovement + '%');
+  jQuery('.js-stats__last-month--avg-learning-rate').html(data.avgLearningRate);
+  jQuery('.js-stats__last-month--highest-speed').html(data.highestSpeed);
+}
+
+function translateStatsTabs() {
+  jQuery('.i18n-week').text(globalize.messageFormatter('week'));
+  jQuery('.i18n-month').text(globalize.messageFormatter('month'));
+}
+function translateStatsWidget() {
+  jQuery('.i18n-completed-sessions').text(globalize.messageFormatter('completed-sessions'));
+  jQuery('.i18n-improvement').text(globalize.messageFormatter('improvement'));
+  jQuery('.i18n-avg-learning-rate').text(globalize.messageFormatter('avg-learning-rate'));
+  jQuery('.i18n-this-week').text(globalize.messageFormatter('this-week'));
+  jQuery('.i18n-last-week').text(globalize.messageFormatter('last-week'));
+  jQuery('.i18n-this-month').text(globalize.messageFormatter('this-month'));
+  jQuery('.i18n-last-month').text(globalize.messageFormatter('last-month'));
+  jQuery('.i18n-best-score-info').text(globalize.messageFormatter('best-score-info'));
+  jQuery('.i18n-completed-sessions-info').text(globalize.messageFormatter('completed-sessions-info'));
+  jQuery('.i18n-improvement-week-info').text(globalize.messageFormatter('improvement-week-info'));
+  jQuery('.i18n-improvement-month-info').text(globalize.messageFormatter('improvement-month-info'));
+  jQuery('.i18n-avg-learning-rate-info').text(globalize.messageFormatter('avg-learning-rate-info'));
+  jQuery('.i18n-highest-speed-info').text(globalize.messageFormatter('highest-speed-info'));
+}
+
+executeStatsCalls = function (orgId, userId, sessionId) {
+  var loadingCounter = 0;
+
+  jQuery.ajax({
+    url: "http://38.89.143.20/NEUROEDX_Staging/api/organizations/" + orgId + "/users/" + userId + "/stats?timeframe=thisweek",
+    beforeSend: function(xhr) {
+      xhr.setRequestHeader('Authorization', 'Basic ' + btoa('satya' + ':' + sessionId));
+    },
+    method: 'GET',
+    success: function(data){
+      insertStatsThisWeek(data);
+      loadingCounter++;
+      if(loadingCounter == 4)
+      {
+        translateStatsWidget();
+        jQuery('#js-stats__loading-container').addClass('stats__loading-container--fading');
+        setTimeout(function()
+        {
+          jQuery('#js-stats__loading-container').hide();
+        }, 800)
+      }
+    }
+  });
+  jQuery.ajax({
+    url: "http://38.89.143.20/NEUROEDX_Staging/api/organizations/" + orgId + "/users/" + userId + "/stats?timeframe=lastweek",
+    beforeSend: function(xhr) {
+      xhr.setRequestHeader('Authorization', 'Basic ' + btoa('satya' + ':' + sessionId));
+    },
+    method: 'GET',
+    success: function(data){
+      insertStatsLastWeek(data);
+      loadingCounter++;
+      if(loadingCounter == 4)
+      {
+        translateStatsWidget();
+        jQuery('#js-stats__loading-container').addClass('stats__loading-container--fading');
+        setTimeout(function()
+        {
+          jQuery('#js-stats__loading-container').hide();
+        }, 800)
+      }
+    }
+  });
+  jQuery.ajax({
+    url: "http://38.89.143.20/NEUROEDX_Staging/api/organizations/" + orgId + "/users/" + userId + "/stats?timeframe=thismonth",
+    beforeSend: function(xhr) {
+      xhr.setRequestHeader('Authorization', 'Basic ' + btoa('satya' + ':' + sessionId));
+    },
+    method: 'GET',
+    success: function(data){
+      insertStatsThisMonth(data);
+      loadingCounter++;
+      if(loadingCounter == 4)
+      {
+        translateStatsWidget();
+        jQuery('#js-stats__loading-container').addClass('stats__loading-container--fading');
+        setTimeout(function()
+        {
+          jQuery('#js-stats__loading-container').hide();
+        }, 800)
+      }
+    }
+  });
+  jQuery.ajax({
+    url: "http://38.89.143.20/NEUROEDX_Staging/api/organizations/" + orgId + "/users/" + userId + "/stats?timeframe=lastmonth",
+    beforeSend: function(xhr) {
+      xhr.setRequestHeader('Authorization', 'Basic ' + btoa('satya' + ':' + sessionId));
+    },
+    method: 'GET',
+    success: function(data){
+      insertStatsLastMonth(data);
+      loadingCounter++;
+      if(loadingCounter == 4)
+      {
+        translateStatsWidget();
+        jQuery('#js-stats__loading-container').addClass('stats__loading-container--fading');
+        setTimeout(function()
+        {
+          jQuery('#js-stats__loading-container').hide();
+        }, 800)
+      }
+    }
+  });
+}
+
+translateStatsTabs();
+executeStatsCalls(getOrgId(), getUserId(), getSessionId());
+
+jQuery('#communicator-input > input').on('change', function () {
+  let changeVal = jQuery('#communicator-input > input').val();
+
+  if(changeVal == 'endSession') {
+    executeStatsCalls(getOrgId(), getUserId(), getSessionId());
+  }
+});
 
 // Mock data - this would be returned from backend API call based on user
 let stats = [

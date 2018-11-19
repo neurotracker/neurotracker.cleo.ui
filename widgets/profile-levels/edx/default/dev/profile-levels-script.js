@@ -53,7 +53,7 @@ insertRewards = function(title, borderImage) {
 
 insertNextRewards = function(level, type) {
   if(level != ""){
-    jQuery("#js-profile__next-reward").html('NEXT REWARD: LEVEL ' + level + ' (NEW ' + type.join(', ') + ')');
+    jQuery("#js-profile__next-reward").html(globalize.messageFormatter("next-reward")()+': '+globalize.messageFormatter("level")() + level + ' ('+globalize.messageFormatter("new")()+' '+ type.join(', ') + ')');
   }
 }
 
@@ -71,6 +71,7 @@ executeProfileLevelsCalls = function(orgId, userId, sessionId){
       insertName(data.firstName + " " + data.lastName);
       loadingCounter++;
       if (loadingCounter >= TOTAL_REQUESTS) {
+        translateProfileWidget();
         hideLoading();
       }
     }
@@ -86,6 +87,7 @@ executeProfileLevelsCalls = function(orgId, userId, sessionId){
       insertPictureUrl(data);
       loadingCounter++;
       if (loadingCounter >= TOTAL_REQUESTS) {
+        translateProfileWidget()
         hideLoading();
       }
     }
@@ -101,6 +103,7 @@ executeProfileLevelsCalls = function(orgId, userId, sessionId){
       insertLevel(data.level, data.exp, data.expToNextLevel);
       loadingCounter++;
       if (loadingCounter >= TOTAL_REQUESTS) {
+        translateProfileWidget()
         hideLoading();
       }
       // request to get rewards data using level
@@ -114,6 +117,7 @@ executeProfileLevelsCalls = function(orgId, userId, sessionId){
           insertRewards(data.reward_title, data.reward_border);
           loadingCounter++;
           if (loadingCounter >= TOTAL_REQUESTS) {
+            translateProfileWidget()
             hideLoading();
           }
         }
@@ -129,6 +133,7 @@ executeProfileLevelsCalls = function(orgId, userId, sessionId){
           insertNextRewards(data.level, data.types);
           loadingCounter++;
           if (loadingCounter >= TOTAL_REQUESTS) {
+            translateProfileWidget()
             hideLoading();
           }
         }
@@ -162,6 +167,13 @@ jQuery('#communicator-input > input').on('change', function() {
     executeProfileLevelsCalls(getOrgId(), getUserId(), getSessionId());
   }
 });
+
+function translateProfileWidget() {
+  jQuery('.i18n-change-pic').html(globalize.messageFormatter('change-pic'));
+  jQuery('.i18n-change-your-image').text(globalize.messageFormatter('change-your-image'));
+  jQuery('.i18n-choose-an-avatar').text(globalize.messageFormatter('choose-an-avatar'));
+  jQuery('.i18n-or').text(globalize.messageFormatter('or'));
+}
 
 jQuery('#js-profile-widget').html(`
 <div class="profile__container">
