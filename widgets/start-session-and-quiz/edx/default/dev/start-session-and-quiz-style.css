@@ -258,7 +258,7 @@
   max-width: 900px;
   margin: auto auto;
   display: flex;
-  //flex-flow: row wrap;
+  flex-flow: row wrap;
   justify-content: space-between;
   align-items: center;
 }
@@ -547,7 +547,7 @@
 } 
 
 
-@media screen and (max-width: 675px), screen and (max-height: 565px) { 
+@media screen and (max-width: 675px), screen and (max-height: 700px) { 
   .quiz__container { 
     padding: 0px; 
   } 

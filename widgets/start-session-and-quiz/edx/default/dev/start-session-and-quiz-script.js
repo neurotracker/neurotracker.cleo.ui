@@ -164,7 +164,7 @@ executeStartSessionCalls = function(orgId, userId, sessionId, serverUrl){
         jQuery('#js-start-session__loading-container').hide();
       }, 800);
 
-      jQuery('#js-quiz__form').attr('action', 'http://38.89.143.20/NEUROEDX_Staging/api/organizations/'  + orgId + '/users/' + userId + '/sessions/quizresults');
+      jQuery('#js-quiz__form').attr('action', serverUrl + "/api/organizations/" + orgId + '/users/' + userId + '/sessions/quizresults');
 
     }
   });
@@ -363,6 +363,7 @@ window.addEventListener('resize', adaptStartSessionLayout);
 
 function adaptStartSessionLayout() {
   let widgetWidth = jQuery("#js-start-widget").parent().width();
+  let quizWidth = jQuery("#js-quiz__form").width();
 
   if(widgetWidth <= 575 ){
     jQuery("#js-start-session__goal-icon").hide();
@@ -394,6 +395,13 @@ function adaptStartSessionLayout() {
     } else {
       jQuery('.start-session__title').css('font-size', '1.8em');
     }
+  }
+  if(quizWidth <= 980) {
+    jQuery(".quiz__subquestion-container").css('flex-flow', 'column');
+    jQuery(".quiz__subquestion-answers").css('margin-top', '5px');
+  } else {
+    jQuery(".quiz__subquestion-container").css('flex-flow', 'row');
+    jQuery(".quiz__subquestion-answers").css('margin-top', '0');
   }
 
   //handle full sscreen exit
