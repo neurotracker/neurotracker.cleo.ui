@@ -24,7 +24,7 @@ jQuery('#communicator-input > input').on('change', function () {
 
 jQuery('#js-advice-widget').html(`
 	<div class="advice__container" id="js-advice-widget-container">
-		<div class="advice__tab"><p>Tip of the day</p></div>
+		<div class="advice__tab">Tip of the day</div>
 		<div class="advice__content" id="js-advice__content">
 
 			<div id="js-advice__loading-container" class="advice__loading-container">
@@ -40,7 +40,7 @@ jQuery('#js-advice-widget').html(`
 			  </svg>
 			</div>
 
-			<div class="advice__content--text"><p id="js-advice-text"></p></div>	
+			<div class="advice__content--text"><span id="js-advice-text"></span></div>	
 		</div>
 	</div>
 `);
