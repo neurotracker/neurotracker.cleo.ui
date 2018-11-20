@@ -144,7 +144,7 @@ updateProfileImage = function(imageUrl)
     picURL: imageUrl
   };
   jQuery.ajax({
-    url: serverUrl + "/api/organizations/" + getOrgId() + "/users/" + getUserId() + "/pictureURL",
+    url: getServerUrl() + "/api/organizations/" + getOrgId() + "/users/" + getUserId() + "/pictureURL",
     beforeSend: function (xhr) {
       xhr.setRequestHeader('Authorization', 'Basic ' + btoa('satya' + ':' + getSessionId()));
     },
