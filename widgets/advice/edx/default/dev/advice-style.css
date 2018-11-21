@@ -81,7 +81,7 @@
   overflow: auto;
 }
 
-.advice__content--text p {  
+.advice__content--text span {  
   margin: 5px auto;
   font-size: 1.45em; 
   font-weight: 700; 
