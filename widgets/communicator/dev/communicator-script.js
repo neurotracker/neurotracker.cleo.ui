@@ -25,9 +25,18 @@ getSessionId = function () {
   return jQuery('#sessionId').val();
 }
 
+setServerUrl = function (id) {
+  jQuery('#serverUrl').val(id);
+  jQuery('#serverUrl').trigger('change');
+}
+
+getServerUrl = function () {
+  return jQuery('#serverUrl').val();
+}
+
 function receiveMessage(event)
 {
-  if (event.origin !== "http://38.89.143.128:3032")
+  if (event.origin !== "https://neuroedx.neurotracker.net")
     return;
 
   //temporary for testing
@@ -51,3 +60,4 @@ window.addEventListener("message", receiveMessage, false);
 setOrgId(btoa(neurotracker.orgId)); 
 setUserId(btoa(neurotracker.userId));
 setSessionId(neurotracker.sessionId);
+setServerUrl(neurotracker.url);

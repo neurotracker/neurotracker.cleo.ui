@@ -2,21 +2,26 @@ function insertAdvice(advice) {
   jQuery('#js-advice-text').html(advice);
 }
 
-executeAdviceCall = function (orgId, sessionId) {
+executeAdviceCall = function (orgId, sessionId, serverUrl) {
 	var dateNow = new Date();
   jQuery.ajax({
-    url: "http://38.89.143.20/NEUROEDX_Staging/api/organizations/" + orgId + "/advice-of-the-day?date=" + dateNow.getFullYear() + '-' + (dateNow.getMonth()+1) + '-' + dateNow.getDate(),
+    url: serverUrl + "/api/organizations/" + orgId + "/advice-of-the-day?date=" + dateNow.getFullYear() + '-' + (dateNow.getMonth()+1) + '-' + dateNow.getDate(),
     beforeSend: function(xhr) {
       xhr.setRequestHeader('Authorization', 'Basic ' + btoa('satya' + ':' + sessionId));
     },
     method: 'GET',
     success: function(data){
-      insertAdvice(data.advice);
+			insertAdvice(data.advice);
+			jQuery('#js-advice__loading-container').addClass('advice__loading-container--fading');
+			setTimeout(function()
+			{
+				jQuery('#js-advice__loading-container').hide();
+			}, 800);
     }
   });
 }
 
-executeAdviceCall(getOrgId(), getSessionId());
+executeAdviceCall(getOrgId(), getSessionId(), getServerUrl());
 
 jQuery('#communicator-input > input').on('change', function () {
   executeAdviceCall(getOrgId(), getSessionId());
@@ -24,7 +29,7 @@ jQuery('#communicator-input > input').on('change', function () {
 
 jQuery('#js-advice-widget').html(`
 	<div class="advice__container" id="js-advice-widget-container">
-		<div class="advice__tab"><p>Tip of the day</p></div>
+		<div class="advice__tab">Tip of the day</div>
 		<div class="advice__content" id="js-advice__content">
 
 			<div id="js-advice__loading-container" class="advice__loading-container">
@@ -40,7 +45,7 @@ jQuery('#js-advice-widget').html(`
 			  </svg>
 			</div>
 
-			<div class="advice__content--text"><p id="js-advice-text"></p></div>	
+			<div class="advice__content--text"><span id="js-advice-text"></span></div>	
 		</div>
 	</div>
 `);
@@ -60,12 +65,3 @@ jQuery('#js-advice-widget').html(`
 // }
 
 // calculateAdviceContentHeight();
-
-setTimeout(function()
-{
-  jQuery('#js-advice__loading-container').addClass('advice__loading-container--fading');
-  setTimeout(function()
-  {
-    jQuery('#js-advice__loading-container').hide();
-  }, 800)
-}, 1000)

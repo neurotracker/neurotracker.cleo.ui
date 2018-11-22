@@ -41,17 +41,17 @@ jQuery("#js-graph-by-targets-widget").html(`
       </div>`
 );
 
-executeGraphCalls = function(orgId, userId, sessionId){
-    getLastSessionData(orgId, userId, sessionId);
+executeGraphCalls = function(orgId, userId, sessionId, serverUrl){
+    getLastSessionData(orgId, userId, sessionId, serverUrl);
 }
 
-executeGraphCalls(getOrgId(), getUserId(), getSessionId());
+executeGraphCalls(getOrgId(), getUserId(), getSessionId(), getServerUrl());
 jQuery('#communicator-input > input').on('change', function() {
   let changeVal = jQuery('#communicator-input > input').val();
 
   if(changeVal == 'endSession') {
     needsUpdateData = true;
-    executeGraphCalls(getOrgId(), getUserId(), getSessionId());
+    executeGraphCalls(getOrgId(), getUserId(), getSessionId(), getServerUrl());
   }
 });
 
@@ -101,7 +101,7 @@ function handleTabClick() {
         let clickedTabNum = /([0-9]|overview)/.exec(jQuery(this).attr('id'))[0];
         currentTargetTab = clickedTabNum;
         // 4. get session data for current tab
-        getSessionData(getOrgId(), getUserId(), getSessionId(), currentTargetTab);
+        getSessionData(getOrgId(), getUserId(), getSessionId(), currentTargetTab, getServerUrl());
     }
 }
 
@@ -121,9 +121,9 @@ function lockTabs() {
     });
 }
 
-function getLastSessionData(orgId, userId, sessionId) {
+function getLastSessionData(orgId, userId, sessionId, serverUrl) {
     jQuery.ajax({
-        url: "http://38.89.143.20/NEUROEDX_Staging/api/organizations/" + orgId + "/users/" + userId + "/sessions?fields=last",
+        url: serverUrl + "/api/organizations/" + orgId + "/users/" + userId + "/sessions?fields=last",
         beforeSend: function(xhr) {
           xhr.setRequestHeader('Authorization', 'Basic ' + btoa('satya' + ':' + sessionId));
         },
@@ -136,14 +136,14 @@ function getLastSessionData(orgId, userId, sessionId) {
             currentTargetTab = "2";
           }
           // 3. select tab to get session data and stats for
-          getCurrentSessionData(orgId, userId, sessionId);
+          getCurrentSessionData(orgId, userId, sessionId, serverUrl);
         }
     });
 }
 
-function getCurrentSessionData(orgId, userId, sessionId) {
+function getCurrentSessionData(orgId, userId, sessionId, serverUrl) {
     jQuery.ajax({
-        url: "http://38.89.143.20/NEUROEDX_Staging/api/organizations/" + orgId + "/users/" + userId,
+        url: serverUrl + "/api/organizations/" + orgId + "/users/" + userId,
         beforeSend: function(xhr) {
           xhr.setRequestHeader('Authorization', 'Basic ' + btoa(':' + sessionId));
         },
@@ -158,13 +158,13 @@ function getCurrentSessionData(orgId, userId, sessionId) {
           if(!jQuery(`#js-graph__tabs div#js-graph__${currentTargetTab}-targets`).hasClass("graph__tabs--selected")){
             jQuery(`#js-graph__tabs div#js-graph__${currentTargetTab}-targets`).click();
           }else{
-            getSessionData(getOrgId(), getUserId(), getSessionId(), currentTargetTab);
+            getSessionData(getOrgId(), getUserId(), getSessionId(), currentTargetTab, serverUrl);
           }
         }
       });
 }
 
-function getSessionData(orgId, userId, sessionId, numTargets) {
+function getSessionData(orgId, userId, sessionId, numTargets, serverUrl) {
     if(userSessionData[`${numTargets}Targets`].data == '' || needsUpdateData == true){
         if(jQuery('#js-graph__loading-container').css('display') == 'none') {
             jQuery('#js-graph__no-data-label').hide();
@@ -177,7 +177,7 @@ function getSessionData(orgId, userId, sessionId, numTargets) {
         }
         let myData;
         jQuery.ajax({
-            url: "http://38.89.143.20/NEUROEDX_Staging/api/organizations/" + orgId + "/users/" + userId + "/sessions" + filterParam,
+            url: serverUrl + "/api/organizations/" + orgId + "/users/" + userId + "/sessions" + filterParam,
             beforeSend: function(xhr) {
             xhr.setRequestHeader('Authorization', 'Basic ' + btoa('satya' + ':' + sessionId));
             },
@@ -189,15 +189,15 @@ function getSessionData(orgId, userId, sessionId, numTargets) {
             else if(numTargets==4){ userSessionData[`${numTargets}Targets`].data = myData;}
             else { userSessionData[`${numTargets}Targets`].data = myData;}
             // 5. get stats for current tab
-            getSessionStats(orgId, userId, sessionId, numTargets);
+            getSessionStats(orgId, userId, sessionId, numTargets, serverUrl);
             }
         });
     } else {
-        getSessionStats(orgId, userId, sessionId, numTargets);
+        getSessionStats(orgId, userId, sessionId, numTargets, serverUrl);
     }
 }
 
-function getSessionStats(orgId, userId, sessionId, numTargets) {
+function getSessionStats(orgId, userId, sessionId, numTargets, serverUrl) {
     let filterParam = "?targets=" + numTargets;
     if(numTargets == 'overview'){
         filterParam = '';
@@ -205,7 +205,7 @@ function getSessionStats(orgId, userId, sessionId, numTargets) {
     if(userSessionData[`${numTargets}Targets`].stats == '' || needsUpdateData == true){
         let myData;
         jQuery.ajax({
-            url: "http://38.89.143.20/NEUROEDX_Staging/api/organizations/" + orgId + "/users/" + userId + "/stats" + filterParam,
+            url: serverUrl + "/api/organizations/" + orgId + "/users/" + userId + "/stats" + filterParam,
             beforeSend: function(xhr) {
             xhr.setRequestHeader('Authorization', 'Basic ' + btoa('satya' + ':' + sessionId));
             },
@@ -493,9 +493,6 @@ function adaptGraphLayout() {
   if( 440 < widgetWidth && widgetWidth < 540 ) {
     jQuery(".graph__tabs").css({"font-size": "1.0em"});
   }
-  if( 540 <= widgetWidth ) {
-    //jQuery(".graph__tabs").css({"font-size": "1.2em"});
-  }
   if( widgetWidth < 635 ) {
     jQuery(".graph__tabs").css({"min-width": "100%"});
     jQuery(".graph__content-container").css({"border-radius": "0 0 7px 7px"});
@@ -504,13 +501,9 @@ function adaptGraphLayout() {
   }
   if(widgetWidth <= 310) {
     jQuery(".graph__tabs").css({"font-family": "'Roboto Condensed', sans-serif"});
-    //jQuery(".highcharts-plot-line-label div").css({"font-family": "'Roboto Condensed', sans-serif", "font-size": "8px", "width": "50px", "transform": "translate(-73px, -27px)"});
     jQuery(".next-target-indicator").css({"width": "20px", "height": "20px", "left": "-23px", "top": "5px"});
-    myChart.chart.spacingBottom = 0;
-    myChart.chart.spacingTop = 0;
-    myChart.chart.spacingRight = 5;
-    myChart.chart.spacingLeft = 0;
-  } else {
-    jQuery(".next-target-indicator").css({"width": "20px", "height": "20px", "left": "-30px", "top": "4px"});
+  }
+  if(widgetWidth > 540){
+    jQuery(".graph__tabs").removeAttr("style");
   }
 }

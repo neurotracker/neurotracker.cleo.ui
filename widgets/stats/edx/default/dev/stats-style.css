@@ -253,19 +253,17 @@
 
   /* tolltips inside when hover stats cells */
 
-  .tooltip {
+  .stats_details_tooltip {
     display: inline-block;
     text-align: left; 
   }
 
-  .tooltip .tooltip-top {
-    position: relative;
+  .stats_details_tooltip .tooltip-top {
     min-width: 149px; 
     top: 104px;
     left: 50%;
     transform: translate(-50%, -100%);
     padding: 10px;
-    color: #FFFFFF;
     background-color: rgba(67, 91, 119, 0.9);    
     border-radius: 8px;
     position: absolute;
@@ -275,18 +273,20 @@
     display: none;  
   }
 
-  .tooltip .tooltip-top p {
+  .stats_details_tooltip .tooltip-top span {
     text-transform: none;
-    font-size: 0.88em;
+    font-family: 'Roboto Condensed', sans-serif;
+    color: #FFFFFF;
+    font-size: 0.9em;
     line-height: normal;
     opacity: 1 !important;
   }
 
-  .tooltip:hover .tooltip-top {
+  .stats_details_tooltip:hover .tooltip-top {
     display:block;   
   }
 
-  .tooltip .tooltip-top i {
+  .stats_details_tooltip .tooltip-top i {
     position:absolute;
     top: 100%;
     left: 80.5%;
@@ -296,7 +296,7 @@
     overflow: hidden;
   }
 
-  .tooltip .tooltip-top i::after {
+  .stats_details_tooltip .tooltip-top i::after {
     content:'';
     position:absolute;
     width: 10px;

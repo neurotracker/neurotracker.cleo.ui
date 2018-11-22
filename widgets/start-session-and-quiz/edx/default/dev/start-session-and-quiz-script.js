@@ -142,10 +142,10 @@ let goBack = getGoBackButton();
 let quizContainer = getQuizContainer();
 let startContainer = getStartContainer();
 
-executeStartSessionCalls = function(orgId, userId, sessionId){
+executeStartSessionCalls = function(orgId, userId, sessionId, serverUrl){
   adaptStartSessionLayout();
   jQuery.ajax({
-    url: "http://38.89.143.20/NEUROEDX_Staging/api/organizations/" + orgId + "/users/" + userId,
+    url: serverUrl + "/api/organizations/" + orgId + "/users/" + userId,
     beforeSend: function(xhr) {
       xhr.setRequestHeader('Authorization', 'Basic ' + btoa(':' + sessionId));
     },
@@ -164,7 +164,7 @@ executeStartSessionCalls = function(orgId, userId, sessionId){
         jQuery('#js-start-session__loading-container').hide();
       }, 800);
 
-      jQuery('#js-quiz__form').attr('action', 'http://38.89.143.20/NEUROEDX_Staging/api/organizations/'  + orgId + '/users/' + userId + '/sessions/quizresults');
+      jQuery('#js-quiz__form').attr('action', serverUrl + "/api/organizations/" + orgId + '/users/' + userId + '/sessions/quizresults');
 
     }
   });
@@ -172,7 +172,7 @@ executeStartSessionCalls = function(orgId, userId, sessionId){
 
 getQuizQuestionIds();
 setupEventHandlers();
-executeStartSessionCalls(getOrgId(), getUserId(), getSessionId());
+executeStartSessionCalls(getOrgId(), getUserId(), getSessionId(), getServerUrl());
 
 jQuery('#communicator-input > input').on('change', function() {
   let changeVal = jQuery('#communicator-input > input').val();
@@ -180,13 +180,13 @@ jQuery('#communicator-input > input').on('change', function() {
   if(changeVal == 'endSession') {
     jQuery('#js-nt-iframe').addClass('start-session__nt-iframe--hidden');
     closeFullscreen();
-    executeStartSessionCalls(getOrgId(), getUserId(), getSessionId());
+    executeStartSessionCalls(getOrgId(), getUserId(), getSessionId(), getServerUrl());
   }
 
   if(changeVal == 'newSessionCompleted') {
     jQuery('#js-nt-iframe').addClass('start-session__nt-iframe--hidden');
     closeFullscreen();
-    executeStartSessionCalls(getOrgId(), getUserId(), getSessionId());
+    executeStartSessionCalls(getOrgId(), getUserId(), getSessionId(), getServerUrl());
   }
   if(changeVal == 'sessionEndedUncomplete') {
     jQuery('#js-nt-iframe').addClass('start-session__nt-iframe--hidden');
@@ -310,7 +310,7 @@ function nextQuestion(n) {
     closeQuiz();
     jQuery.ajax({
       type: "POST",
-      url: "http://38.89.143.20/NEUROEDX_Staging/api/organizations/" + getOrgId() + "/users/" + getUserId() + "/sessions/quizresults",
+      url: serverUrl + "/api/organizations/" + getOrgId() + "/users/" + getUserId() + "/sessions/quizresults",
       beforeSend: function(xhr) {
         xhr.setRequestHeader('Authorization', 'Basic ' + btoa(':' + getSessionId()));
       },
@@ -363,6 +363,7 @@ window.addEventListener('resize', adaptStartSessionLayout);
 
 function adaptStartSessionLayout() {
   let widgetWidth = jQuery("#js-start-widget").parent().width();
+  let quizWidth = jQuery("#js-quiz__form").width();
 
   if(widgetWidth <= 575 ){
     jQuery("#js-start-session__goal-icon").hide();
@@ -394,6 +395,13 @@ function adaptStartSessionLayout() {
     } else {
       jQuery('.start-session__title').css('font-size', '1.8em');
     }
+  }
+  if(quizWidth <= 980) {
+    jQuery(".quiz__subquestion-container").css('flex-flow', 'column');
+    jQuery(".quiz__subquestion-answers").css('margin-top', '5px');
+  } else {
+    jQuery(".quiz__subquestion-container").css('flex-flow', 'row');
+    jQuery(".quiz__subquestion-answers").css('margin-top', '0');
   }
 
   //handle full sscreen exit

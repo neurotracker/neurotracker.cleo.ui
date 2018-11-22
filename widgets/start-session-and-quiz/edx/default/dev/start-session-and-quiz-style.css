@@ -179,7 +179,7 @@
   opacity: 1;
   position: absolute;
   left: 0px;
-  top: 110px;
+  top: 150px;
   width: 100%;
   height: 80%;
   min-height: 450px;
@@ -284,6 +284,8 @@
   justify-content: space-around;
   align-items: center;
   width: 120px;
+  //margin: 0 auto;
+  padding: 12px; 
 }
 .quiz__sleep-count-input {
   visibility: hidden;
@@ -294,7 +296,7 @@
   color: rgb(54, 92, 170);
   font-weight: 700;
   text-align: center;
-  min-width: 90px;
+  min-width: 60px;
 }
 
 .quiz__increment-btn,
@@ -545,7 +547,7 @@
 } 
 
 
-@media screen and (max-width: 675px), screen and (max-height: 565px) { 
+@media screen and (max-width: 675px), screen and (max-height: 700px) { 
   .quiz__container { 
     padding: 0px; 
   } 
@@ -672,9 +674,11 @@
   .quiz__answer--mood { 
     padding-right: calc(16px + 6 * ((100vw - 320px) / 800)); 
     padding-left: calc(16px + 6 * ((100vw - 320px) / 800)); 
+    padding-top: 10px;
+    padding-bottom: 10px;
   } 
   .quiz__answer--mood > div { 
-    font-size: calc(8px + 6 * ((100vw - 320px) / 680)); 
+    //font-size: calc(8px + 6 * ((100vw - 320px) / 680)); 
   } 
 } 
  
