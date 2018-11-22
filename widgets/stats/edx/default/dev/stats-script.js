@@ -188,7 +188,7 @@ jQuery('#js-stats-widget').html(`
             <!-- <div class="stats_details_sub">[Wednesday, Oct 30]</div> -->
             <div class="stats_details_moreinfo tooltip">
               <div class="tooltip-top">
-                <p>This is your best NeuroEdX speed threshold score obtained at the end of each session (calculated after 20 trials). Keep it up!</p>
+                <span>This is your best NeuroEdX speed threshold score obtained at the end of each session (calculated after 20 trials). Keep it up!</span>
                 <i></i>
               </div>
             </div>
@@ -216,7 +216,7 @@ jQuery('#js-stats-widget').html(`
             <!-- <div class="stats_details_sub">[-35% OF LAST WEEK]</div> -->
             <div class="stats_details_moreinfo tooltip">
               <div class="tooltip-top">
-                <p>This is how many NeuroEdX sessions you've successfully completed.</p>
+                <span>This is how many NeuroEdX sessions you've successfully completed.</span>
                 <i></i>
               </div>
             </div>
@@ -242,7 +242,7 @@ jQuery('#js-stats-widget').html(`
             </div>
             <div class="stats_details_moreinfo tooltip">
               <div class="tooltip-top">
-                <p>This metric shows how much you've improved over this week and the last week.</p>
+                <span>This metric shows how much you've improved over this week and the last week.</span>
                 <i></i>
               </div>
             </div>
@@ -269,7 +269,7 @@ jQuery('#js-stats-widget').html(`
             <!-- <div class="stats_details_main">39% IMPROVEMENT</div> -->
             <div class="stats_details_moreinfo tooltip">
               <div class="tooltip-top">
-                <p>NeuroEdX adjusts in speed and number of targets as you progress, this metric gives you an average value of how you're adapting and learning to the task as it progresses in difficulty.</p>
+                <span>NeuroEdX adjusts in speed and number of targets as you progress, this metric gives you an average value of how you're adapting and learning to the task as it progresses in difficulty.</span>
                 <i></i>
               </div>
             </div>
@@ -297,7 +297,7 @@ jQuery('#js-stats-widget').html(`
             <!-- <div class="stats_details_sub">[Wednesday, Oct 30]</div> -->
             <div class="stats_details_moreinfo tooltip">
               <div class="tooltip-top">
-                <p>This is the highest speed you reached within a NeuroEdX session. Great job!</p>
+                <span>This is the highest speed you reached within a NeuroEdX session. Great job!</span>
                 <i></i>
               </div>
             </div>
@@ -343,7 +343,7 @@ jQuery('#js-stats-widget').html(`
           <!-- <div class="stats_details_sub">[Wednesday, Oct 30]</div> -->
             <div class="stats_details_moreinfo tooltip">
               <div class="tooltip-top">
-                <p>This is your best NeuroEdX speed threshold score obtained at the end of each session (calculated after 20 trials). Keep it up!</p>
+                <span>This is your best NeuroEdX speed threshold score obtained at the end of each session (calculated after 20 trials). Keep it up!</span>
                 <i></i>
               </div>
             </div>
@@ -371,7 +371,7 @@ jQuery('#js-stats-widget').html(`
             <!-- <div class="stats_details_sub">[-35% OF LAST month]</div> -->
             <div class="stats_details_moreinfo tooltip">
               <div class="tooltip-top">
-                <p>This is how many NeuroEdX sessions you've successfully completed.</p>
+                <span>This is how many NeuroEdX sessions you've successfully completed.</span>
                 <i></i>
               </div>
             </div>
@@ -397,7 +397,7 @@ jQuery('#js-stats-widget').html(`
           </div>
             <div class="stats_details_moreinfo tooltip">
               <div class="tooltip-top">
-                <p>This metric shows how much you've improved over this month and the last month.</p>
+                <span>This metric shows how much you've improved over this month and the last month.</span>
                 <i></i>
               </div>
             </div>
@@ -424,7 +424,7 @@ jQuery('#js-stats-widget').html(`
             <!-- <div class="stats_details_main">51% IMPROVEMENT</div> -->
             <div class="stats_details_moreinfo tooltip">
               <div class="tooltip-top">
-                <p>NeuroEdX adjusts in speed and number of targets as you progress, this metric gives you an average value of how you're adapting and learning to the task as it progresses in difficulty.</p>
+                <span>NeuroEdX adjusts in speed and number of targets as you progress, this metric gives you an average value of how you're adapting and learning to the task as it progresses in difficulty.</span>
                 <i></i>
               </div>
             </div>
@@ -452,7 +452,7 @@ jQuery('#js-stats-widget').html(`
             <!-- <div class="stats_details_sub">[Wednesday, Oct 30]</div> -->
             <div class="stats_details_moreinfo tooltip">
               <div class="tooltip-top">
-                <p>This is the highest speed you reached within a NeuroEdX session. Great job!</p>
+                <span>This is the highest speed you reached within a NeuroEdX session. Great job!</span>
                 <i></i>
               </div>
             </div>
