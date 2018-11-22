@@ -186,7 +186,7 @@ jQuery('#js-stats-widget').html(`
               <div class="stats_details_main_data js-stats__last-week--best-score">2.02</div>
             </div>
             <!-- <div class="stats_details_sub">[Wednesday, Oct 30]</div> -->
-            <div class="stats_details_moreinfo tooltip">
+            <div class="stats_details_moreinfo stats_details_tooltip">
               <div class="tooltip-top">
                 <span>This is your best NeuroEdX speed threshold score obtained at the end of each session (calculated after 20 trials). Keep it up!</span>
                 <i></i>
@@ -214,7 +214,7 @@ jQuery('#js-stats-widget').html(`
               <div class="stats_details_main_data js-stats__last-week--sessions-completed">26</div>
             </div>
             <!-- <div class="stats_details_sub">[-35% OF LAST WEEK]</div> -->
-            <div class="stats_details_moreinfo tooltip">
+            <div class="stats_details_moreinfo stats_details_tooltip">
               <div class="tooltip-top">
                 <span>This is how many NeuroEdX sessions you've successfully completed.</span>
                 <i></i>
@@ -240,7 +240,7 @@ jQuery('#js-stats-widget').html(`
               <div class="stats_details_main_line"></div>
               <div class="stats_details_main_data js-stats__last-week--improvement">65%</div>
             </div>
-            <div class="stats_details_moreinfo tooltip">
+            <div class="stats_details_moreinfo stats_details_tooltip">
               <div class="tooltip-top">
                 <span>This metric shows how much you've improved over this week and the last week.</span>
                 <i></i>
@@ -267,7 +267,7 @@ jQuery('#js-stats-widget').html(`
               <div class="stats_details_main_data js-stats__last-week--avg-learning-rate">3.38</div>
             </div>
             <!-- <div class="stats_details_main">39% IMPROVEMENT</div> -->
-            <div class="stats_details_moreinfo tooltip">
+            <div class="stats_details_moreinfo stats_details_tooltip">
               <div class="tooltip-top">
                 <span>NeuroEdX adjusts in speed and number of targets as you progress, this metric gives you an average value of how you're adapting and learning to the task as it progresses in difficulty.</span>
                 <i></i>
@@ -295,7 +295,7 @@ jQuery('#js-stats-widget').html(`
               <div class="stats_details_main_data js-stats__last-week--highest-speed">3.1</div>
             </div>
             <!-- <div class="stats_details_sub">[Wednesday, Oct 30]</div> -->
-            <div class="stats_details_moreinfo tooltip">
+            <div class="stats_details_moreinfo stats_details_tooltip">
               <div class="tooltip-top">
                 <span>This is the highest speed you reached within a NeuroEdX session. Great job!</span>
                 <i></i>
@@ -341,7 +341,7 @@ jQuery('#js-stats-widget').html(`
             <div class="stats_details_main_data js-stats__last-month--best-score">2.61</div>
           </div>
           <!-- <div class="stats_details_sub">[Wednesday, Oct 30]</div> -->
-            <div class="stats_details_moreinfo tooltip">
+            <div class="stats_details_moreinfo stats_details_tooltip">
               <div class="tooltip-top">
                 <span>This is your best NeuroEdX speed threshold score obtained at the end of each session (calculated after 20 trials). Keep it up!</span>
                 <i></i>
@@ -369,7 +369,7 @@ jQuery('#js-stats-widget').html(`
               <div class="stats_details_main_data js-stats__last-month--sessions-completed">56</div>
             </div>
             <!-- <div class="stats_details_sub">[-35% OF LAST month]</div> -->
-            <div class="stats_details_moreinfo tooltip">
+            <div class="stats_details_moreinfo stats_details_tooltip">
               <div class="tooltip-top">
                 <span>This is how many NeuroEdX sessions you've successfully completed.</span>
                 <i></i>
@@ -395,7 +395,7 @@ jQuery('#js-stats-widget').html(`
             <div class="stats_details_main_line"></div>
             <div class="stats_details_main_data js-stats__last-month--improvement">25%</div>
           </div>
-            <div class="stats_details_moreinfo tooltip">
+            <div class="stats_details_moreinfo stats_details_tooltip">
               <div class="tooltip-top">
                 <span>This metric shows how much you've improved over this month and the last month.</span>
                 <i></i>
@@ -422,7 +422,7 @@ jQuery('#js-stats-widget').html(`
               <div class="stats_details_main_data js-stats__last-month--avg-learning-rate">2.49</div>
             </div>
             <!-- <div class="stats_details_main">51% IMPROVEMENT</div> -->
-            <div class="stats_details_moreinfo tooltip">
+            <div class="stats_details_moreinfo stats_details_tooltip">
               <div class="tooltip-top">
                 <span>NeuroEdX adjusts in speed and number of targets as you progress, this metric gives you an average value of how you're adapting and learning to the task as it progresses in difficulty.</span>
                 <i></i>
@@ -450,7 +450,7 @@ jQuery('#js-stats-widget').html(`
               <div class="stats_details_main_data js-stats__last-month--highest-speed">2.6</div>
             </div>
             <!-- <div class="stats_details_sub">[Wednesday, Oct 30]</div> -->
-            <div class="stats_details_moreinfo tooltip">
+            <div class="stats_details_moreinfo stats_details_tooltip">
               <div class="tooltip-top">
                 <span>This is the highest speed you reached within a NeuroEdX session. Great job!</span>
                 <i></i>
