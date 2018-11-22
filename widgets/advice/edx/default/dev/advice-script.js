@@ -11,7 +11,12 @@ executeAdviceCall = function (orgId, sessionId, serverUrl) {
     },
     method: 'GET',
     success: function(data){
-      insertAdvice(data.advice);
+			insertAdvice(data.advice);
+			jQuery('#js-advice__loading-container').addClass('advice__loading-container--fading');
+			setTimeout(function()
+			{
+				jQuery('#js-advice__loading-container').hide();
+			}, 800);
     }
   });
 }
@@ -60,12 +65,3 @@ jQuery('#js-advice-widget').html(`
 // }
 
 // calculateAdviceContentHeight();
-
-setTimeout(function()
-{
-  jQuery('#js-advice__loading-container').addClass('advice__loading-container--fading');
-  setTimeout(function()
-  {
-    jQuery('#js-advice__loading-container').hide();
-  }, 800)
-}, 1000)
