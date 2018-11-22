@@ -36,7 +36,6 @@ getServerUrl = function () {
 
 function receiveMessage(event)
 {
-  console.log('origin: ', event.origin);
   if (event.origin !== "https://neuroedx.neurotracker.net")
     return;
 
