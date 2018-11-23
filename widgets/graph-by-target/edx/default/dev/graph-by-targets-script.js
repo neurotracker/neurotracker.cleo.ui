@@ -41,20 +41,6 @@ jQuery("#js-graph-by-targets-widget").html(`
       </div>`
 );
 
-executeGraphCalls = function(orgId, userId, sessionId, serverUrl){
-    getLastSessionData(orgId, userId, sessionId, serverUrl);
-}
-
-executeGraphCalls(getOrgId(), getUserId(), getSessionId(), getServerUrl());
-jQuery('#communicator-input > input').on('change', function() {
-  let changeVal = jQuery('#communicator-input > input').val();
-
-  if(changeVal == 'endSession') {
-    needsUpdateData = true;
-    executeGraphCalls(getOrgId(), getUserId(), getSessionId(), getServerUrl());
-  }
-});
-
 let unlockNextTarget;
 let unlockLabelText;
 let currentTargetTab;
@@ -87,6 +73,20 @@ let userSessionData = {
     lastSessionData: '',
     currentSessionData: ''
 }
+
+executeGraphCalls = function(orgId, userId, sessionId, serverUrl){
+    getLastSessionData(orgId, userId, sessionId, serverUrl);
+}
+
+executeGraphCalls(getOrgId(), getUserId(), getSessionId(), getServerUrl());
+jQuery('#communicator-input > input').on('change', function() {
+  let changeVal = jQuery('#communicator-input > input').val();
+
+  if(changeVal == 'endSession') {
+    needsUpdateData = true;
+    executeGraphCalls(getOrgId(), getUserId(), getSessionId(), getServerUrl());
+  }
+});
 
 // grab html elements
 let graphContainer = jQuery('#js-graph__graph-container');
@@ -183,12 +183,7 @@ function getSessionData(orgId, userId, sessionId, numTargets, serverUrl) {
             },
             method: 'GET',
             success: function(data){
-            myData = data;
-            if(numTargets==2){ userSessionData[`${numTargets}Targets`].data = myData;}
-            else if(numTargets==3){ userSessionData[`${numTargets}Targets`].data = myData;}
-            else if(numTargets==4){ userSessionData[`${numTargets}Targets`].data = myData;}
-            else { userSessionData[`${numTargets}Targets`].data = myData;}
-            // 5. get stats for current tab
+            userSessionData[`${numTargets}Targets`].data = data;
             getSessionStats(orgId, userId, sessionId, numTargets, serverUrl);
             }
         });
@@ -369,7 +364,7 @@ function displayDataAndStats(numTargets) {
     // set correct stat values in html elements
     jQuery('#js-graph__best-score-stat-value').text(statValues.bestScore);
     jQuery('#js-graph__highest-speed-stat-value').text(statValues.highestSpeed);
-    needsUpdateData == false;
+    needsUpdateData = false;
 }
 
 
