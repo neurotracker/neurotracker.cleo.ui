@@ -340,7 +340,7 @@ function nextQuestion(n) {
 
     jQuery.ajax({
       type: "POST",
-      url: serverUrl + "/api/organizations/" + getOrgId() + "/users/" + getUserId() + "/sessions/quizresults",
+      url: getServerUrl() + "/api/organizations/" + getOrgId() + "/users/" + getUserId() + "/sessions/quizresults",
       beforeSend: function(xhr) {
         xhr.setRequestHeader('Authorization', 'Basic ' + btoa(':' + getSessionId()));
       },
