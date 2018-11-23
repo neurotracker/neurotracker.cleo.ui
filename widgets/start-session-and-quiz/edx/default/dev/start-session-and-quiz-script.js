@@ -227,7 +227,11 @@ function updateStartInfo(start__data) {
 // sets up event handlers for all html elements (buttons and inputs)
 function setupEventHandlers() {
   jQuery('#js-start-session__start-btn').click(openQuiz);
-  jQuery('#js-quiz__close-btn').click(closeQuiz);
+  jQuery('#js-quiz__close-btn').click(function() {
+    closeQuiz();
+    startContainer.removeClass('start-session__container--hidden');
+    jQuery('#js-profile-widget, #js-advice-widget, #js-graph-by-targets-widget, #js-stats-widget').show();
+  });
   goNext.click(() => nextQuestion(1));
   goBack.click(() => nextQuestion(-1));
   jQuery("[type='number']").keypress(e => e.preventDefault);
