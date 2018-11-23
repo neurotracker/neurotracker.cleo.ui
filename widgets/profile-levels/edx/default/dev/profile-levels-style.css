@@ -64,7 +64,7 @@
 .profile__avatar > .profile__change-pic-overlay {
   width: 60px;
   height: 60px;
-  top: 10px;
+  top: 7px;
   left: 10px;
   position: absolute;
   opacity: 0;
@@ -80,7 +80,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  line-height: 20px;
+  line-height: 15px;
 }
 
 .profile__change-pic-overlay:hover {
