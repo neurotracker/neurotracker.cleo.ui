@@ -407,6 +407,24 @@
   color: #365CAA;
 }
 
+.start-session__session-loading {
+  display: none;
+  flex-direction: column;
+  position: absolute;
+  width: 300px;
+  height: 300px;
+  background-color: white;
+  justify-content: space-around;
+  padding: 15px 0;
+  align-items: center;
+  border-radius: 20px;
+  color: #48995a;
+  font-size: 1.3em;
+  font-weight: 700;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.06), 0 15px 35px rgba(42,51,83,0.12);
+  font-family: 'Roboto Condensed', sans-serif;
+}
+
 /*          MOOD QUESTION          */
 
 .quiz__answers--mood {
