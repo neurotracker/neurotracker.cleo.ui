@@ -251,6 +251,7 @@
   letter-spacing: 1px;
   text-align: center;
   line-height: normal;
+  padding: 30px 0 0 30px;
 }
 
 .quiz__subquestion-container {
