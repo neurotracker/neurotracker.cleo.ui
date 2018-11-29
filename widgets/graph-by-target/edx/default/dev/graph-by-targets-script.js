@@ -491,8 +491,9 @@ function adaptGraphLayout() {
   if( widgetWidth < 635 ) {
     jQuery(".graph__tabs").css({"min-width": "100%"});
     jQuery(".graph__content-container").css({"border-radius": "0 0 7px 7px"});
+    JQuery(".next-target-indicator").css({"left": "-26px"});
   } else {
-    jQuery(".graph__tabs, .graph__content-container").removeAttr("style");
+    jQuery(".graph__tabs, .graph__content-container, .next-target-indicator").removeAttr("style");
   }
   if(widgetWidth <= 310) {
     jQuery(".graph__tabs").css({"font-family": "'Roboto Condensed', sans-serif"});

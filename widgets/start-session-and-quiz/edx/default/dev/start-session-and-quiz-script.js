@@ -31,8 +31,7 @@ jQuery('#js-start-widget').html(`
   </div>
 </div>
 <div id="js-start-session__session-loading" class="start-session__session-loading">
-  <div> Loading your NeuroEdX session... </div>
-  <svg width="200" height="200" viewBox="0 0 38 38" xmlns="http://www.w3.org/2000/svg" stroke="#365BA9">
+  <svg width="175" height="175" viewBox="0 0 38 38" xmlns="http://www.w3.org/2000/svg" stroke="#365BA9">
     <g fill="none" fill-rule="evenodd">
       <g transform="translate(1 1)" stroke-width="2">
         <circle stroke-opacity=".3" cx="18" cy="18" r="18" />
@@ -42,6 +41,7 @@ jQuery('#js-start-widget').html(`
       </g>
     </g>
   </svg>
+  <div>Loading your NeuroEdX session...</div>
 </div>
 <form id="js-quiz__form" action="" method="post" class="quiz__container quiz__container--hidden">
   <svg id="js-quiz__close-btn" class="quiz__close-btn" width="138" height="138" viewBox="0 0 138 138" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M95.5853 54.1467C98.8416 50.7653 98.7401 45.3843 95.3586 42.1281C91.9772 38.8718 86.5962 38.9733 83.34 42.3547L95.5853 54.1467ZM42.4148 84.8534C39.1585 88.2348 39.26 93.6158 42.6415 96.872C46.023 100.128 51.4039 100.027 54.6602 96.6453L42.4148 84.8534ZM84.3533 96.0853C87.7347 99.3416 93.1157 99.2401 96.3719 95.8586C99.6282 92.4772 99.5267 87.0962 96.1453 83.84L84.3533 96.0853ZM53.6467 42.9148C50.2652 39.6585 44.8842 39.76 41.628 43.1415C38.3717 46.523 38.4732 51.9039 41.8547 55.1602L53.6467 42.9148ZM29 17.5H109V0.5H29V17.5ZM120.5 29V109.5H137.5V29H120.5ZM109 121H29V138H109V121ZM17.5 109.5V29H0.5V109.5H17.5ZM29 121C22.6487 121 17.5 115.851 17.5 109.5H0.5C0.5 125.24 13.2599 138 29 138V121ZM120.5 109.5C120.5 115.851 115.351 121 109 121V138C124.74 138 137.5 125.24 137.5 109.5H120.5ZM109 17.5C115.351 17.5 120.5 22.6487 120.5 29H137.5C137.5 13.2599 124.74 0.5 109 0.5V17.5ZM29 0.5C13.2599 0.5 0.5 13.2599 0.5 29H17.5C17.5 22.6487 22.6487 17.5 29 17.5V0.5ZM83.34 42.3547L42.4148 84.8534L54.6602 96.6453L95.5853 54.1467L83.34 42.3547ZM96.1453 83.84L53.6467 42.9148L41.8547 55.1602L84.3533 96.0853L96.1453 83.84Z" fill="black"/></svg>
