@@ -36,22 +36,8 @@ getServerUrl = function () {
 
 function receiveMessage(event)
 {
-  if (event.origin !== "https://neuroedx.neurotracker.net")
-    return;
-
-  //temporary for testing
   if(event.data == "endSession"){
     jQuery('#communicator-event').val("endSession");
-    jQuery('#sessionId').trigger('change');
-  }
-
-  if(event.data == "newSessionCompleted"){
-    jQuery('#communicator-event').val("newSessionCompleted");
-    jQuery('#sessionId').trigger('change');
-  }
-
-  if(event.data == "sessionEndedUncomplete"){
-    jQuery('#communicator-event').val("sessionEndedUncompleted");
     jQuery('#sessionId').trigger('change');
   }
 }
