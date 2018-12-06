@@ -1,0 +1,359 @@
+/* Container styles */
+.graph__container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+  font-family: 'Roboto', sans-serif;
+  text-transform: uppercase;
+}
+
+.graph__loading-container {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-color: #ffffff;
+  top: 0;
+  left: 0;
+  z-index: 100;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: 0.7s ease-in;
+}
+
+.graph__loading-container--fading {
+  opacity: 0;
+}
+
+/* Tab styles */
+.graph__tabs {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  z-index: 1;
+  font-size: 1.2em;
+}
+
+.graph__tabs > div {
+  position: relative;
+  width: 155px;
+  height: 37px;
+  text-align: center;
+  line-height: 35px;
+  font-weight: bold;
+  transition: 0.2s;
+  color: #d7e2f7;
+  background-color: #365CAA;
+  cursor: pointer;
+  border-top: 4px solid #365CAA;
+}
+
+.graph__tabs > div:first-of-type {
+  border-left: 4px solid #365CAA;
+  border-radius: 7px 0 0 0;
+}
+
+.graph__tabs > div:last-of-type {
+  border-right: 4px solid #365CAA;
+  border-radius: 0 7px 0 0;
+}
+
+.graph__tabs > div:not(.graph__tabs--selected):hover,
+.graph__tabs > div:not(.graph__tabs--selected):hover::before {
+  color: white;
+  background-color: #5072b9;
+}
+
+.graph__tabs > div::before {
+  z-index: 1;
+  position: absolute;
+  content: "";
+  width: 100%;
+  height: 4px;
+  bottom: -4px;
+  left: 0px;
+  background-color: #365CAA;
+  transition: 0.2s;
+}
+
+.graph__tabs .graph__tabs--selected {
+  background-color: white;
+  color: #0C7F40;
+  box-shadow: none;
+  opacity: 1.0;
+  line-height: 40px;
+  cursor: default;
+  position: relative;
+}
+
+.graph__tabs .graph__tabs--selected::before {
+  height: 4px;
+  bottom: -4px;
+  z-index: 1;
+  background-color: white;
+}
+
+.graph__tabs > div:not(.graph__tabs--selected):hover {
+  transition: 0.2s;
+}
+
+.graph__tabs .graph__tabs--locked {
+  pointer-events: none;
+}
+
+.graph__tabs .graph__tabs--locked:hover {
+  background-color: #365CAA;
+}
+
+.graph__tabs .graph__tabs--locked::before,
+.graph__tabs .graph__tabs--locked:hover::before {
+  height: 4px;
+  bottom: -4px;
+  background-color: rgba(150, 172, 200, 0.9) !important;
+}
+
+.graph__tabs .graph__tabs--locked::after {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+  content: "\f023";
+  color: white;
+  background-color: rgba(150, 172, 200, 0.9);
+  -webkit-font-smoothing: antialiased;
+  display: inline-block;
+  font-style: normal;
+  font-variant: normal;
+  text-rendering: auto;
+  line-height: 34px;
+  font-family: "Font Awesome 5 Free";
+  font-weight: 900;
+  cursor:not-allowed;
+}
+
+/* Content styles */
+.graph__content-container {
+  display: flex;
+  flex-direction: column;
+  background-color: white;
+  border-radius: 0 7px 7px 7px;
+  border: 4px solid rgb(54, 92, 170);
+  height: 445px;
+  box-shadow: 0 5px 15px rgba(0,0,0,0.06), 0 15px 35px rgba(42,51,83,0.12);
+  position: relative;
+}
+
+/* Stat styles */
+.graph__stat-list {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  list-style: none;
+  padding: 0;
+  margin: 5px;
+}
+
+.graph__stat {
+  visibility: visible;
+  opacity: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 60px;
+  width: 120px;
+  transition: 0.0s;
+}
+
+.graph__stat-value--hidden {
+  visibility: hidden;
+  opacity: 0;
+  height: 0;
+  width: 0;
+}
+
+.graph__stat-value {
+  width: 100px;
+  height: 30px;
+  background: rgb(12, 127, 64);
+  color: white;
+  text-align: center;
+  border-radius: 5px;
+  font-size: 1.1em;
+  line-height: 33px;
+  font-weight: 700;
+  text-shadow: 2px 1px 2px rgba(0, 0, 0, 0.5);
+  margin-bottom: 3px;
+}
+
+.graph__stat-name {
+  color: rgb(12, 127, 64);
+  font-size: 0.75em;
+  font-weight: 700;
+  text-align: center;
+}
+
+/* Graph container styles */
+.graph__graph-container {
+  width: 100%;
+  height: 80%;
+  align-self: center;
+  flex-flow: 1;
+  position: relative;
+}
+
+/* STYLING FOR HIGHCHARTS GRAPH */
+
+.highcharts-background {
+  fill: white;
+}
+
+.highcharts-container {
+  font-family: 'Roboto', sans-serif;
+}
+
+.highcharts-plot-line {
+  fill: none;
+  stroke: #F39C12;
+  stroke-width: 3px;
+  opacity: 1;
+  stroke-dasharray: 5, 7;
+  visibility: hidden;
+}
+
+.highcharts-plot-line-label div {
+  position: absolute;
+  width: 90px;
+  left: 5px;
+  padding: 5px;
+  border: 1px solid #F39C12;
+  border-radius: 5px;
+  background-color: white;
+  color: #F39C12;
+  transform: translate(-105px, -30px);
+  font-weight: 700;
+  font-size: 0.8em;
+  white-space: normal !important;
+}
+
+.highcharts-graph {
+  stroke-width: 3px;
+}
+
+.highcharts-credits {
+  display: none;
+}
+
+.next-target-indicator{
+  position: absolute;
+  top: 5px;
+  left: -30px;
+  width: 21px;
+  height: 21px;
+  border-radius: 50%;
+  border: 2px dashed #f8c471;
+  color: #f8c471;
+  background-color: transparent;
+  text-align: center;
+  font-weight: 700;
+  font-size: 1.24em;
+  animation-name: spin;
+  animation-duration: 6s;
+  animation-iteration-count: infinite;
+  animation-timing-function: linear;
+}
+
+@-moz-keyframes spin {
+  from { -moz-transform: rotate(0deg); }
+  to { -moz-transform: rotate(360deg); }
+}
+@-webkit-keyframes spin {
+  from { -webkit-transform: rotate(0deg); }
+  to { -webkit-transform: rotate(360deg); }
+}
+@keyframes spin {
+  from {transform:rotate(0deg);}
+  to {transform:rotate(360deg);}
+}
+
+.graph__no-data-label {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-color: #ffffff;
+  top: 0;
+  left: 0;
+  z-index: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: rgb(12, 127, 64);
+  font-weight: 700;
+  font-size: 3em;
+}
+
+/* Define the stop colors */
+#gradient-0 stop[offset="0"] {
+  stop-color: rgb(74, 163, 186);
+	stop-opacity: 0.9;
+}
+#gradient-0 stop[offset="1"] {
+  stop-color: rgb(168, 228, 177);
+	stop-opacity: 0.9;
+}
+
+.highcharts-color-0 {
+  fill: rgb(12, 127, 64);
+  stroke: rgb(12, 127, 64);
+  stop-color: rgb(12, 127, 64);
+  stroke-opacity: 1;
+}
+
+.highcharts-color-0 .highcharts-area {
+	fill-opacity: 0.5;
+  fill: url(#gradient-0); 
+}
+
+.highcharts-color-2 {
+  fill: #f8c471;
+  stroke: #f8c471;
+  stop-color: #f8c471;
+  stroke-opacity: 1;
+}
+
+.highcharts-color-2 .highcharts-area {
+	fill: transparent; 
+}
+
+.highcharts-area {
+  fill-opacity: 0.4;
+}
+
+.highcharts-color-1 {
+  fill: #8085e9;
+  stroke: #8085e9;
+}
+
+.highcharts-tooltip-box {
+  fill-opacity: 1;
+  fill: white;
+}
+
+.highcharts-tooltip {
+  text-transform: none;
+}
+
+.unlockIndicatorSeries {
+  /* opacity: 0.6; */
+  stroke-dasharray: 5, 7;
+  stroke-width: 2px;
+  -webkit-animation: dash 90s linear infinite;
+}
+
+@-webkit-keyframes dash {
+  to {
+    stroke-dashoffset: -1000;
+  }
+}
