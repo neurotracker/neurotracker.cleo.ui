@@ -311,11 +311,11 @@ function nextQuestion(n) {
   currentQuestion = currentQuestion + n;
   if (currentQuestion >= questionIds.length) {
     let formData = {
-      "feeling": jQuery("input[name=feeling]").val(),
+      "feeling": jQuery("input[name=feeling]:checked").val(),
       "mood": quizMoodAnswers,
       "sleep": jQuery("input[name=sleep]").val(),
-      "meal": jQuery("input[name=meal]").val(),
-      "physical": jQuery("input[name=physical]").val()
+      "meal": jQuery("input[name=meal]:checked").val(),
+      "physical": jQuery("input[name=physical]:checked").val()
     };
     
     //display NT iframe fullscreen
