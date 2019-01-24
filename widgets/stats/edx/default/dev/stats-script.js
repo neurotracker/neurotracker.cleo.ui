@@ -54,13 +54,18 @@ executeStatsCalls = function (orgId, userId, sessionId, serverUrl) {
   var loadingCounter = 0;
 
   jQuery.ajax({
-    url: serverUrl + "/api/organizations/" + orgId + "/users/" + userId + "/stats?timeframe=thisweek",
+    //url: serverUrl + "/api/organizations/" + orgId + "/users/" + userId + "/stats?timeframe=thisweek",
+    url: serverUrl + "/request",
+    params: {
+        "api": "GetStats",
+        "timefilter": "thisweek"
+    },
     beforeSend: function(xhr) {
-      xhr.setRequestHeader('Authorization', 'Basic ' + btoa('satya' + ':' + sessionId));
+        xhr.setRequestHeader('Authorization', 'Bearer ' + sessionId);
     },
     method: 'GET',
     success: function(data){
-      insertStatsThisWeek(data);
+      insertStatsThisWeek(data.Data);
       loadingCounter++;
       if(loadingCounter == 4)
       {
@@ -73,13 +78,18 @@ executeStatsCalls = function (orgId, userId, sessionId, serverUrl) {
     }
   });
   jQuery.ajax({
-    url: serverUrl + "/api/organizations/" + orgId + "/users/" + userId + "/stats?timeframe=lastweek",
+    //url: serverUrl + "/api/organizations/" + orgId + "/users/" + userId + "/stats?timeframe=lastweek",
+    url: serverUrl + "/request",
+    params: {
+        "api": "GetStats",
+        "timefilter": "lastweek"
+    },
     beforeSend: function(xhr) {
-      xhr.setRequestHeader('Authorization', 'Basic ' + btoa('satya' + ':' + sessionId));
+        xhr.setRequestHeader('Authorization', 'Bearer ' + sessionId);
     },
     method: 'GET',
     success: function(data){
-      insertStatsLastWeek(data);
+      insertStatsLastWeek(data.Data);
       loadingCounter++;
       if(loadingCounter == 4)
       {
@@ -92,13 +102,18 @@ executeStatsCalls = function (orgId, userId, sessionId, serverUrl) {
     }
   });
   jQuery.ajax({
-    url: serverUrl + "/api/organizations/" + orgId + "/users/" + userId + "/stats?timeframe=thismonth",
+    //url: serverUrl + "/api/organizations/" + orgId + "/users/" + userId + "/stats?timeframe=thismonth",
+    url: serverUrl + "/request",
+    params: {
+        "api": "GetStats",
+        "timefilter": "thismonth"
+    },
     beforeSend: function(xhr) {
-      xhr.setRequestHeader('Authorization', 'Basic ' + btoa('satya' + ':' + sessionId));
+        xhr.setRequestHeader('Authorization', 'Bearer ' + sessionId);
     },
     method: 'GET',
     success: function(data){
-      insertStatsThisMonth(data);
+      insertStatsThisMonth(data.Data);
       loadingCounter++;
       if(loadingCounter == 4)
       {
@@ -111,13 +126,18 @@ executeStatsCalls = function (orgId, userId, sessionId, serverUrl) {
     }
   });
   jQuery.ajax({
-    url: serverUrl + "/api/organizations/" + orgId + "/users/" + userId + "/stats?timeframe=lastmonth",
+    //url: serverUrl + "/api/organizations/" + orgId + "/users/" + userId + "/stats?timeframe=lastmonth",
+    url: serverUrl + "/request",
+    params: {
+        "api": "GetStats",
+        "timefilter": "lastmonth"
+    },
     beforeSend: function(xhr) {
-      xhr.setRequestHeader('Authorization', 'Basic ' + btoa('satya' + ':' + sessionId));
+        xhr.setRequestHeader('Authorization', 'Bearer ' + sessionId);
     },
     method: 'GET',
     success: function(data){
-      insertStatsLastMonth(data);
+      insertStatsLastMonth(data.Data);
       loadingCounter++;
       if(loadingCounter == 4)
       {

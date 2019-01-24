@@ -123,13 +123,18 @@ function lockTabs() {
 
 function getLastSessionData(orgId, userId, sessionId, serverUrl) {
     jQuery.ajax({
-        url: serverUrl + "/api/organizations/" + orgId + "/users/" + userId + "/sessions?fields=last",
+        //url: serverUrl + "/api/organizations/" + orgId + "/users/" + userId + "/sessions?fields=last",
+        url: serverUrl + "/request",
+        params: {
+            "api": "GetSessions",
+            "fields":"last",
+        },
         beforeSend: function(xhr) {
-          xhr.setRequestHeader('Authorization', 'Basic ' + btoa('satya' + ':' + sessionId));
+            xhr.setRequestHeader('Authorization', 'Bearer ' + sessionId);
         },
         method: 'GET',
         success: function(data){
-          userSessionData.lastSessionData = data;
+          userSessionData.lastSessionData = data.Data;
           // 2. set current tab to type of last session
           currentTargetTab = userSessionData.lastSessionData.targets;
           if(!currentTargetTab) {
@@ -143,15 +148,19 @@ function getLastSessionData(orgId, userId, sessionId, serverUrl) {
 
 function getCurrentSessionData(orgId, userId, sessionId, serverUrl) {
     jQuery.ajax({
-        url: serverUrl + "/api/organizations/" + orgId + "/users/" + userId,
+        //url: serverUrl + "/api/organizations/" + orgId + "/users/" + userId,
+        url: serverUrl + "/request",
+        params: {
+            "api": "GetUser",
+        },
         beforeSend: function(xhr) {
-          xhr.setRequestHeader('Authorization', 'Basic ' + btoa(':' + sessionId));
+            xhr.setRequestHeader('Authorization', 'Bearer ' + sessionId);
         },
         method: 'GET',
         success: function(data){
             userSessionData.currentSessionData = {
-            targets: data.nextTargets,
-            seconds: data.nextSeconds,
+            targets: data.Data.nextTargets,
+            seconds: data.Data.nextSeconds,
           };
           //lock tabs for higher number of targets than the current session type
           lockTabs();
@@ -177,13 +186,18 @@ function getSessionData(orgId, userId, sessionId, numTargets, serverUrl) {
         }
         let myData;
         jQuery.ajax({
-            url: serverUrl + "/api/organizations/" + orgId + "/users/" + userId + "/sessions" + filterParam,
+            //url: serverUrl + "/api/organizations/" + orgId + "/users/" + userId + "/sessions" + filterParam,
+            url: serverUrl + "/request",
+            params: {
+                "api": "GetSessions",
+                "targets": filterParam
+            },
             beforeSend: function(xhr) {
-            xhr.setRequestHeader('Authorization', 'Basic ' + btoa('satya' + ':' + sessionId));
+                xhr.setRequestHeader('Authorization', 'Bearer ' + sessionId);
             },
             method: 'GET',
             success: function(data){
-            userSessionData[`${numTargets}Targets`].data = data;
+            userSessionData[`${numTargets}Targets`].data = data.Data;
             getSessionStats(orgId, userId, sessionId, numTargets, serverUrl);
             }
         });
@@ -200,13 +214,18 @@ function getSessionStats(orgId, userId, sessionId, numTargets, serverUrl) {
     if(userSessionData[`${numTargets}Targets`].stats == '' || needsUpdateData == true){
         let myData;
         jQuery.ajax({
-            url: serverUrl + "/api/organizations/" + orgId + "/users/" + userId + "/stats" + filterParam,
+            //url: serverUrl + "/api/organizations/" + orgId + "/users/" + userId + "/stats" + filterParam,
+            url: serverUrl + "/request",
+            params: {
+                "api": "GetStats",
+                "targets": filterParam,
+            },
             beforeSend: function(xhr) {
-            xhr.setRequestHeader('Authorization', 'Basic ' + btoa('satya' + ':' + sessionId));
+                xhr.setRequestHeader('Authorization', 'Bearer ' + sessionId);
             },
             method: 'GET',
             success: function(data){
-            myData = data;
+            myData = data.Data;
             userSessionData[`${numTargets}Targets`].stats = myData;
             // 6. display data and stats for current tab
             displayDataAndStats(numTargets);

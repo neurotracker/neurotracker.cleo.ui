@@ -62,13 +62,17 @@ executeProfileLevelsCalls = function(orgId, userId, sessionId, serverUrl){
   const TOTAL_REQUESTS = 5
 
   jQuery.ajax({
-    url: serverUrl + "/api/organizations/" + orgId + "/users/" + userId + "?fields=firstname,lastname",
-    beforeSend: function (xhr) {
-      xhr.setRequestHeader('Authorization', 'Basic ' + btoa('satya' + ':' + sessionId));
+    //url: serverUrl + "/api/organizations/" + orgId + "/users/" + userId + "?fields=firstname,lastname",
+    url: serverUrl + "/request",
+    params: {
+        "api": "GetUser",
+    },
+    beforeSend: function(xhr) {
+        xhr.setRequestHeader('Authorization', 'Bearer ' + sessionId);
     },
     method: 'GET',
     success: function (data) {
-      insertName(data.firstName + " " + data.lastName);
+      insertName(data.Data.firstName + " " + data.Data.lastName);
       loadingCounter++;
       if (loadingCounter >= TOTAL_REQUESTS) {
         hideLoading();
@@ -77,13 +81,17 @@ executeProfileLevelsCalls = function(orgId, userId, sessionId, serverUrl){
   });
 
   jQuery.ajax({
-    url: serverUrl + "/api/organizations/" + orgId + "/users/" + userId + "/pictureUrl",
-    beforeSend: function (xhr) {
-      xhr.setRequestHeader('Authorization', 'Basic ' + btoa('satya' + ':' + sessionId));
+    //url: serverUrl + "/api/organizations/" + orgId + "/users/" + userId + "/pictureUrl",
+    url: serverUrl + "/request",
+    params: {
+        "api": "GetPicture",
+    },
+    beforeSend: function(xhr) {
+        xhr.setRequestHeader('Authorization', 'Bearer ' + sessionId);
     },
     method: 'GET',
     success: function (data) {
-      insertPictureUrl(data);
+      insertPictureUrl(data.Data.PictureURL);
       loadingCounter++;
       if (loadingCounter >= TOTAL_REQUESTS) {
         hideLoading();
@@ -92,26 +100,35 @@ executeProfileLevelsCalls = function(orgId, userId, sessionId, serverUrl){
   });
 
   jQuery.ajax({
-    url: serverUrl + "/api/organizations/" + orgId + "/users/" + userId + '/level',
-    beforeSend: function (xhr) {
-      xhr.setRequestHeader('Authorization', 'Basic ' + btoa('satya' + ':' + sessionId));
+    //url: serverUrl + "/api/organizations/" + orgId + "/users/" + userId + '/level',
+    url: serverUrl + "/request",
+    params: {
+        "api": "GetLevel",
+    },
+    beforeSend: function(xhr) {
+        xhr.setRequestHeader('Authorization', 'Bearer ' + sessionId);
     },
     method: 'GET',
     success: function (data) {
-      insertLevel(data.level, data.exp, data.expToNextLevel);
+      insertLevel(data.Data.level, data.Data.exp, data.Data.expToNextLevel);
       loadingCounter++;
       if (loadingCounter >= TOTAL_REQUESTS) {
         hideLoading();
       }
       // request to get rewards data using level
       jQuery.ajax({
-        url: serverUrl + "/api/organizations/" + orgId + "/rewards/" + data.level,
-        beforeSend: function (xhr) {
-          xhr.setRequestHeader('Authorization', 'Basic ' + btoa('satya' + ':' + sessionId));
+        //url: serverUrl + "/api/organizations/" + orgId + "/rewards/" + data.level,
+        url: serverUrl + "/request",
+        params: {
+            "api": "GetAReward",
+            "level": data.Data.level
+        },
+        beforeSend: function(xhr) {
+            xhr.setRequestHeader('Authorization', 'Bearer ' + sessionId);
         },
         method: 'GET',
         success: function (data) {
-          insertRewards(data.reward_title, data.reward_border);
+          insertRewards(data.Data.reward_title, data.Data.reward_border);
           loadingCounter++;
           if (loadingCounter >= TOTAL_REQUESTS) {
             hideLoading();
@@ -120,13 +137,18 @@ executeProfileLevelsCalls = function(orgId, userId, sessionId, serverUrl){
       });
       // request to get next rewards data using level
       jQuery.ajax({
-        url: serverUrl + "/api/organizations/" + orgId + "/rewards/" + data.level + "/nexttype",
-        beforeSend: function (xhr) {
-          xhr.setRequestHeader('Authorization', 'Basic ' + btoa('satya' + ':' + sessionId));
+        //url: serverUrl + "/api/organizations/" + orgId + "/rewards/" + data.level + "/nexttype",
+        url: serverUrl + "/request",
+        params: {
+            "api": "GetNextRewardType",
+            "level": data.Data.level
+        },
+        beforeSend: function(xhr) {
+            xhr.setRequestHeader('Authorization', 'Bearer ' + sessionId);
         },
         method: 'GET',
         success: function (data) {
-          insertNextRewards(data.level, data.types);
+          insertNextRewards(data.Data.level, data.Data.types);
           loadingCounter++;
           if (loadingCounter >= TOTAL_REQUESTS) {
             hideLoading();
@@ -140,16 +162,21 @@ executeProfileLevelsCalls = function(orgId, userId, sessionId, serverUrl){
 updateProfileImage = function(imageUrl)
 {
   imageUrl = imageUrl.split(CDN_URL+'Avatars/')[1];
-  let data = {
-    picURL: imageUrl
-  };
+  // let data = {
+  //   picURL: imageUrl
+  // };
   jQuery.ajax({
-    url: getServerUrl() + "/api/organizations/" + getOrgId() + "/users/" + getUserId() + "/pictureURL",
-    beforeSend: function (xhr) {
-      xhr.setRequestHeader('Authorization', 'Basic ' + btoa('satya' + ':' + getSessionId()));
+    //url: getServerUrl() + "/api/organizations/" + getOrgId() + "/users/" + getUserId() + "/pictureURL",
+    url: serverUrl + "/request",
+    params: {
+        "api": "UpdatePicture",
+        "PicUrl": imageUrl,
+    },
+    beforeSend: function(xhr) {
+        xhr.setRequestHeader('Authorization', 'Bearer ' + sessionId);
     },
     method: 'PUT',
-    data: JSON.stringify(data),
+    //data: JSON.stringify(data.Data),
     contentType : "application/json"
   });
 }
