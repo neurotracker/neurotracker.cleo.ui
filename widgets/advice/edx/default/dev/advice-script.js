@@ -12,7 +12,9 @@ executeAdviceCall = function (orgId, sessionId, serverUrl) {
 			"date": dateNow.getFullYear() + '-' + (dateNow.getMonth()+1) + '-' + dateNow.getDate(),
 		},
 		beforeSend: function(xhr) {
-      xhr.setRequestHeader('Authorization', 'Bearer ' + sessionId);
+			xhr.setRequestHeader('Authorization', 'Bearer ' + sessionId);
+			xhr.setRequestHeader('Content-Type', 'application/json');
+			xhr.setRequestHeader("Accept", "application/json");
     },
     method: 'GET',
     success: function(data){
