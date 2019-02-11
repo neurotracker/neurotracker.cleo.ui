@@ -160,7 +160,7 @@ executeStartSessionCalls = function(orgId, userId, sessionId, serverUrl){
   jQuery.ajax({
     //url: serverUrl + "/api/organizations/" + orgId + "/users/" + userId,
     url: serverUrl + "/request",
-    params: {
+    data: {
         "api": "GetUser",
     },
     beforeSend: function(xhr) {
@@ -341,21 +341,23 @@ function nextQuestion(n) {
     let loadingXPos = (docWidth / 2) - (loadingWidth / 2);
     let loadingYPos = (docHeight / 2) - (loadingHeight / 2);
     jQuery('#js-start-session__session-loading').css({'display': 'flex', 'left': loadingXPos, 'top': loadingYPos});
-
     jQuery.ajax({
       type: "POST",
       //url: getServerUrl() + "/api/organizations/" + getOrgId() + "/users/" + getUserId() + "/sessions/quizresults",
-      url: serverUrl + "/request",
-      params: {
+      url: getServerUrl() + "/request",
+      data: JSON.stringify({
           "api": "UploadQuiz",
+          "quizresults":{
           "feeling": jQuery("input[name=feeling]:checked").val(),
           "mood": quizMoodAnswers,
           "sleep": jQuery("input[name=sleep]").val(),
           "meal": jQuery("input[name=meal]:checked").val(),
           "physical": jQuery("input[name=physical]:checked").val()
-      },
+          }
+      }),
+      contentType:"application/json",
       beforeSend: function(xhr) {
-          xhr.setRequestHeader('Authorization', 'Bearer ' + sessionId);
+          xhr.setRequestHeader('Authorization', 'Bearer ' + getSessionId());
       },
       //data: JSON.stringify(formData),
       success: function(){

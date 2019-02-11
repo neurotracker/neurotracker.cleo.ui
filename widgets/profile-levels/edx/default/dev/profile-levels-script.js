@@ -2,6 +2,7 @@ var CDN_URL = 'https://raw.githubusercontent.com/neurotracker/neurotracker.cleo.
 var previewProfileImage;
 var currentProfileImage;
 var experiencePercentage;
+var imageUrl;
 
 hideLoading = function() {
   jQuery('#js-profile__loading-container').addClass('profile__loading-container--fading');
@@ -17,7 +18,8 @@ insertName = function(name) {
   jQuery('#js-profile__name').html(name);
 }
 
-insertPictureUrl = function(imageUrl) {
+insertPictureUrl = function(data) {
+  imageUrl = data["Data"]["PictureUrl"];
   jQuery('#js-profile__avatar-img').attr('src', imageUrl);
 }
 
@@ -46,25 +48,43 @@ insertLevel = function (level, currentExp, goalExp) {
   jQuery('#js-profile__star').css('filter', 'drop-shadow(0 2px 7px rgba(0,0,0,0.21)) hue-rotate(' + hueRotation + 'deg)');
 }
 
-insertRewards = function(title, borderImage) {
-  jQuery("#js-profile__title").html(title);
-  jQuery("#js-profile__avatar-border").attr('src', borderImage);
-}
+// insertRewards = function(title, borderImage) {
+//   jQuery("#js-profile__title").html(title);
+//   jQuery("#js-profile__avatar-border").attr('src', borderImage);
+// }
 
-insertNextRewards = function(level, type) {
+var level;
+insertNextRewards = function(level,type) {
+ // type = data["reward_type"];
   if(level != ""){
     jQuery("#js-profile__next-reward").html('NEXT REWARD: LEVEL ' + level + ' (NEW ' + type.join(', ') + ')');
   }
 }
+var title;
+var borderImage;
+insertRewards = function(data) {
+  title = data["Data"]["reward_title"];
+  borderImage = data["Data"]["reward_border"];
+  jQuery("#js-profile__title").html(title);
+  jQuery("#js-profile__avatar-border").attr('src', borderImage);
+}
+
+
+// insertPictureUrl = function(data) {
+//   console.log("new data",JSON.stringify(data));
+//   imageUrl = data["Data"]["PictureUrl"];
+//   console.log("image url: ",imageUrl);
+//   jQuery('#js-profile__avatar-img').attr('src', imageUrl);
+// }
 
 executeProfileLevelsCalls = function(orgId, userId, sessionId, serverUrl){
   var loadingCounter = 0;
   const TOTAL_REQUESTS = 5
-
+serverUrl = getServerUrl();
   jQuery.ajax({
     //url: serverUrl + "/api/organizations/" + orgId + "/users/" + userId + "?fields=firstname,lastname",
     url: serverUrl + "/request",
-    params: {
+    data: {
         "api": "GetUser",
     },
     beforeSend: function(xhr) {
@@ -83,7 +103,7 @@ executeProfileLevelsCalls = function(orgId, userId, sessionId, serverUrl){
   jQuery.ajax({
     //url: serverUrl + "/api/organizations/" + orgId + "/users/" + userId + "/pictureUrl",
     url: serverUrl + "/request",
-    params: {
+    data: {
         "api": "GetPicture",
     },
     beforeSend: function(xhr) {
@@ -91,7 +111,8 @@ executeProfileLevelsCalls = function(orgId, userId, sessionId, serverUrl){
     },
     method: 'GET',
     success: function (data) {
-      insertPictureUrl(data.Data.PictureURL);
+      imageUrl = JSON.stringify(data.Data.PictureURL);
+      insertPictureUrl(data);
       loadingCounter++;
       if (loadingCounter >= TOTAL_REQUESTS) {
         hideLoading();
@@ -102,7 +123,7 @@ executeProfileLevelsCalls = function(orgId, userId, sessionId, serverUrl){
   jQuery.ajax({
     //url: serverUrl + "/api/organizations/" + orgId + "/users/" + userId + '/level',
     url: serverUrl + "/request",
-    params: {
+    data: {
         "api": "GetLevel",
     },
     beforeSend: function(xhr) {
@@ -119,7 +140,7 @@ executeProfileLevelsCalls = function(orgId, userId, sessionId, serverUrl){
       jQuery.ajax({
         //url: serverUrl + "/api/organizations/" + orgId + "/rewards/" + data.level,
         url: serverUrl + "/request",
-        params: {
+        data: {
             "api": "GetAReward",
             "level": data.Data.level
         },
@@ -128,7 +149,7 @@ executeProfileLevelsCalls = function(orgId, userId, sessionId, serverUrl){
         },
         method: 'GET',
         success: function (data) {
-          insertRewards(data.Data.reward_title, data.Data.reward_border);
+          insertRewards(data);
           loadingCounter++;
           if (loadingCounter >= TOTAL_REQUESTS) {
             hideLoading();
@@ -139,7 +160,7 @@ executeProfileLevelsCalls = function(orgId, userId, sessionId, serverUrl){
       jQuery.ajax({
         //url: serverUrl + "/api/organizations/" + orgId + "/rewards/" + data.level + "/nexttype",
         url: serverUrl + "/request",
-        params: {
+        data: {
             "api": "GetNextRewardType",
             "level": data.Data.level
         },
@@ -167,17 +188,17 @@ updateProfileImage = function(imageUrl)
   // };
   jQuery.ajax({
     //url: getServerUrl() + "/api/organizations/" + getOrgId() + "/users/" + getUserId() + "/pictureURL",
-    url: serverUrl + "/request",
-    params: {
+    url: getServerUrl() + "/request",
+    data: JSON.stringify({
         "api": "UpdatePicture",
         "PicUrl": imageUrl,
-    },
+    }),
+    contentType : "application/json",
     beforeSend: function(xhr) {
-        xhr.setRequestHeader('Authorization', 'Bearer ' + sessionId);
+        xhr.setRequestHeader('Authorization', 'Bearer ' + getSessionId());
     },
-    method: 'PUT',
+    method: 'PUT'
     //data: JSON.stringify(data.Data),
-    contentType : "application/json"
   });
 }
 

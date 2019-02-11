@@ -7,10 +7,12 @@ executeAdviceCall = function (orgId, sessionId, serverUrl) {
   jQuery.ajax({
     //url: serverUrl + "/api/organizations/" + orgId + "/advice-of-the-day?date=" + dateNow.getFullYear() + '-' + (dateNow.getMonth()+1) + '-' + dateNow.getDate(),
 		url: serverUrl + "/request",
-		params: {
+		data: {
 			"api": "GetAdvice",
 			"date": dateNow.getFullYear() + '-' + (dateNow.getMonth()+1) + '-' + dateNow.getDate(),
 		},
+		dataType:"json",
+		//processData:false,
 		beforeSend: function(xhr) {
 			xhr.setRequestHeader('Authorization', 'Bearer ' + sessionId);
 			xhr.setRequestHeader('Content-Type', 'application/json');
