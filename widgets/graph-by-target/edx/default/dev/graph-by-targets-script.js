@@ -123,13 +123,18 @@ function lockTabs() {
 
 function getLastSessionData(orgId, userId, sessionId, serverUrl) {
     jQuery.ajax({
-        url: serverUrl + "/api/organizations/" + orgId + "/users/" + userId + "/sessions?fields=last",
+        //url: serverUrl + "/api/organizations/" + orgId + "/users/" + userId + "/sessions?fields=last",
+        url: serverUrl + "/request",
+        data: {
+            "api": "GetSessions",
+            "fields":"last",
+        },
         beforeSend: function(xhr) {
-          xhr.setRequestHeader('Authorization', 'Basic ' + btoa('satya' + ':' + sessionId));
+            xhr.setRequestHeader('Authorization', 'Bearer ' + sessionId);
         },
         method: 'GET',
         success: function(data){
-          userSessionData.lastSessionData = data;
+          userSessionData.lastSessionData = data.Data;
           // 2. set current tab to type of last session
           currentTargetTab = userSessionData.lastSessionData.targets;
           if(!currentTargetTab) {
@@ -143,15 +148,19 @@ function getLastSessionData(orgId, userId, sessionId, serverUrl) {
 
 function getCurrentSessionData(orgId, userId, sessionId, serverUrl) {
     jQuery.ajax({
-        url: serverUrl + "/api/organizations/" + orgId + "/users/" + userId,
+        //url: serverUrl + "/api/organizations/" + orgId + "/users/" + userId,
+        url: serverUrl + "/request",
+        data: {
+            "api": "GetUser",
+        },
         beforeSend: function(xhr) {
-          xhr.setRequestHeader('Authorization', 'Basic ' + btoa(':' + sessionId));
+            xhr.setRequestHeader('Authorization', 'Bearer ' + sessionId);
         },
         method: 'GET',
         success: function(data){
             userSessionData.currentSessionData = {
-            targets: data.nextTargets,
-            seconds: data.nextSeconds,
+            targets: data.Data.nextTargets,
+            seconds: data.Data.nextSeconds,
           };
           //lock tabs for higher number of targets than the current session type
           lockTabs();
@@ -165,25 +174,44 @@ function getCurrentSessionData(orgId, userId, sessionId, serverUrl) {
 }
 
 function getSessionData(orgId, userId, sessionId, numTargets, serverUrl) {
-    if(userSessionData[`${numTargets}Targets`].data == '' || needsUpdateData == true){
+    if(userSessionData[`${numTargets}Targets`].data === '' || needsUpdateData == true){
         if(jQuery('#js-graph__loading-container').css('display') == 'none') {
             jQuery('#js-graph__no-data-label').hide();
             jQuery('#js-graph__loading-container').removeClass('graph__loading-container--fading');
             jQuery('#js-graph__loading-container').show();
         }
-        let filterParam = "?targets=" + numTargets;
+        let filterParam =/* "?targets=" + */numTargets;
+
         if(numTargets == 'overview'){
             filterParam = '';
         }
+        numTargets = parseFloat(numTargets);
+        if (isNaN(numTargets)) 
+        {
+            filterParam = "";
+            numTargets = "overview";
+        }
+
+        numTargets = parseFloat(numTargets);
+        if (isNaN(numTargets)) 
+        {
+            filterParam = "";
+            numTargets = "overview";
+        }
         let myData;
         jQuery.ajax({
-            url: serverUrl + "/api/organizations/" + orgId + "/users/" + userId + "/sessions" + filterParam,
+            //url: serverUrl + "/api/organizations/" + orgId + "/users/" + userId + "/sessions" + filterParam,
+            url: serverUrl + "/request",
+            data: {
+                "api": "GetSessions",
+                "targets": filterParam
+            },
             beforeSend: function(xhr) {
-            xhr.setRequestHeader('Authorization', 'Basic ' + btoa('satya' + ':' + sessionId));
+                xhr.setRequestHeader('Authorization', 'Bearer ' + sessionId);
             },
             method: 'GET',
             success: function(data){
-            userSessionData[`${numTargets}Targets`].data = data;
+            userSessionData[`${numTargets}Targets`].data = data.Data;
             getSessionStats(orgId, userId, sessionId, numTargets, serverUrl);
             }
         });
@@ -193,20 +221,33 @@ function getSessionData(orgId, userId, sessionId, numTargets, serverUrl) {
 }
 
 function getSessionStats(orgId, userId, sessionId, numTargets, serverUrl) {
-    let filterParam = "?targets=" + numTargets;
+    numTargets = parseFloat(numTargets);
+    let filterParam = /*"?targets=" +*/ numTargets;
     if(numTargets == 'overview'){
         filterParam = '';
     }
-    if(userSessionData[`${numTargets}Targets`].stats == '' || needsUpdateData == true){
+    numTargets = parseFloat(numTargets);
+    if (isNaN(numTargets)) 
+    {
+        filterParam = "";
+        numTargets = "overview";
+    }
+
+    if(userSessionData[`${numTargets}Targets`].stats === '' || needsUpdateData == true){
         let myData;
         jQuery.ajax({
-            url: serverUrl + "/api/organizations/" + orgId + "/users/" + userId + "/stats" + filterParam,
+            //url: serverUrl + "/api/organizations/" + orgId + "/users/" + userId + "/stats" + filterParam,
+            url: serverUrl + "/request",
+            data: {
+                "api": "GetStats",
+                "targets": filterParam,
+            },
             beforeSend: function(xhr) {
-            xhr.setRequestHeader('Authorization', 'Basic ' + btoa('satya' + ':' + sessionId));
+                xhr.setRequestHeader('Authorization', 'Bearer ' + sessionId);
             },
             method: 'GET',
             success: function(data){
-            myData = data;
+            myData = data.Data;
             userSessionData[`${numTargets}Targets`].stats = myData;
             // 6. display data and stats for current tab
             displayDataAndStats(numTargets);
@@ -224,6 +265,12 @@ function getSessionStats(orgId, userId, sessionId, numTargets, serverUrl) {
 }
 
 function displayPlotLine(numTargets, newChartData) {
+    numTargets = parseFloat(numTargets);
+    if (isNaN(numTargets)) 
+    {
+        filterParam = "";
+        numTargets = "overview";
+    }
     myChart.yAxis[0].removePlotLine('js-highcharts-plot-line-0');
     if(myChart.series[1]) {
         myChart.series[1].remove();
@@ -299,6 +346,12 @@ function displayPlotLine(numTargets, newChartData) {
 
 function displayDataAndStats(numTargets) {
     // update chart with data for session type
+    numTargets = parseFloat(numTargets);
+    if (isNaN(numTargets)) 
+    {
+        filterParam = "";
+        numTargets = "overview";
+    }
     let newChartData = [];
     let learningRateData = [];
     if(userSessionData[`${numTargets}Targets`].data.length == 0){
@@ -309,7 +362,7 @@ function displayDataAndStats(numTargets) {
     userSessionData[`${numTargets}Targets`].data.forEach((val, index) => {
         newChartData.push({
         x: index+1,
-        y: val.threshold,
+        y: parseFloat(val.threshold),
         dateRun: val.dateRun,
         target: val.targets,
         trialDuration: val.trialDuration
@@ -327,6 +380,7 @@ function displayDataAndStats(numTargets) {
     });
 
     // add empty point to end of series data and add series to chart
+   // console.log("New chart data: ",newChartData);
     myChart.series[0].setData(newChartData, true);
 
     // create and add series for learning rate goal from the last data point to carrot
@@ -491,7 +545,7 @@ function adaptGraphLayout() {
   if( widgetWidth < 635 ) {
     jQuery(".graph__tabs").css({"min-width": "100%"});
     jQuery(".graph__content-container").css({"border-radius": "0 0 7px 7px"});
-    JQuery(".next-target-indicator").css({"left": "-26px"});
+    jQuery(".next-target-indicator").css({"left": "-26px"});
   } else {
     jQuery(".graph__tabs, .graph__content-container, .next-target-indicator").removeAttr("style");
   }

@@ -158,17 +158,21 @@ let startContainer = getStartContainer();
 executeStartSessionCalls = function(orgId, userId, sessionId, serverUrl){
   adaptStartSessionLayout();
   jQuery.ajax({
-    url: serverUrl + "/api/organizations/" + orgId + "/users/" + userId,
+    //url: serverUrl + "/api/organizations/" + orgId + "/users/" + userId,
+    url: serverUrl + "/request",
+    data: {
+        "api": "GetUser",
+    },
     beforeSend: function(xhr) {
-      xhr.setRequestHeader('Authorization', 'Basic ' + btoa(':' + sessionId));
+        xhr.setRequestHeader('Authorization', 'Bearer ' + sessionId);
     },
     method: 'GET',
     success: function(data){
       start__data = {
-        targets: data.nextTargets,
-        seconds: data.nextSeconds,
-        program: data.program,
-        message: data.message
+        targets: data.Data.nextTargets,
+        seconds: data.Data.nextSeconds,
+        program: data.Data.program,
+        message: data.Data.message
       };
       updateStartInfo(start__data);
       jQuery('#js-start-session__loading-container').addClass('start-session__loading-container--fading');
@@ -177,8 +181,8 @@ executeStartSessionCalls = function(orgId, userId, sessionId, serverUrl){
         jQuery('#js-start-session__loading-container').hide();
       }, 800);
 
-      jQuery('#js-quiz__form').attr('action', serverUrl + "/api/organizations/" + orgId + '/users/' + userId + '/sessions/quizresults');
-
+      //jQuery('#js-quiz__form').attr('action', serverUrl + "/api/organizations/" + orgId + '/users/' + userId + '/sessions/quizresults');
+      jQuery('#js-quiz__form').attr('action', serverUrl + "/request");
     }
   });
 }
@@ -310,13 +314,13 @@ function nextQuestion(n) {
   jQuery(`#${questionIds[currentQuestion]}`).removeClass('quiz__question-container--show');
   currentQuestion = currentQuestion + n;
   if (currentQuestion >= questionIds.length) {
-    let formData = {
-      "feeling": jQuery("input[name=feeling]:checked").val(),
-      "mood": quizMoodAnswers,
-      "sleep": jQuery("input[name=sleep]").val(),
-      "meal": jQuery("input[name=meal]:checked").val(),
-      "physical": jQuery("input[name=physical]:checked").val()
-    };
+    //let formData = {
+    //   "feeling": jQuery("input[name=feeling]:checked").val(),
+    //   "mood": quizMoodAnswers,
+    //   "sleep": jQuery("input[name=sleep]").val(),
+    //   "meal": jQuery("input[name=meal]:checked").val(),
+    //   "physical": jQuery("input[name=physical]:checked").val()
+    // };
     
     //display NT iframe fullscreen
     jQuery('#js-nt-iframe').attr('src', neurotrackerSessionUrl);
@@ -337,14 +341,25 @@ function nextQuestion(n) {
     let loadingXPos = (docWidth / 2) - (loadingWidth / 2);
     let loadingYPos = (docHeight / 2) - (loadingHeight / 2);
     jQuery('#js-start-session__session-loading').css({'display': 'flex', 'left': loadingXPos, 'top': loadingYPos});
-
     jQuery.ajax({
       type: "POST",
-      url: getServerUrl() + "/api/organizations/" + getOrgId() + "/users/" + getUserId() + "/sessions/quizresults",
+      //url: getServerUrl() + "/api/organizations/" + getOrgId() + "/users/" + getUserId() + "/sessions/quizresults",
+      url: getServerUrl() + "/request",
+      data: JSON.stringify({
+          "api": "UploadQuiz",
+          "quizresults":{
+          "feeling": jQuery("input[name=feeling]:checked").val(),
+          "mood": quizMoodAnswers,
+          "sleep": jQuery("input[name=sleep]").val(),
+          "meal": jQuery("input[name=meal]:checked").val(),
+          "physical": jQuery("input[name=physical]:checked").val()
+          }
+      }),
+      contentType:"application/json",
       beforeSend: function(xhr) {
-        xhr.setRequestHeader('Authorization', 'Basic ' + btoa(':' + getSessionId()));
+          xhr.setRequestHeader('Authorization', 'Bearer ' + getSessionId());
       },
-      data: JSON.stringify(formData),
+      //data: JSON.stringify(formData),
       success: function(){
       },
       error: function(XMLHttpRequest, textStatus, errorThrown) { 
