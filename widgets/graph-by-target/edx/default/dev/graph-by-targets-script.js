@@ -174,10 +174,8 @@ function getCurrentSessionData(orgId, userId, sessionId, serverUrl) {
 }
 
 function getSessionData(orgId, userId, sessionId, numTargets, serverUrl) {
-    if(typeof userSessionData[`2Targets`].data == "object" && userSessionData[`2Targets`].data.length == 0){
-
-    }
     if(userSessionData[`${numTargets}Targets`].data === '' || needsUpdateData == true){
+        console.log('here');
         if(jQuery('#js-graph__loading-container').css('display') == 'none') {
             jQuery('#js-graph__no-data-label').hide();
             jQuery('#js-graph__loading-container').removeClass('graph__loading-container--fading');
@@ -236,7 +234,7 @@ function getSessionStats(orgId, userId, sessionId, numTargets, serverUrl) {
         numTargets = "overview";
     }
 
-    if(userSessionData[`${numTargets}Targets`].stats == '' || needsUpdateData == true){
+    if(userSessionData[`${numTargets}Targets`].stats === '' || needsUpdateData == true){
         let myData;
         jQuery.ajax({
             //url: serverUrl + "/api/organizations/" + orgId + "/users/" + userId + "/stats" + filterParam,
