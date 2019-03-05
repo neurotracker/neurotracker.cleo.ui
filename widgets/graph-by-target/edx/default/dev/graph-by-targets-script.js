@@ -175,7 +175,6 @@ function getCurrentSessionData(orgId, userId, sessionId, serverUrl) {
 
 function getSessionData(orgId, userId, sessionId, numTargets, serverUrl) {
     if(userSessionData[`${numTargets}Targets`].data === '' || needsUpdateData == true){
-        console.log('here');
         if(jQuery('#js-graph__loading-container').css('display') == 'none') {
             jQuery('#js-graph__no-data-label').hide();
             jQuery('#js-graph__loading-container').removeClass('graph__loading-container--fading');
