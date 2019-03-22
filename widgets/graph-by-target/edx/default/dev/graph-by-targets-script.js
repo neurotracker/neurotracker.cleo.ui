@@ -360,10 +360,12 @@ function displayDataAndStats(numTargets) {
         jQuery('#js-graph__no-data-label').hide();
     }
     userSessionData[`${numTargets}Targets`].data.forEach((val, index) => {
+        let date = new Date(val.dateRun + ' UTC');
+        let formattedDate = moment(date).format("l") + ' ' + moment(date).format("LT");
         newChartData.push({
         x: index+1,
         y: parseFloat(val.threshold),
-        dateRun: val.dateRun,
+        dateRun: formattedDate,
         target: val.targets,
         trialDuration: val.trialDuration
         });
@@ -371,7 +373,7 @@ function displayDataAndStats(numTargets) {
             learningRateData.push({
                 x: index+1,
                 y: Number(val.learningRate),
-                dateRun: val.dateRun,
+                dateRun: formattedDate,
                 target: val.targets,
                 trialDuration: val.trialDuration,
                 learningRate: Number(val.learningRate)
