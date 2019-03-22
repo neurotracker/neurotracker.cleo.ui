@@ -47,7 +47,7 @@ let currentTargetTab;
 let myChart;
 let tabNames = ['2 Targets', '3 Targets', '4 Targets'];
 let needsUpdateData = true;
-let learningRateGoalThreshold = 4;
+let learningRateGoalThreshold = 4; //used to set max threshold to determine if learning rate goal is shown on the graph or not
 let userSessionData = {
     '2Targets': {
         data: '',
