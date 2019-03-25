@@ -314,16 +314,20 @@ function nextQuestion(n) {
   jQuery(`#${questionIds[currentQuestion]}`).removeClass('quiz__question-container--show');
   currentQuestion = currentQuestion + n;
   if (currentQuestion >= questionIds.length) {
-    //let formData = {
-    //   "feeling": jQuery("input[name=feeling]:checked").val(),
-    //   "mood": quizMoodAnswers,
-    //   "sleep": jQuery("input[name=sleep]").val(),
-    //   "meal": jQuery("input[name=meal]:checked").val(),
-    //   "physical": jQuery("input[name=physical]:checked").val()
-    // };
     
     //display NT iframe fullscreen
     jQuery('#js-nt-iframe').attr('src', neurotrackerSessionUrl);
+
+    let formData = {
+      "api": "UploadQuiz",
+      "quizresults":{
+      "feeling": jQuery("input[name=feeling]:checked").val(),
+      "mood": quizMoodAnswers,
+      "sleep": jQuery("input[name=sleep]").val(),
+      "meal": jQuery("input[name=meal]:checked").val(),
+      "physical": jQuery("input[name=physical]:checked").val()
+      }
+    };
 
     setTimeout(() => {
       jQuery('#js-nt-iframe').removeClass('start-session__nt-iframe--hidden');
@@ -345,16 +349,7 @@ function nextQuestion(n) {
       type: "POST",
       //url: getServerUrl() + "/api/organizations/" + getOrgId() + "/users/" + getUserId() + "/sessions/quizresults",
       url: getServerUrl() + "/request",
-      data: JSON.stringify({
-          "api": "UploadQuiz",
-          "quizresults":{
-          "feeling": jQuery("input[name=feeling]:checked").val(),
-          "mood": quizMoodAnswers,
-          "sleep": jQuery("input[name=sleep]").val(),
-          "meal": jQuery("input[name=meal]:checked").val(),
-          "physical": jQuery("input[name=physical]:checked").val()
-          }
-      }),
+      data: JSON.stringify(formData),
       contentType:"application/json",
       beforeSend: function(xhr) {
           xhr.setRequestHeader('Authorization', 'Bearer ' + getSessionId());
