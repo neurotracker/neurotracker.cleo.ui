@@ -1,7 +1,7 @@
 function insertStatsThisWeek(data) {
   jQuery('.js-stats__this-week--best-score').html(data.bestScore);
   jQuery('.js-stats__this-week--sessions-completed').html(data.sessionsCompleted);
-  if(data.userImprovement == 'N/A') {
+  if(data.userImprovement == 'N/A' || data.userImprovement == "") {
     jQuery('.js-stats__this-week--improvement').html(data.userImprovement);
   } else {
     jQuery('.js-stats__this-week--improvement').html(data.userImprovement + '%');
@@ -14,7 +14,7 @@ function insertStatsThisWeek(data) {
 function insertStatsLastWeek(data) {
   jQuery('.js-stats__last-week--best-score').html(data.bestScore);
   jQuery('.js-stats__last-week--sessions-completed').html(data.sessionsCompleted);
-  if(data.userImprovement == 'N/A') {
+  if(data.userImprovement == 'N/A' || data.userImprovement == "") {
     jQuery('.js-stats__last-week--improvement').html(data.userImprovement);
   } else {
     jQuery('.js-stats__last-week--improvement').html(data.userImprovement + '%');
@@ -27,7 +27,7 @@ function insertStatsLastWeek(data) {
 function insertStatsThisMonth(data) {
   jQuery('.js-stats__this-month--best-score').html(data.bestScore);
   jQuery('.js-stats__this-month--sessions-completed').html(data.sessionsCompleted);
-  if(data.userImprovement == 'N/A') {
+  if(data.userImprovement == 'N/A' || data.userImprovement == "") {
     jQuery('.js-stats__this-month--improvement').html(data.userImprovement);
   } else {
     jQuery('.js-stats__this-month--improvement').html(data.userImprovement + '%');
@@ -40,7 +40,7 @@ function insertStatsThisMonth(data) {
 function insertStatsLastMonth(data) {
   jQuery('.js-stats__last-month--best-score').html(data.bestScore);
   jQuery('.js-stats__last-month--sessions-completed').html(data.sessionsCompleted);
-  if(data.userImprovement == 'N/A') {
+  if(data.userImprovement == 'N/A' || data.userImprovement == "") {
     jQuery('.js-stats__last-month--improvement').html(data.userImprovement);
   } else {
     jQuery('.js-stats__last-month--improvement').html(data.userImprovement + '%');
@@ -54,13 +54,18 @@ executeStatsCalls = function (orgId, userId, sessionId, serverUrl) {
   var loadingCounter = 0;
 
   jQuery.ajax({
-    url: serverUrl + "/api/organizations/" + orgId + "/users/" + userId + "/stats?timeframe=thisweek",
+    //url: serverUrl + "/api/organizations/" + orgId + "/users/" + userId + "/stats?timeframe=thisweek",
+    url: serverUrl + "/request",
+    data: {
+        "api": "GetStats",
+        "timeframe": "thisweek"
+    },
     beforeSend: function(xhr) {
-      xhr.setRequestHeader('Authorization', 'Basic ' + btoa('satya' + ':' + sessionId));
+        xhr.setRequestHeader('Authorization', 'Bearer ' + sessionId);
     },
     method: 'GET',
     success: function(data){
-      insertStatsThisWeek(data);
+      insertStatsThisWeek(data.Data);
       loadingCounter++;
       if(loadingCounter == 4)
       {
@@ -73,13 +78,18 @@ executeStatsCalls = function (orgId, userId, sessionId, serverUrl) {
     }
   });
   jQuery.ajax({
-    url: serverUrl + "/api/organizations/" + orgId + "/users/" + userId + "/stats?timeframe=lastweek",
+    //url: serverUrl + "/api/organizations/" + orgId + "/users/" + userId + "/stats?timeframe=lastweek",
+    url: serverUrl + "/request",
+    data: {
+        "api": "GetStats",
+        "timeframe": "lastweek"
+    },
     beforeSend: function(xhr) {
-      xhr.setRequestHeader('Authorization', 'Basic ' + btoa('satya' + ':' + sessionId));
+        xhr.setRequestHeader('Authorization', 'Bearer ' + sessionId);
     },
     method: 'GET',
     success: function(data){
-      insertStatsLastWeek(data);
+      insertStatsLastWeek(data.Data);
       loadingCounter++;
       if(loadingCounter == 4)
       {
@@ -92,13 +102,18 @@ executeStatsCalls = function (orgId, userId, sessionId, serverUrl) {
     }
   });
   jQuery.ajax({
-    url: serverUrl + "/api/organizations/" + orgId + "/users/" + userId + "/stats?timeframe=thismonth",
+    //url: serverUrl + "/api/organizations/" + orgId + "/users/" + userId + "/stats?timeframe=thismonth",
+    url: serverUrl + "/request",
+    data: {
+        "api": "GetStats",
+        "timeframe": "thismonth"
+    },
     beforeSend: function(xhr) {
-      xhr.setRequestHeader('Authorization', 'Basic ' + btoa('satya' + ':' + sessionId));
+        xhr.setRequestHeader('Authorization', 'Bearer ' + sessionId);
     },
     method: 'GET',
     success: function(data){
-      insertStatsThisMonth(data);
+      insertStatsThisMonth(data.Data);
       loadingCounter++;
       if(loadingCounter == 4)
       {
@@ -111,13 +126,18 @@ executeStatsCalls = function (orgId, userId, sessionId, serverUrl) {
     }
   });
   jQuery.ajax({
-    url: serverUrl + "/api/organizations/" + orgId + "/users/" + userId + "/stats?timeframe=lastmonth",
+    //url: serverUrl + "/api/organizations/" + orgId + "/users/" + userId + "/stats?timeframe=lastmonth",
+    url: serverUrl + "/request",
+    data: {
+        "api": "GetStats",
+        "timeframe": "lastmonth"
+    },
     beforeSend: function(xhr) {
-      xhr.setRequestHeader('Authorization', 'Basic ' + btoa('satya' + ':' + sessionId));
+        xhr.setRequestHeader('Authorization', 'Bearer ' + sessionId);
     },
     method: 'GET',
     success: function(data){
-      insertStatsLastMonth(data);
+      insertStatsLastMonth(data.Data);
       loadingCounter++;
       if(loadingCounter == 4)
       {

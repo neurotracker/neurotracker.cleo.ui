@@ -5,13 +5,22 @@ function insertAdvice(advice) {
 executeAdviceCall = function (orgId, sessionId, serverUrl) {
 	var dateNow = new Date();
   jQuery.ajax({
-    url: serverUrl + "/api/organizations/" + orgId + "/advice-of-the-day?date=" + dateNow.getFullYear() + '-' + (dateNow.getMonth()+1) + '-' + dateNow.getDate(),
-    beforeSend: function(xhr) {
-      xhr.setRequestHeader('Authorization', 'Basic ' + btoa('satya' + ':' + sessionId));
+    //url: serverUrl + "/api/organizations/" + orgId + "/advice-of-the-day?date=" + dateNow.getFullYear() + '-' + (dateNow.getMonth()+1) + '-' + dateNow.getDate(),
+		url: serverUrl + "/request",
+		data: {
+			"api": "GetAdvice",
+			"date": dateNow.getFullYear() + '-' + (dateNow.getMonth()+1) + '-' + dateNow.getDate(),
+		},
+		dataType:"json",
+		//processData:false,
+		beforeSend: function(xhr) {
+			xhr.setRequestHeader('Authorization', 'Bearer ' + sessionId);
+			xhr.setRequestHeader('Content-Type', 'application/json');
+			xhr.setRequestHeader("Accept", "application/json");
     },
     method: 'GET',
     success: function(data){
-			insertAdvice(data.advice);
+			insertAdvice(data.Data.advice);
 			jQuery('#js-advice__loading-container').addClass('advice__loading-container--fading');
 			setTimeout(function()
 			{
