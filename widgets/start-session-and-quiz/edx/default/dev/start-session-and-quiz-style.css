@@ -285,7 +285,7 @@
   justify-content: space-around;
   align-items: center;
   width: 120px;
-  margin: 0 auto;
+  //margin: 0 auto;
   padding: 12px; 
 }
 .quiz__sleep-count-input {
@@ -700,7 +700,7 @@
     padding-bottom: 10px;
   } 
   .quiz__answer--mood > div { 
-    font-size: calc(8px + 6 * ((100vw - 320px) / 680)); 
+    //font-size: calc(8px + 6 * ((100vw - 320px) / 680)); 
   } 
 } 
  

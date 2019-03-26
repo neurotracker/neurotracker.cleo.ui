@@ -158,21 +158,17 @@ let startContainer = getStartContainer();
 executeStartSessionCalls = function(orgId, userId, sessionId, serverUrl){
   adaptStartSessionLayout();
   jQuery.ajax({
-    //url: serverUrl + "/api/organizations/" + orgId + "/users/" + userId,
-    url: serverUrl + "/request",
-    data: {
-        "api": "GetUser",
-    },
+    url: serverUrl + "/api/organizations/" + orgId + "/users/" + userId,
     beforeSend: function(xhr) {
-        xhr.setRequestHeader('Authorization', 'Bearer ' + sessionId);
+      xhr.setRequestHeader('Authorization', 'Basic ' + btoa(':' + sessionId));
     },
     method: 'GET',
     success: function(data){
       start__data = {
-        targets: data.Data.nextTargets,
-        seconds: data.Data.nextSeconds,
-        program: data.Data.program,
-        message: data.Data.message
+        targets: data.nextTargets,
+        seconds: data.nextSeconds,
+        program: data.program,
+        message: data.message
       };
       updateStartInfo(start__data);
       jQuery('#js-start-session__loading-container').addClass('start-session__loading-container--fading');
@@ -181,8 +177,8 @@ executeStartSessionCalls = function(orgId, userId, sessionId, serverUrl){
         jQuery('#js-start-session__loading-container').hide();
       }, 800);
 
-      //jQuery('#js-quiz__form').attr('action', serverUrl + "/api/organizations/" + orgId + '/users/' + userId + '/sessions/quizresults');
-      jQuery('#js-quiz__form').attr('action', serverUrl + "/request");
+      jQuery('#js-quiz__form').attr('action', serverUrl + "/api/organizations/" + orgId + '/users/' + userId + '/sessions/quizresults');
+
     }
   });
 }
@@ -314,20 +310,16 @@ function nextQuestion(n) {
   jQuery(`#${questionIds[currentQuestion]}`).removeClass('quiz__question-container--show');
   currentQuestion = currentQuestion + n;
   if (currentQuestion >= questionIds.length) {
-    
-    //display NT iframe fullscreen
-    jQuery('#js-nt-iframe').attr('src', neurotrackerSessionUrl);
-
     let formData = {
-      "api": "UploadQuiz",
-      "quizresults":{
       "feeling": jQuery("input[name=feeling]:checked").val(),
       "mood": quizMoodAnswers,
       "sleep": jQuery("input[name=sleep]").val(),
       "meal": jQuery("input[name=meal]:checked").val(),
       "physical": jQuery("input[name=physical]:checked").val()
-      }
     };
+    
+    //display NT iframe fullscreen
+    jQuery('#js-nt-iframe').attr('src', neurotrackerSessionUrl);
 
     setTimeout(() => {
       jQuery('#js-nt-iframe').removeClass('start-session__nt-iframe--hidden');
@@ -345,16 +337,14 @@ function nextQuestion(n) {
     let loadingXPos = (docWidth / 2) - (loadingWidth / 2);
     let loadingYPos = (docHeight / 2) - (loadingHeight / 2);
     jQuery('#js-start-session__session-loading').css({'display': 'flex', 'left': loadingXPos, 'top': loadingYPos});
+
     jQuery.ajax({
       type: "POST",
-      //url: getServerUrl() + "/api/organizations/" + getOrgId() + "/users/" + getUserId() + "/sessions/quizresults",
-      url: getServerUrl() + "/request",
-      data: JSON.stringify(formData),
-      contentType:"application/json",
+      url: getServerUrl() + "/api/organizations/" + getOrgId() + "/users/" + getUserId() + "/sessions/quizresults",
       beforeSend: function(xhr) {
-          xhr.setRequestHeader('Authorization', 'Bearer ' + getSessionId());
+        xhr.setRequestHeader('Authorization', 'Basic ' + btoa(':' + getSessionId()));
       },
-      //data: JSON.stringify(formData),
+      data: JSON.stringify(formData),
       success: function(){
       },
       error: function(XMLHttpRequest, textStatus, errorThrown) { 

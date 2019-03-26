@@ -2,7 +2,6 @@ var CDN_URL = 'https://raw.githubusercontent.com/neurotracker/neurotracker.cleo.
 var previewProfileImage;
 var currentProfileImage;
 var experiencePercentage;
-var imageUrl;
 
 hideLoading = function() {
   jQuery('#js-profile__loading-container').addClass('profile__loading-container--fading');
@@ -18,8 +17,7 @@ insertName = function(name) {
   jQuery('#js-profile__name').html(name);
 }
 
-insertPictureUrl = function(data) {
-  imageUrl = data["Data"]["PictureUrl"];
+insertPictureUrl = function(imageUrl) {
   jQuery('#js-profile__avatar-img').attr('src', imageUrl);
 }
 
@@ -48,51 +46,29 @@ insertLevel = function (level, currentExp, goalExp) {
   jQuery('#js-profile__star').css('filter', 'drop-shadow(0 2px 7px rgba(0,0,0,0.21)) hue-rotate(' + hueRotation + 'deg)');
 }
 
-// insertRewards = function(title, borderImage) {
-//   jQuery("#js-profile__title").html(title);
-//   jQuery("#js-profile__avatar-border").attr('src', borderImage);
-// }
-
-var level;
-insertNextRewards = function(level,type) {
- // type = data["reward_type"];
-  if(level != ""){
-    jQuery("#js-profile__next-reward").html('NEXT REWARD: LEVEL ' + level + ' (NEW ' + type.join(', ') + ')');
-  }
-}
-var title;
-var borderImage;
-insertRewards = function(data) {
-  title = data["Data"]["reward_title"];
-  borderImage = data["Data"]["reward_border"];
+insertRewards = function(title, borderImage) {
   jQuery("#js-profile__title").html(title);
   jQuery("#js-profile__avatar-border").attr('src', borderImage);
 }
 
-
-// insertPictureUrl = function(data) {
-//   console.log("new data",JSON.stringify(data));
-//   imageUrl = data["Data"]["PictureUrl"];
-//   console.log("image url: ",imageUrl);
-//   jQuery('#js-profile__avatar-img').attr('src', imageUrl);
-// }
+insertNextRewards = function(level, type) {
+  if(level != ""){
+    jQuery("#js-profile__next-reward").html('NEXT REWARD: LEVEL ' + level + ' (NEW ' + type.join(', ') + ')');
+  }
+}
 
 executeProfileLevelsCalls = function(orgId, userId, sessionId, serverUrl){
   var loadingCounter = 0;
   const TOTAL_REQUESTS = 5
-serverUrl = getServerUrl();
+
   jQuery.ajax({
-    //url: serverUrl + "/api/organizations/" + orgId + "/users/" + userId + "?fields=firstname,lastname",
-    url: serverUrl + "/request",
-    data: {
-        "api": "GetUser",
-    },
-    beforeSend: function(xhr) {
-        xhr.setRequestHeader('Authorization', 'Bearer ' + sessionId);
+    url: serverUrl + "/api/organizations/" + orgId + "/users/" + userId + "?fields=firstname,lastname",
+    beforeSend: function (xhr) {
+      xhr.setRequestHeader('Authorization', 'Basic ' + btoa('satya' + ':' + sessionId));
     },
     method: 'GET',
     success: function (data) {
-      insertName(data.Data.firstName + " " + data.Data.lastName);
+      insertName(data.firstName + " " + data.lastName);
       loadingCounter++;
       if (loadingCounter >= TOTAL_REQUESTS) {
         hideLoading();
@@ -101,17 +77,12 @@ serverUrl = getServerUrl();
   });
 
   jQuery.ajax({
-    //url: serverUrl + "/api/organizations/" + orgId + "/users/" + userId + "/pictureUrl",
-    url: serverUrl + "/request",
-    data: {
-        "api": "GetPicture",
-    },
-    beforeSend: function(xhr) {
-        xhr.setRequestHeader('Authorization', 'Bearer ' + sessionId);
+    url: serverUrl + "/api/organizations/" + orgId + "/users/" + userId + "/pictureUrl",
+    beforeSend: function (xhr) {
+      xhr.setRequestHeader('Authorization', 'Basic ' + btoa('satya' + ':' + sessionId));
     },
     method: 'GET',
     success: function (data) {
-      imageUrl = JSON.stringify(data.Data.PictureURL);
       insertPictureUrl(data);
       loadingCounter++;
       if (loadingCounter >= TOTAL_REQUESTS) {
@@ -121,35 +92,26 @@ serverUrl = getServerUrl();
   });
 
   jQuery.ajax({
-    //url: serverUrl + "/api/organizations/" + orgId + "/users/" + userId + '/level',
-    url: serverUrl + "/request",
-    data: {
-        "api": "GetLevel",
-    },
-    beforeSend: function(xhr) {
-        xhr.setRequestHeader('Authorization', 'Bearer ' + sessionId);
+    url: serverUrl + "/api/organizations/" + orgId + "/users/" + userId + '/level',
+    beforeSend: function (xhr) {
+      xhr.setRequestHeader('Authorization', 'Basic ' + btoa('satya' + ':' + sessionId));
     },
     method: 'GET',
     success: function (data) {
-      insertLevel(data.Data.level, data.Data.exp, data.Data.expToNextLevel);
+      insertLevel(data.level, data.exp, data.expToNextLevel);
       loadingCounter++;
       if (loadingCounter >= TOTAL_REQUESTS) {
         hideLoading();
       }
       // request to get rewards data using level
       jQuery.ajax({
-        //url: serverUrl + "/api/organizations/" + orgId + "/rewards/" + data.level,
-        url: serverUrl + "/request",
-        data: {
-            "api": "GetAReward",
-            "level": data.Data.level
-        },
-        beforeSend: function(xhr) {
-            xhr.setRequestHeader('Authorization', 'Bearer ' + sessionId);
+        url: serverUrl + "/api/organizations/" + orgId + "/rewards/" + data.level,
+        beforeSend: function (xhr) {
+          xhr.setRequestHeader('Authorization', 'Basic ' + btoa('satya' + ':' + sessionId));
         },
         method: 'GET',
         success: function (data) {
-          insertRewards(data);
+          insertRewards(data.reward_title, data.reward_border);
           loadingCounter++;
           if (loadingCounter >= TOTAL_REQUESTS) {
             hideLoading();
@@ -158,18 +120,13 @@ serverUrl = getServerUrl();
       });
       // request to get next rewards data using level
       jQuery.ajax({
-        //url: serverUrl + "/api/organizations/" + orgId + "/rewards/" + data.level + "/nexttype",
-        url: serverUrl + "/request",
-        data: {
-            "api": "GetNextRewardType",
-            "level": data.Data.level
-        },
-        beforeSend: function(xhr) {
-            xhr.setRequestHeader('Authorization', 'Bearer ' + sessionId);
+        url: serverUrl + "/api/organizations/" + orgId + "/rewards/" + data.level + "/nexttype",
+        beforeSend: function (xhr) {
+          xhr.setRequestHeader('Authorization', 'Basic ' + btoa('satya' + ':' + sessionId));
         },
         method: 'GET',
         success: function (data) {
-          insertNextRewards(data.Data.level, data.Data.types);
+          insertNextRewards(data.level, data.types);
           loadingCounter++;
           if (loadingCounter >= TOTAL_REQUESTS) {
             hideLoading();
@@ -183,22 +140,17 @@ serverUrl = getServerUrl();
 updateProfileImage = function(imageUrl)
 {
   imageUrl = imageUrl.split(CDN_URL+'Avatars/')[1];
-  // let data = {
-  //   picURL: imageUrl
-  // };
+  let data = {
+    picURL: imageUrl
+  };
   jQuery.ajax({
-    //url: getServerUrl() + "/api/organizations/" + getOrgId() + "/users/" + getUserId() + "/pictureURL",
-    url: getServerUrl() + "/request",
-    data: JSON.stringify({
-        "api": "UpdatePicture",
-        "PicUrl": imageUrl,
-    }),
-    contentType : "application/json",
-    beforeSend: function(xhr) {
-        xhr.setRequestHeader('Authorization', 'Bearer ' + getSessionId());
+    url: getServerUrl() + "/api/organizations/" + getOrgId() + "/users/" + getUserId() + "/pictureURL",
+    beforeSend: function (xhr) {
+      xhr.setRequestHeader('Authorization', 'Basic ' + btoa('satya' + ':' + getSessionId()));
     },
-    method: 'PUT'
-    //data: JSON.stringify(data.Data),
+    method: 'PUT',
+    data: JSON.stringify(data),
+    contentType : "application/json"
   });
 }
 

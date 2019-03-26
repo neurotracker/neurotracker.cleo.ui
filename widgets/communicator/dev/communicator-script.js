@@ -43,7 +43,7 @@ function receiveMessage(event)
 }
 window.addEventListener("message", receiveMessage, false);
 
-setOrgId(neurotracker.orgId); 
-setUserId(neurotracker.userId);
+setOrgId(btoa(neurotracker.orgId)); 
+setUserId(btoa(neurotracker.userId));
 setSessionId(neurotracker.sessionId);
 setServerUrl(neurotracker.url);
