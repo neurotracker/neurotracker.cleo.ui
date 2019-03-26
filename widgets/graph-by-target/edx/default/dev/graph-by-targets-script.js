@@ -47,6 +47,7 @@ let currentTargetTab;
 let myChart;
 let tabNames = ['2 Targets', '3 Targets', '4 Targets'];
 let needsUpdateData = true;
+let learningRateGoalThreshold = 4; 
 let userSessionData = {
     '2Targets': {
         data: '',
@@ -231,7 +232,8 @@ function displayPlotLine(numTargets, newChartData) {
     if(userSessionData[`${numTargets}Targets`].stats.learningRateGoal && 
        numTargets == userSessionData.lastSessionData.targets && 
        !(userSessionData.lastSessionData.trialDuration == 8 && userSessionData.lastSessionData.targets == 4) &&
-       userSessionData.currentSessionData.targets == numTargets){
+       userSessionData.currentSessionData.targets == numTargets &&  
+       userSessionData[`${numTargets}Targets`].stats.learningRateGoal < learningRateGoalThreshold){
         let learningRateGoal = userSessionData[`${numTargets}Targets`].stats.learningRateGoal;
         learningRateGoal = Math.round(learningRateGoal * 100) / 100;
         //let goalLabelText = `<div>score ${learningRateGoal} or higher in your next session to ` ;
@@ -307,10 +309,12 @@ function displayDataAndStats(numTargets) {
         jQuery('#js-graph__no-data-label').hide();
     }
     userSessionData[`${numTargets}Targets`].data.forEach((val, index) => {
+        let date = new Date(val.dateRun + ' UTC'); 
+        let formattedDate = moment(date).format("l") + ' ' + moment(date).format("LT"); 
         newChartData.push({
         x: index+1,
         y: val.threshold,
-        dateRun: val.dateRun,
+        dateRun: formattedDate,
         target: val.targets,
         trialDuration: val.trialDuration
         });
@@ -318,7 +322,7 @@ function displayDataAndStats(numTargets) {
             learningRateData.push({
                 x: index+1,
                 y: Number(val.learningRate),
-                dateRun: val.dateRun,
+                dateRun: formattedDate,
                 target: val.targets,
                 trialDuration: val.trialDuration,
                 learningRate: Number(val.learningRate)
