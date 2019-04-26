@@ -142,3 +142,18 @@
     height: auto; 
 	}
 }
+@media screen and (max-width: 540px) {
+	#navbar-header {
+		background-color: #fff;
+	}	
+	.navbar-elements-ul {
+    padding: 0;
+	}
+	.navbar-elements-ul li {
+    height: 30px;
+	}
+	.navbar-elements-ul li a {
+		font-size: 10px;
+	}
+
+}
