@@ -152,8 +152,18 @@
 	.navbar-elements-ul li {
     height: 30px;
 	}
-	.navbar-elements-ul li a {
-		font-size: 10px;
+	.navbar-elements-ul .navbar-elements-link {
+    font-size: 10px;
 	}
-
+}
+@media screen and (min-width: 540px) {
+	.navbar-elements-ul {
+    padding: 20px 0;
+	}
+	.navbar-elements-ul li {
+    height: 50px;
+	}
+	.navbar-elements-ul .navbar-elements-link {
+    font-size: 18px;
+	}
 }
